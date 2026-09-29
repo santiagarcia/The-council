@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "the-council"
+version = "0.1.0"
+description = "Versioned identities, evidence-governed memory, and research context assembly"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0,<7", "jsonschema>=4.23,<5", "python-pptx>=1.0,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+council = "council.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/council"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
