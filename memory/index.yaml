@@ -1,0 +1,5 @@
+version: '1.0'
+mode: scan
+record_glob: memory/**/*.md
+status_source: front matter
+note: 'No duplicated ID list: council validate and assemble scan authoritative records.'

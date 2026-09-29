@@ -1,0 +1,11 @@
+name: The Council
+version: '1.0'
+principal_investigator: santiago
+agents:
+- atlas
+- curie
+- gauss
+- ada
+- vera
+- iris
+- scout

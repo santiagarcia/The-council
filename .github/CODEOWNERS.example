@@ -1,0 +1,6 @@
+# Copy to CODEOWNERS only after Santiago confirms the desired ownership policy.
+# Replace OWNER with a verified GitHub user or team; this is not an active rule.
+# /constitution/ @OWNER
+# /members/*/identity.md @OWNER
+# /members/*/operating-beliefs.yaml @OWNER
+# /src/ @OWNER

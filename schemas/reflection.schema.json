@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reflection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "agent": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "project": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "ref",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "agent",
+    "project",
+    "created",
+    "evidence",
+    "status"
+  ],
+  "additionalProperties": false
+}

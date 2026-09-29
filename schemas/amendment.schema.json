@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "amendment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "agent": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "current_version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "proposed_version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "previous_trait": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "proposed_trait": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "triggering_memories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "ref",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evidence_across_projects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "expected_behavior": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "negative_consequences": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evaluation_scenarios": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "trial_result": {
+      "type": "string"
+    },
+    "approval_status": {
+      "enum": [
+        "proposed",
+        "trial",
+        "approved",
+        "applied",
+        "rejected",
+        "rolled-back"
+      ]
+    },
+    "approved_by": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "foundational": {
+      "type": "boolean"
+    },
+    "rollback_plan": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "id",
+    "agent",
+    "created",
+    "current_version",
+    "proposed_version",
+    "previous_trait",
+    "proposed_trait",
+    "triggering_memories",
+    "evidence",
+    "evidence_across_projects",
+    "expected_behavior",
+    "negative_consequences",
+    "evaluation_scenarios",
+    "trial_result",
+    "approval_status",
+    "approved_by",
+    "foundational",
+    "rollback_plan"
+  ],
+  "additionalProperties": false
+}

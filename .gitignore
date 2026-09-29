@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.coverage
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pptx
+*.ppt
+*.zip
+style_sources/presentations/private/*
+!style_sources/presentations/private/.gitkeep
+.council/
+# Derived private-source statistics require human disclosure review before tracking.
+style/derived/*
+!style/derived/.gitkeep

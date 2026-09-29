@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "memory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "owner": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "author": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "memory_type": {
+      "enum": [
+        "episodic",
+        "semantic",
+        "procedural",
+        "self_model"
+      ]
+    },
+    "project": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "scope": {
+      "enum": [
+        "project",
+        "general"
+      ]
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "verified",
+        "adopted",
+        "deprecated",
+        "superseded"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "observation": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "ref",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "reviewers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agent": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "decision": {
+            "enum": [
+              "accept",
+              "request-changes"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "agent",
+          "decision",
+          "date",
+          "evidence_refs",
+          "notes"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "superseded_by": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "contradicts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "id",
+    "owner",
+    "author",
+    "memory_type",
+    "project",
+    "scope",
+    "status",
+    "created",
+    "tags",
+    "confidence",
+    "observation",
+    "evidence",
+    "limitations",
+    "reviewers",
+    "supersedes",
+    "superseded_by",
+    "contradicts"
+  ],
+  "additionalProperties": false
+}

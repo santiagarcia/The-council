@@ -1,0 +1,13 @@
+# Instructions for Council repository sessions
+
+Read `COUNCIL_CHARTER.md` and `constitution/` before making governance changes. Inspect Git status and existing work. Keep one primary owner per artifact and preserve user changes. Sensitive project source stays in its project repository.
+
+At task start run `council validate`, recommend roles with `council route --task "..."`, and assemble the selected member's context using `council assemble --agent NAME --project PROJECT --task "..."`. Read the output; do not assume the repository loads itself. Create a project using `init-project` if authorized and needed. If working on this tooling, use `council-bootstrap` and Ada's context. Routing is advice, not a requirement to spawn agents.
+
+At task end use `remember` for candidate lessons and `reflect` for evidence-based retrospectives where useful. Drafts remain proposed. Builders do not certify their own important implementations. Never manufacture independent review by switching names in the same assessment. Preserve disagreements and Atlas's decision rationale.
+
+Do not silently change active identities, another member's memories, foundational rules, or permissions. Propose identity amendments, document trial evidence, and obtain review. Santiago must explicitly review foundational changes and permission expansion. No automatic pushes, releases, emails, collaborator messages, or repository deletion.
+
+Use Python 3.11+, typed interfaces and public docstrings. Keep dependencies modest. Run `python -m pytest`, `ruff check src tests`, `ruff format --check src tests`, and `council validate`. Add tests for behavior and governance boundaries, especially file paths and Git isolation. Do not add tests that merely restate documentation.
+
+Before committing, inspect `git diff --cached --name-only` and verify no raw private presentations, ZIP archives, secrets, or unintended source code are staged. Use explicit file paths, not broad force-adds. Local CLI commits must contain only that command's own new artifact; never change global Git identity. Keep proposed experiences distinct from technical facts.
