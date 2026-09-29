@@ -131,6 +131,34 @@ def parser() -> argparse.ArgumentParser:
     )
     ingest.add_argument("source", type=Path)
     mutation_flags(ingest)
+    claude = commands.add_parser("claude", help="Maintain Claude Code native Council agents")
+    claude_commands = claude.add_subparsers(dest="claude_command", required=True)
+    sync = claude_commands.add_parser("sync", help="Generate native agents from council.yaml")
+    mode = sync.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true", help="Fail if generated agents are stale")
+    mode.add_argument("--dry-run", action="store_true", help="Preview without writing")
+    objective = commands.add_parser("objective", help="Maintain one shared project objective")
+    objectives = objective.add_subparsers(dest="objective_command", required=True)
+    show = objectives.add_parser("show", help="Read the objective, criteria, and constraints")
+    show.add_argument("--project", required=True)
+    set_goal = objectives.add_parser("set", help="Set the objective for every Council member")
+    set_goal.add_argument("--project", required=True)
+    set_goal.add_argument("--text", required=True)
+    set_goal.add_argument("--success", action="append", help="Success criterion; repeatable")
+    set_goal.add_argument("--constraint", action="append", help="Constraint; repeatable")
+    mutation_flags(set_goal)
+    dispatch = commands.add_parser("dispatch", help="Prepare one fast shared delegation packet")
+    dispatch.add_argument("--project", required=True)
+    dispatch.add_argument("--task", help="Current subtask; defaults to the shared objective")
+    selection = dispatch.add_mutually_exclusive_group()
+    selection.add_argument("--agent", action="append", help="Select specific members; repeatable")
+    selection.add_argument(
+        "--all", action="store_true", help="Include the entire registered Council"
+    )
+    dispatch.add_argument(
+        "--limit", type=int, default=6, help="Maximum relevant memories per member"
+    )
+    dispatch.add_argument("--output", help="New repository-relative JSON output file")
     return cli
 
 
@@ -163,6 +191,36 @@ def create_record(
 def run(args: argparse.Namespace) -> int:
     """Dispatch commands; return a process exit code."""
     root = root_at(args.root)
+    if args.command == "objective":
+        from council.dispatch import get_objective, set_objective
+
+        if args.objective_command == "show":
+            print(json.dumps(get_objective(root, args.project), indent=2))
+        else:
+            print(
+                set_objective(
+                    root, args.project, args.text, args.success, args.constraint, args.dry_run
+                )
+            )
+        return 0
+    if args.command == "dispatch":
+        from council.dispatch import dispatch
+
+        packet = dispatch(root, args.project, args.task, args.agent, args.all, args.limit)
+        text = json.dumps(packet, ensure_ascii=False, indent=2) + "\n"
+        if args.output:
+            path = safe_path(root, args.output)
+            write_new(path, text)
+            print(path.relative_to(root).as_posix())
+        else:
+            print(text)
+        return 0
+    if args.command == "claude":
+        from council.claude import sync
+
+        code, message = sync(root, check=args.check, dry_run=args.dry_run)
+        print(message)
+        return code
     if args.command == "validate":
         errors = validate(root)
         print("\n".join(errors) if errors else "Council validation passed")

@@ -86,6 +86,10 @@ def validate(root: Path) -> list[str]:
         if config_errors:
             return config_errors
         agents = set(config["agents"])
+        for path, objective, _ in records(root, "projects/*/objective.md"):
+            errors.extend(f"{path}: {e}" for e in check_schema(root, "objective", objective))
+            if objective.get("project") != path.parent.name:
+                errors.append(f"Objective project mismatch: {path.parent.name}")
         required = {
             "constitution": (
                 "shared-principles",

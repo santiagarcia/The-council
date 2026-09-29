@@ -4,6 +4,12 @@ Read `COUNCIL_CHARTER.md` and `constitution/` before making governance changes. 
 
 At task start run `council validate`, recommend roles with `council route --task "..."`, and assemble the selected member's context using `council assemble --agent NAME --project PROJECT --task "..."`. Read the output; do not assume the repository loads itself. Create a project using `init-project` if authorized and needed. If working on this tooling, use `council-bootstrap` and Ada's context. Routing is advice, not a requirement to spawn agents.
 
+For a coordinated Council round, `council dispatch --project PROJECT` is the combined
+alternative: it validates, routes, and assembles a shared snapshot once. Establish
+the general objective with `council objective set`; direct assembly also includes
+it. A subagent receiving a complete current dispatch handoff reads that supplied
+context instead of repeating the startup commands. Refresh after source changes.
+
 At task end use `remember` for candidate lessons and `reflect` for evidence-based retrospectives where useful. Drafts remain proposed. Builders do not certify their own important implementations. Never manufacture independent review by switching names in the same assessment. Preserve disagreements and Atlas's decision rationale.
 
 Do not silently change active identities, another member's memories, foundational rules, or permissions. Propose identity amendments, document trial evidence, and obtain review. Santiago must explicitly review foundational changes and permission expansion. No automatic pushes, releases, emails, collaborator messages, or repository deletion.

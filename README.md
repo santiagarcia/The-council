@@ -8,6 +8,11 @@ Atlas integrates, Curie checks mechanics, Gauss checks numerics and sensitivitie
 
 ## Quick start
 
+**Using Claude Code?** Open this repository and ask it to use the Council, or type
+`/council council-bootstrap YOUR TASK`. Seven native agents and automatic delegation
+instructions are included. `/council-sync` regenerates agents from the registry.
+See [Claude Code setup and examples](docs/claude-code.md).
+
 Requires Python 3.11+; Git is needed only for commits. Run from this repository:
 
 ```bash
@@ -85,6 +90,16 @@ docs/                  Contribution, memory, and security guidance
 ```
 
 Commands: `validate`, `list-agents`, `route`, `assemble`, `init-project`, `remember`, `reflect`, `propose-identity-change`, `promote-memory`, and `style ingest`. Use `council COMMAND --help` for options. Mutating commands offer `--dry-run`.
+
+Claude integration adds `council claude sync` with `--check` and `--dry-run`.
+`CLAUDE.md` coordinates native `.claude/agents/` adapters and `/council` commands;
+member identities and governed memory remain the shared source of truth.
+
+Set a shared outcome with `council objective set --project PROJECT --text "GOAL"`.
+`council dispatch --project PROJECT` prepares the objective, common instructions,
+and specialist contexts in one validated packet. Use `--all` for the whole Council.
+Claude passes each member its portion without repeating setup. See the
+[shared-objective workflow](docs/claude-code.md#one-objective-fast-handoffs).
 
 ## Development and verification
 

@@ -18,6 +18,9 @@ dist/
 style_sources/presentations/private/*
 !style_sources/presentations/private/.gitkeep
 .council/
+.claude/settings.local.json
+.claude/agent-memory/
+.claude/agent-memory-local/
 # Derived private-source statistics require human disclosure review before tracking.
 style/derived/*
 !style/derived/.gitkeep

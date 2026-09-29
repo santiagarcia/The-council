@@ -31,12 +31,14 @@ def repo(tmp_path):
             destination / name,
             ignore=shutil.ignore_patterns("private", "derived")
             if name in {"style", "style_sources"}
+            else shutil.ignore_patterns("objective.md")
+            if name == "projects"
             else None,
         )
     for name in ("style_sources/presentations/private", "style/derived"):
         (destination / name).mkdir(parents=True, exist_ok=True)
         (destination / name / ".gitkeep").touch()
-    for name in ("council.yaml", ".gitignore"):
+    for name in ("council.yaml", ".gitignore", "AGENTS.md", "COUNCIL_CHARTER.md"):
         shutil.copyfile(ROOT / name, destination / name)
     return destination
 
