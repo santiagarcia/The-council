@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Optional transient affective appraisal",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "enum": [
+        "atlas",
+        "curie",
+        "gauss",
+        "ada",
+        "vera",
+        "iris",
+        "scout"
+      ]
+    },
+    "project": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "mode": {
+      "enum": [
+        "imagination",
+        "verification"
+      ]
+    },
+    "affect_enabled": {
+      "type": "boolean"
+    },
+    "experience": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "appraisal": {
+      "type": "object",
+      "properties": {
+        "goal_relevance": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "novelty": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "uncertainty": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "evidence_strength": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "collaboration_history": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "potential_consequences": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "conflict_with_values": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "strategy_change_needed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "goal_relevance",
+        "novelty",
+        "uncertainty",
+        "evidence_strength",
+        "collaboration_history",
+        "potential_consequences",
+        "conflict_with_values",
+        "strategy_change_needed"
+      ],
+      "additionalProperties": false
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "disposition": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "previous": {
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ]
+          },
+          "current": {
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "behavior": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "stopping_rule": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "disposition",
+          "previous",
+          "current",
+          "reason",
+          "behavior",
+          "stopping_rule"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "outcome": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "reflection": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "durable_update": {
+      "enum": [
+        "none",
+        "relational-proposal",
+        "disposition-proposal",
+        "identity-proposal"
+      ]
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "agent",
+    "project",
+    "date",
+    "mode",
+    "affect_enabled",
+    "experience",
+    "appraisal",
+    "transitions",
+    "outcome",
+    "reflection",
+    "durable_update",
+    "limitations"
+  ],
+  "additionalProperties": false
+}

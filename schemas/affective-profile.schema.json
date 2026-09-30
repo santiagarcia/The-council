@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Functional affective profile",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "enum": [
+        "atlas",
+        "curie",
+        "gauss",
+        "ada",
+        "vera",
+        "iris",
+        "scout"
+      ]
+    },
+    "profile_version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "identity_version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "basis": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "voice": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "motivation": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "levels": {
+      "const": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    "dispositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z_]*$"
+          },
+          "baseline": {
+            "enum": [
+              "low",
+              "moderate",
+              "high"
+            ]
+          },
+          "trigger": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "behavior_when_high": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "boundary": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "name",
+          "baseline",
+          "trigger",
+          "behavior_when_high",
+          "boundary"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "shared_relational_behaviors": {
+      "type": "object",
+      "properties": {
+        "affection": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "trust": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "gratitude": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "respect": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "affection",
+        "trust",
+        "gratitude",
+        "respect"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "agent",
+    "profile_version",
+    "identity_version",
+    "basis",
+    "voice",
+    "motivation",
+    "levels",
+    "dispositions",
+    "shared_relational_behaviors"
+  ],
+  "additionalProperties": false
+}

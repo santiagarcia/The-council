@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Manually reviewed relational event",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "author": {
+      "enum": [
+        "atlas",
+        "curie",
+        "gauss",
+        "ada",
+        "vera",
+        "iris",
+        "scout"
+      ]
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "atlas",
+          "curie",
+          "gauss",
+          "ada",
+          "vera",
+          "iris",
+          "scout",
+          "santiago"
+        ]
+      },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "project": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "verified",
+        "adopted",
+        "deprecated",
+        "superseded"
+      ]
+    },
+    "event": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "participant": {
+            "enum": [
+              "atlas",
+              "curie",
+              "gauss",
+              "ada",
+              "vera",
+              "iris",
+              "scout",
+              "santiago"
+            ]
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "acknowledgment": {
+            "enum": [
+              "pending",
+              "confirmed",
+              "disputed"
+            ]
+          }
+        },
+        "required": [
+          "participant",
+          "interpretation",
+          "acknowledgment"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "ref",
+          "detail"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "development": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "tension",
+            "positive-development",
+            "conflict-repair",
+            "mixed"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "kind",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "qualities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "quality": {
+            "enum": [
+              "trust",
+              "familiarity",
+              "gratitude",
+              "respect",
+              "protective-concern",
+              "intellectual-reliance",
+              "unresolved-tension",
+              "successful-conflict-repair"
+            ]
+          },
+          "change": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 1
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "quality",
+          "change",
+          "scope",
+          "evidence_refs",
+          "limitations"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "future_collaboration": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "pending",
+        "request-changes",
+        "accepted"
+      ]
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reviewer": {
+            "enum": [
+              "atlas",
+              "curie",
+              "gauss",
+              "ada",
+              "vera",
+              "iris",
+              "scout",
+              "santiago"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "decision": {
+            "enum": [
+              "accept",
+              "request-changes"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 1
+          },
+          "reasoning": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "reviewer",
+          "date",
+          "decision",
+          "evidence_refs",
+          "reasoning"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "identity_implication": {
+      "type": "object",
+      "properties": {
+        "should_propose": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "amendment_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "should_propose",
+        "reason",
+        "amendment_ref"
+      ],
+      "additionalProperties": false
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "superseded_by": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "deprecation_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "author",
+    "participants",
+    "project",
+    "date",
+    "status",
+    "event",
+    "interpretations",
+    "evidence",
+    "development",
+    "qualities",
+    "future_collaboration",
+    "confidence",
+    "review_status",
+    "reviews",
+    "limitations",
+    "identity_implication",
+    "supersedes",
+    "superseded_by",
+    "deprecation_reason"
+  ],
+  "additionalProperties": false
+}
