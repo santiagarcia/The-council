@@ -7,7 +7,7 @@ import json
 import re
 from pathlib import Path
 
-from council.store import CouncilError, safe_path, yaml_load
+from council.store import CouncilError, safe_path
 from council.validation import check_schema, records, reference_ok, validate
 
 READER_RULES = (
@@ -149,6 +149,11 @@ def diagnostics(text: str, kind: str) -> list[dict]:
     """Flag explainable text patterns; findings are candidates, not semantic proof."""
     findings = []
     for number, line in enumerate(text.splitlines(), 1):
+        if re.search(r"\b(idiot|stupid|childish|dumb)\b", line, re.IGNORECASE):
+            findings.append(
+                {"rule": "possible-humiliation", "line": number,
+                 "detail": "Check for ridicule or infantilization; inspect context."}
+            )
         if re.search(r"\b(obviously|trivial|simply understand)\b", line, re.IGNORECASE):
             findings.append(
                 {"rule": "assumed-understanding", "line": number,
@@ -200,6 +205,8 @@ def reviewed_gate(root: Path, report: dict, artifact: str) -> bool:
                 raise CouncilError(f"Broken review evidence: {ref}")
         if assessment["decision"] == "pass" and not assessment["evidence_refs"]:
             raise CouncilError("A passing review must cite evidence")
+    if report["correctness"]["reviewer"] == "nico":
+        raise CouncilError("Nico reviews comprehension, not technical correctness")
     if report["correctness"]["reviewer"] == report["builder"]:
         raise CouncilError("Builder cannot certify correctness")
     return (

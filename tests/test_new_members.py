@@ -292,3 +292,14 @@ def test_stale_review_does_not_certify_a_changed_artifact(repo):
     public_artifact(repo, "A different claim after review.")
     with pytest.raises(CouncilError, match="stale"):
         reviewed_gate(repo, report, report["artifact"])
+
+
+def test_nico_cannot_certify_correctness_and_ridicule_is_flagged(repo):
+    artifact = public_artifact(repo)
+    report = review_report()
+    report["correctness"]["reviewer"] = "nico"
+    with pytest.raises(CouncilError, match="not technical correctness"):
+        reviewed_gate(repo, report, artifact)
+    public_artifact(repo, "You are stupid for asking that question.")
+    _, result = evaluate_artifact(repo, "comprehension", artifact)
+    assert any(f["rule"] == "possible-humiliation" for f in result["findings"])
