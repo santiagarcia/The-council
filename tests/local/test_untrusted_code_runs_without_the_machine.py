@@ -84,3 +84,42 @@ def test_the_report_says_how_contained_the_run_really_was(tmp_path):
 def test_available_reports_what_this_machine_offers():
     offered = available()
     assert set(offered) == {"bwrap", "podman", "docker", "gfortran"}
+
+
+@needs_bwrap
+@needs_gfortran
+def test_a_real_umat_compiles_once_the_abaqus_include_is_staged(tmp_path):
+    """Every genuine UMAT includes ABA_PARAM.INC, which Abaqus supplies.
+
+    Without the shim the check reports "cannot open ABA_PARAM.INC" for the
+    whole corpus, which is a fact about the solver's absence and not about
+    the Fortran. With it, the result has to say so.
+    """
+    source = tmp_path / "umat.for"
+    source.write_text(
+        "      SUBROUTINE UMAT(STRESS,NTENS)\n"
+        "      INCLUDE 'ABA_PARAM.INC'\n"
+        "      DIMENSION STRESS(NTENS)\n"
+        "      STRESS(1) = 1.D0\n"
+        "      RETURN\n"
+        "      END\n"
+    )
+
+    shimmed = syntax_check(source, work=tmp_path / "with")
+    assert shimmed.ok
+    assert "ABA_PARAM.INC was staged" in shimmed.note
+    assert "real Abaqus headers" in shimmed.note
+
+    bare = syntax_check(source, work=tmp_path / "without", abaqus_shim=False)
+    assert not bare.ok
+    assert "ABA_PARAM.INC" in bare.stderr
+
+
+@needs_bwrap
+@needs_gfortran
+def test_the_shim_is_not_staged_for_a_source_that_does_not_ask_for_it(tmp_path):
+    source = tmp_path / "plain.f90"
+    source.write_text("program p\n  print *, 1\nend program\n")
+    result = syntax_check(source, work=tmp_path / "w")
+    assert result.ok
+    assert "ABA_PARAM" not in result.note

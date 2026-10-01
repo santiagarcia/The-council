@@ -34,6 +34,14 @@ OUTPUT_LIMIT = 200_000
 #: Things that must never be visible to a build of untrusted code.
 NEVER_MOUNT = ("/home", "/root", "/etc/ssh", "/var/lib", "/mnt", "/media")
 
+#: Abaqus supplies this to every user subroutine, so a corpus source that
+#: INCLUDEs it is not defective for doing so -- it simply cannot compile
+#: outside Abaqus without it. The two lines are what Abaqus's own copy
+#: contains for a double-precision build; staging them lets a syntax check
+#: answer the question actually being asked, which is whether the FORTRAN is
+#: well formed, not whether the solver is installed.
+ABA_PARAM = "      IMPLICIT REAL*8(A-H,O-Z)\n      PARAMETER (NPRECD=2)\n"
+
 
 @dataclass
 class SandboxResult:
@@ -206,28 +214,54 @@ def run(
 
 
 def syntax_check(
-    source: Path | str, *, include_dir: Path | str | None = None, work: Path | str | None = None
+    source: Path | str,
+    *,
+    include_dir: Path | str | None = None,
+    work: Path | str | None = None,
+    abaqus_shim: bool = True,
 ) -> SandboxResult:
     """Compile one scraped source for syntax only, in the sandbox.
 
     Copies the source in rather than binding its directory: a file that is
     read where it lives is a file whose neighbours are also reachable.
+
+    ``abaqus_shim`` stages a minimal ``ABA_PARAM.INC`` when the source
+    includes one and no real copy was supplied. Without it every genuine UMAT
+    stops at its first INCLUDE and the check reports "cannot open
+    ABA_PARAM.INC" for all of them, which says nothing about the Fortran. The
+    staged copy is named in the note, so the result cannot be mistaken for a
+    compile against the real Abaqus headers.
     """
     source = Path(source)
     owned = work is not None
     work = Path(work) if owned else Path(tempfile.mkdtemp(prefix="council-sandbox-"))
     work.mkdir(parents=True, exist_ok=True)
+    shimmed = False
     try:
         staged = work / source.name
         shutil.copyfile(source, staged)
+        supplied = set()
         if include_dir:
             for extra in Path(include_dir).glob("*.[iI][nN][cC]"):
                 shutil.copyfile(extra, work / extra.name)
+                supplied.add(extra.name.upper())
+        if abaqus_shim and "ABA_PARAM.INC" not in supplied:
+            text = staged.read_bytes().decode("utf-8", "replace").upper()
+            if "ABA_PARAM.INC" in text:
+                for name in ("ABA_PARAM.INC", "aba_param.inc"):
+                    (work / name).write_text(ABA_PARAM)
+                shimmed = True
         result = run(
             ["gfortran", "-fsyntax-only", "-ffree-line-length-none", "-I", ".", staged.name],
             work=work,
         )
-        result.note = (result.note + " ").strip() + f" source={source.name}"
+        note = [result.note.strip(), f"source={source.name}"]
+        if shimmed:
+            note.append(
+                "a minimal ABA_PARAM.INC was staged; this is not a compile"
+                " against the real Abaqus headers"
+            )
+        result.note = " ".join(part for part in note if part)
         return result
     finally:
         if not owned:
