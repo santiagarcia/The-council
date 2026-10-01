@@ -156,3 +156,35 @@ Results live in `evaluations/local/`.
   Santiago's review.
 - Local models propose patches; they do not merge. Write access is gated on a
   read-only benchmark pass per task.
+
+## When something goes wrong
+
+| symptom | what it means | what to do |
+|---|---|---|
+| `which ollama` finds nothing | it is installed at `~/.local/ollama/bin`, not on `PATH` | nothing — `council-local` finds it anyway; `scripts/local/install_runtime.sh` confirms |
+| `RuntimeUnavailable: no ollama binary found` | genuinely absent | `scripts/local/install_runtime.sh --download` (user space, ~1.5 GB, no service) |
+| `ollama did not become ready` | the server died starting | read the log the error names, under `~/.cache/council-local/` |
+| a task raises `OSError` | the server is unreachable | `council-local status`, then `up`. The task **raises** rather than returning empty, so a sweep cannot silently shrink |
+| an envelope with `escalation: schema_invalid` | the model could not produce valid JSON twice | the answer is unusable and says so; rerun or escalate. Never salvage it by hand |
+| answers suddenly slow | another model is resident and the new one spilled to CPU | `council-local unload <model>`; 8 GiB does not hold two |
+| `bwrap: Creating new namespace failed` | a process-count rlimit is blocking the sandbox | already handled; if it returns, check `RLIMIT_NPROC` — it counts **every** process the user owns |
+| a benchmark case fails | recorded in `failures`, not dropped | the case count excludes it; read `evaluations/local/bench-*.json` |
+
+Recovering is always the same two commands:
+
+```sh
+scripts/local/council-local down
+scripts/local/council-local up
+```
+
+Nothing persists across that except the models on disk. There is no state to
+repair, no service to re-enable and no port left open.
+
+## Removing it
+
+```sh
+scripts/local/council-local down
+rm -rf ~/.cache/council-local        # logs and pid files
+rm -rf ~/.local/ollama               # the runtime, if this installed it
+ollama rm qwen2.5-coder:32b          # models, individually, if wanted
+```
