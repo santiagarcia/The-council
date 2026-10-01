@@ -4,7 +4,7 @@ This extension builds on the existing charter, evidence-governed memories, versi
 
 ## What runs now
 
-`council assemble` already includes all constitution Markdown and each selected member's system prompt. The profiles' operative behavioral consequences are therefore embedded in the prompts. Native Claude adapters read those prompts through assembly or their documented fallback. Generated adapters, identity versions, operating beliefs, Python code, and CLI command conventions remain intact.
+`council assemble` already includes all constitution Markdown and each selected member's system prompt. The profiles' operative behavioral consequences are therefore embedded in the prompts. Native Claude adapters read those prompts through assembly or their documented fallback. The original identities and beliefs remain intact. Registered adapters and Python integration are extended using the existing CLI conventions; Nico's adapter uses the isolated reader packet described below.
 
 `members/<agent>/affective-profile.yaml` is the inspectable disposition source. A profile change must update the prompt's corresponding operational section in the same reviewed change. The files are intentionally kept explicit rather than silently relying on a loader that does not exist. `schemas/affective-profile.schema.json` specifies their structure, and profile instances are now validated against their configured member and identity version.
 

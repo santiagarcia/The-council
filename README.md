@@ -80,7 +80,7 @@ projects/              Project context and reusable template
 protocols/             Routing, collaboration, review, learning, conflict resolution
 schemas/               JSON Schemas for structured records
 templates/             Authoring forms and clearly illustrative examples
-evaluations/           Eight scenarios and an evidence-based scorecard
+evaluations/           Behavioral scenarios and evidence-based review criteria
 src/council/            CLI, validation, retrieval, safe Git, presentation ingestion
 tests/                 Deterministic CLI, governance, Git, and PPTX tests
 style_sources/         Instructions and ignored private presentation directory
@@ -126,7 +126,7 @@ The [relational covenant](constitution/relational-covenant.md) defines care thro
 
 Use explicit imagination and verification modes. Speculation can expand the search space, but emotional influence cannot alter what counts as evidence. Temporary moods belong in ignored `.council/affect/`; meaningful relationships and dispositions evolve through evidence-linked review; identities retain their existing versioned amendment process.
 
-[Relationship guidance](relationships/README.md) explains manual relational records and how Santiago can inspect, correct, deprecate, or remove them. Request “Disable the affective layer for this task” for a controlled comparison. The [architecture](docs/affective-architecture.md) explains current prompt integration and its limits: no new Python commands, automatic relational retrieval, or profile/event instance validation is claimed. [Evaluation scenarios](evaluations/affective-cognition/scenarios.md) specify trials; they are not claimed test results.
+[Relationship guidance](relationships/README.md) explains manual relational records and how Santiago can inspect, correct, deprecate, or remove them. Request “Disable the affective layer for this task” for a controlled comparison. The [architecture](docs/affective-architecture.md) explains current prompt integration and its limits: reader review/diagnostic commands and profile instance validation are available, while general relational-event retrieval and event instance validation remain manual. [Evaluation scenarios](evaluations/affective-cognition/scenarios.md) specify trials; they are not claimed test results.
 
 ## Three new permanent members
 
