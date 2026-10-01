@@ -123,3 +123,37 @@ def test_the_shim_is_not_staged_for_a_source_that_does_not_ask_for_it(tmp_path):
     result = syntax_check(source, work=tmp_path / "w")
     assert result.ok
     assert "ABA_PARAM" not in result.note
+
+
+@needs_bwrap
+@needs_gfortran
+def test_fixed_form_code_past_column_72_is_not_a_syntax_error(tmp_path):
+    """gfortran truncates fixed-form source at column 72 by default.
+
+    Real UMATs run past it constantly. Without `-ffixed-line-length-none` the
+    check reports a syntax error at column 72 for valid code -- an artefact of
+    the compile line that reads exactly like a finding. Measured on the pilot
+    batch: four of six sources failed for this reason alone.
+    """
+    source = tmp_path / "wide.for"
+    padding = " " * 60
+    source.write_text(
+        "      SUBROUTINE UMAT(STRESS,NTENS)\n"
+        "      DIMENSION STRESS(NTENS)\n"
+        f"      STRESS(1) = 1.D0{padding}! past column 72\n"
+        "      RETURN\n"
+        "      END\n"
+    )
+    result = syntax_check(source, work=tmp_path / "w")
+    assert result.ok, result.stderr
+
+
+@needs_bwrap
+@needs_gfortran
+def test_a_genuinely_missing_module_still_fails(tmp_path):
+    """Lifting the column limit must not turn a real dependency into a pass."""
+    source = tmp_path / "needs_module.f90"
+    source.write_text("module m\n  use precision\nend module\n")
+    result = syntax_check(source, work=tmp_path / "w")
+    assert not result.ok
+    assert "precision" in result.stderr

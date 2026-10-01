@@ -251,8 +251,21 @@ def syntax_check(
                 for name in ("ABA_PARAM.INC", "aba_param.inc"):
                     (work / name).write_text(ABA_PARAM)
                 shimmed = True
+        # Both line-length limits must be lifted. gfortran truncates
+        # fixed-form source at column 72 by default, and real UMATs run past
+        # it constantly -- without this the check reports a syntax error at
+        # column 72 for perfectly valid code, which looks like a finding and
+        # is an artefact of the compile line.
         result = run(
-            ["gfortran", "-fsyntax-only", "-ffree-line-length-none", "-I", ".", staged.name],
+            [
+                "gfortran",
+                "-fsyntax-only",
+                "-ffree-line-length-none",
+                "-ffixed-line-length-none",
+                "-I",
+                ".",
+                staged.name,
+            ],
             work=work,
         )
         note = [result.note.strip(), f"source={source.name}"]

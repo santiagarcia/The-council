@@ -1,0 +1,20 @@
+{
+  "trigger": "first local pilot over a diverse corpus batch",
+  "previous_belief": "a 7B local model can replace first-pass corpus triage",
+  "observation": "agreement with the registry was 64% over 36 scoreable fields; 9 answers escalated themselves",
+  "evidence": [
+    "evaluations/local/pilot.json"
+  ],
+  "new_behavioral_rule": "delegate only the tasks whose measured agreement clears the threshold recorded in evaluations/local/benchmark.md",
+  "scope": "corpus triage on this machine",
+  "exceptions": "none recorded",
+  "confidence": 0.4,
+  "verification_test": "rerun scripts/local/pilot.py after any prompt change",
+  "agent": "ada",
+  "project": "",
+  "review_status": "proposed",
+  "memories_loaded": [],
+  "memories_used": [],
+  "remember_command": "council remember --agent ada --project corpus-robustification --type episodic --scope project --observation 'agreement with the registry was 64% over 36 scoreable fields; 9 answers escalated themselves Previous belief: a 7B local model can replace first-pass corpus triage. Proposed rule: delegate only the tasks whose measured agreement clears the threshold recorded in evaluations/local/benchmark.md. Scope: corpus triage on this machine. Exceptions: none recorded. Verification: rerun scripts/local/pilot.py after any prompt change. Retrieved memories: none loaded.' --confidence 0.40 --evidence evaluations/local/pilot.json --limitations 'proposed by a local model; unverified until rerun scripts/local/pilot.py after any prompt change'",
+  "adopted": false
+}

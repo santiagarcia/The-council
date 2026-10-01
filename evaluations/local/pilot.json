@@ -1,0 +1,741 @@
+{
+  "model": "qwen2.5-coder:7b",
+  "started": "2026-09-30T21:17:03",
+  "sources": [
+    {
+      "situation": "already verified",
+      "source_id": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "registry_state": "fully_verified",
+      "tasks": {
+        "classify_umat": {
+          "answers": {},
+          "grounded": 0.0,
+          "seconds": 0.0,
+          "escalation": "schema_invalid",
+          "scored": {
+            "correct": 0,
+            "wrong": 0,
+            "missing": 5,
+            "details": {
+              "entry_line": {
+                "expected": 15,
+                "got": null,
+                "verdict": "missing"
+              },
+              "entry_routine": {
+                "expected": "umat",
+                "got": null,
+                "verdict": "missing"
+              },
+              "verdict": {
+                "expected": "genuine_umat",
+                "got": null,
+                "verdict": "missing"
+              },
+              "writes_ddsdde": {
+                "expected": true,
+                "got": null,
+                "verdict": "missing"
+              },
+              "writes_stress": {
+                "expected": true,
+                "got": null,
+                "verdict": "missing"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 2,
+            "max_statev_index": 0,
+            "kinematics": "finite_strain",
+            "uses_ntens": true,
+            "inline_constants": [],
+            "solver_utilities": []
+          },
+          "grounded": 1.0,
+          "seconds": 30.42,
+          "escalation": "none",
+          "scored": {
+            "correct": 2,
+            "wrong": 1,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "finite_strain",
+                "got": "finite_strain",
+                "verdict": "correct"
+              },
+              "max_props_index": {
+                "expected": 2,
+                "got": 2,
+                "verdict": "correct"
+              },
+              "max_statev_index": {
+                "expected": 1,
+                "got": 0,
+                "verdict": "wrong"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {
+            "includes": [],
+            "modules_used": [
+              "NumKind"
+            ],
+            "external_calls": [],
+            "solver_provided": [],
+            "defined_in_this_file": [
+              "matmul"
+            ]
+          },
+          "grounded": 0.6,
+          "seconds": 22.28,
+          "escalation": "none"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": false,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.03
+      }
+    },
+    {
+      "situation": "transform refused",
+      "source_id": "AlexSTA1993__numerical_geolab/numerical_geolab_materials/UMATERIALS/CAUCHY3D-DP/hyplast_Cauchy3D-DP.for",
+      "registry_state": "transform_refused",
+      "tasks": {
+        "classify_umat": {
+          "answers": {
+            "verdict": "genuine_umat",
+            "entry_routine": "UMAT",
+            "entry_line": 6,
+            "argument_count": 30,
+            "writes_stress": true,
+            "writes_ddsdde": true,
+            "complete_subroutine": true
+          },
+          "grounded": 1.0,
+          "seconds": 43.87,
+          "escalation": "none",
+          "scored": {
+            "correct": 4,
+            "wrong": 1,
+            "missing": 0,
+            "details": {
+              "entry_line": {
+                "expected": 6,
+                "got": 6,
+                "verdict": "correct"
+              },
+              "entry_routine": {
+                "expected": "UMAT",
+                "got": "UMAT",
+                "verdict": "correct"
+              },
+              "verdict": {
+                "expected": "genuine_umat",
+                "got": "genuine_umat",
+                "verdict": "correct"
+              },
+              "writes_ddsdde": {
+                "expected": false,
+                "got": true,
+                "verdict": "wrong"
+              },
+              "writes_stress": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 14,
+            "max_statev_index": -1,
+            "kinematics": "small_strain",
+            "uses_ntens": true,
+            "inline_constants": [],
+            "solver_utilities": []
+          },
+          "grounded": 1.0,
+          "seconds": 40.4,
+          "escalation": "none",
+          "scored": {
+            "correct": 1,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "small_strain",
+                "got": "small_strain",
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {},
+          "grounded": 0.0,
+          "seconds": 0.0,
+          "escalation": "schema_invalid"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": true,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.04
+      }
+    },
+    {
+      "situation": "unresolved dependency",
+      "source_id": "BBahtiri__ABAQUS-Multiphysics-Diffusion-UEL/Diffusion_3D.for",
+      "registry_state": "external_dependency_unavailable",
+      "tasks": {
+        "classify_umat": {
+          "answers": {
+            "verdict": "genuine_umat",
+            "entry_routine": "UMAT",
+            "entry_line": 517,
+            "argument_count": 34,
+            "writes_stress": true,
+            "writes_ddsdde": true,
+            "complete_subroutine": true
+          },
+          "grounded": 1.0,
+          "seconds": 39.9,
+          "escalation": "no_evidence",
+          "scored": {
+            "correct": 5,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "entry_line": {
+                "expected": 518,
+                "got": 517,
+                "verdict": "correct"
+              },
+              "entry_routine": {
+                "expected": "umat",
+                "got": "UMAT",
+                "verdict": "correct"
+              },
+              "verdict": {
+                "expected": "genuine_umat",
+                "got": "genuine_umat",
+                "verdict": "correct"
+              },
+              "writes_ddsdde": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              },
+              "writes_stress": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 2,
+            "max_statev_index": 1,
+            "kinematics": "small_strain",
+            "uses_ntens": true,
+            "inline_constants": [],
+            "solver_utilities": []
+          },
+          "grounded": 0.67,
+          "seconds": 31.63,
+          "escalation": "no_evidence",
+          "scored": {
+            "correct": 1,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "small_strain",
+                "got": "small_strain",
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {
+            "includes": [
+              "aba_param.inc"
+            ],
+            "modules_used": [],
+            "external_calls": [
+              "UserVar"
+            ],
+            "solver_provided": [
+              "SPRINC",
+              "SPRIND",
+              "ROTSIG",
+              "XIT",
+              "STDB_ABQERR",
+              "SINV"
+            ],
+            "defined_in_this_file": []
+          },
+          "grounded": 0.0,
+          "seconds": 18.89,
+          "escalation": "no_evidence"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": false,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.05
+      }
+    },
+    {
+      "situation": "multi-file",
+      "source_id": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/francesc/umat_DP_primal_CPPM_def.f90",
+      "registry_state": "not_a_umat",
+      "tasks": {
+        "classify_umat": {
+          "answers": {
+            "verdict": "not_fortran_subroutine",
+            "entry_routine": "other_entry_point",
+            "entry_line": 1,
+            "argument_count": 10,
+            "writes_stress": true,
+            "writes_ddsdde": true,
+            "complete_subroutine": true
+          },
+          "grounded": 1.0,
+          "seconds": 45.05,
+          "escalation": "none",
+          "scored": {
+            "correct": 3,
+            "wrong": 1,
+            "missing": 0,
+            "details": {
+              "entry_line": {
+                "expected": 7,
+                "got": 1,
+                "verdict": "wrong"
+              },
+              "verdict": {
+                "expected": "__not_umat__",
+                "got": "not_fortran_subroutine",
+                "verdict": "correct"
+              },
+              "writes_ddsdde": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              },
+              "writes_stress": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 14,
+            "max_statev_index": 1,
+            "kinematics": "small_strain",
+            "uses_ntens": true,
+            "inline_constants": [
+              "hard=0.038_iwp"
+            ],
+            "solver_utilities": []
+          },
+          "grounded": 0.83,
+          "seconds": 53.24,
+          "escalation": "none",
+          "scored": {
+            "correct": 1,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "small_strain",
+                "got": "small_strain",
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {
+            "includes": [],
+            "modules_used": [
+              "precision"
+            ],
+            "external_calls": [
+              "INVERSE"
+            ],
+            "solver_provided": [
+              "SPRINC",
+              "SPRIND",
+              "ROTSIG",
+              "XIT",
+              "STDB_ABQERR",
+              "SINV"
+            ],
+            "defined_in_this_file": [
+              "DOUBLE_CONTRACTION_22",
+              "TENSOR_PRODUCT_22",
+              "DOT_PROD",
+              "INVERSE"
+            ]
+          },
+          "grounded": 0.9,
+          "seconds": 50.37,
+          "escalation": "none"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": false,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.03
+      }
+    },
+    {
+      "situation": "unclear metadata",
+      "source_id": "3MAH__simcoon/testBin/Umats/UMABA/external/UMAT_ABAQUS_ELASTIC.f",
+      "registry_state": "missing_material_data",
+      "tasks": {
+        "classify_umat": {
+          "answers": {
+            "verdict": "genuine_umat",
+            "entry_routine": "UMAT",
+            "entry_line": 1,
+            "argument_count": 30,
+            "writes_stress": true,
+            "writes_ddsdde": true,
+            "complete_subroutine": true
+          },
+          "grounded": 1.0,
+          "seconds": 42.97,
+          "escalation": "none",
+          "scored": {
+            "correct": 5,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "entry_line": {
+                "expected": 1,
+                "got": 1,
+                "verdict": "correct"
+              },
+              "entry_routine": {
+                "expected": "UMAT",
+                "got": "UMAT",
+                "verdict": "correct"
+              },
+              "verdict": {
+                "expected": "genuine_umat",
+                "got": "genuine_umat",
+                "verdict": "correct"
+              },
+              "writes_ddsdde": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              },
+              "writes_stress": {
+                "expected": true,
+                "got": true,
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 2,
+            "max_statev_index": 4,
+            "kinematics": "small_strain",
+            "uses_ntens": true,
+            "inline_constants": [],
+            "solver_utilities": []
+          },
+          "grounded": 1.0,
+          "seconds": 42.88,
+          "escalation": "none",
+          "scored": {
+            "correct": 1,
+            "wrong": 0,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "small_strain",
+                "got": "small_strain",
+                "verdict": "correct"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {
+            "includes": [],
+            "modules_used": [],
+            "external_calls": [],
+            "solver_provided": [],
+            "defined_in_this_file": []
+          },
+          "grounded": 0.0,
+          "seconds": 27.86,
+          "escalation": "no_evidence"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": true,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.03
+      }
+    },
+    {
+      "situation": "not a UMAT",
+      "source_id": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "registry_state": "not_a_umat",
+      "tasks": {
+        "classify_umat": {
+          "answers": {
+            "verdict": "genuine_umat",
+            "entry_routine": "UMAT",
+            "entry_line": 1,
+            "argument_count": 24,
+            "writes_stress": true,
+            "writes_ddsdde": true,
+            "complete_subroutine": true
+          },
+          "grounded": 1.0,
+          "seconds": 36.08,
+          "escalation": "no_evidence",
+          "scored": {
+            "correct": 0,
+            "wrong": 4,
+            "missing": 0,
+            "details": {
+              "entry_line": {
+                "expected": 9,
+                "got": 1,
+                "verdict": "wrong"
+              },
+              "verdict": {
+                "expected": "__not_umat__",
+                "got": "genuine_umat",
+                "verdict": "wrong"
+              },
+              "writes_ddsdde": {
+                "expected": false,
+                "got": true,
+                "verdict": "wrong"
+              },
+              "writes_stress": {
+                "expected": false,
+                "got": true,
+                "verdict": "wrong"
+              }
+            }
+          }
+        },
+        "extract_umat_contract": {
+          "answers": {
+            "max_props_index": 14,
+            "max_statev_index": 1,
+            "kinematics": "finite_strain",
+            "uses_ntens": true,
+            "inline_constants": [
+              "zero: 0.0_iwp"
+            ],
+            "solver_utilities": [
+              "INVERT_MATRIX_3x3",
+              "BEEMAT"
+            ]
+          },
+          "grounded": 1.0,
+          "seconds": 37.97,
+          "escalation": "no_evidence",
+          "scored": {
+            "correct": 0,
+            "wrong": 1,
+            "missing": 0,
+            "details": {
+              "kinematics": {
+                "expected": "small_strain",
+                "got": "finite_strain",
+                "verdict": "wrong"
+              }
+            }
+          }
+        },
+        "detect_dependencies": {
+          "answers": {
+            "includes": [],
+            "modules_used": [
+              "INVERT_MATRIX_3x3",
+              "DETERMINANT_MATRIX_3x3",
+              "BEEMAT",
+              "GEEMAT",
+              "DOUBLE_CONTRACTION_4",
+              "large_strain_voigt_to_parafem"
+            ],
+            "external_calls": [
+              "INVERT_MATRIX_3x3",
+              "DETERMINANT_MATRIX_3x3"
+            ],
+            "solver_provided": [
+              "SPRINC",
+              "SPRIND",
+              "ROTSIG",
+              "XIT"
+            ],
+            "defined_in_this_file": []
+          },
+          "grounded": 0.6,
+          "seconds": 35.97,
+          "escalation": "no_evidence"
+        }
+      },
+      "sandboxed_compile": {
+        "ok": false,
+        "isolated": true,
+        "isolation": "bwrap+rlimit",
+        "seconds": 0.03
+      }
+    }
+  ],
+  "claude_still_needed": [
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "entry_line: said None, registry says 15"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "entry_routine: said None, registry says 'umat'"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "verdict: said None, registry says 'genuine_umat'"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "writes_ddsdde: said None, registry says True"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "writes_stress: said None, registry says True"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "classify_umat",
+      "why": "escalated: schema_invalid"
+    },
+    {
+      "source": "AlexanderJFDR__Hyperelastic_phase_field/umat/NeoHookean_umat.for",
+      "task": "extract_umat_contract",
+      "why": "max_statev_index: said 0, registry says 1"
+    },
+    {
+      "source": "AlexSTA1993__numerical_geolab/numerical_geolab_materials/UMATERIALS/CAUCHY3D-DP/hyplast_Cauchy3D-DP.for",
+      "task": "classify_umat",
+      "why": "writes_ddsdde: said True, registry says False"
+    },
+    {
+      "source": "AlexSTA1993__numerical_geolab/numerical_geolab_materials/UMATERIALS/CAUCHY3D-DP/hyplast_Cauchy3D-DP.for",
+      "task": "detect_dependencies",
+      "why": "escalated: schema_invalid"
+    },
+    {
+      "source": "BBahtiri__ABAQUS-Multiphysics-Diffusion-UEL/Diffusion_3D.for",
+      "task": "classify_umat",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "BBahtiri__ABAQUS-Multiphysics-Diffusion-UEL/Diffusion_3D.for",
+      "task": "extract_umat_contract",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "BBahtiri__ABAQUS-Multiphysics-Diffusion-UEL/Diffusion_3D.for",
+      "task": "detect_dependencies",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/francesc/umat_DP_primal_CPPM_def.f90",
+      "task": "classify_umat",
+      "why": "entry_line: said 1, registry says 7"
+    },
+    {
+      "source": "3MAH__simcoon/testBin/Umats/UMABA/external/UMAT_ABAQUS_ELASTIC.f",
+      "task": "detect_dependencies",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "classify_umat",
+      "why": "entry_line: said 1, registry says 9"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "classify_umat",
+      "why": "verdict: said 'genuine_umat', registry says '__not_umat__'"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "classify_umat",
+      "why": "writes_ddsdde: said True, registry says False"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "classify_umat",
+      "why": "writes_stress: said True, registry says False"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "classify_umat",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "extract_umat_contract",
+      "why": "kinematics: said 'finite_strain', registry says 'small_strain'"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "extract_umat_contract",
+      "why": "escalated: no_evidence"
+    },
+    {
+      "source": "Batmanabcdefg__ParaFEM-lite/src/programs/dev/xx15/plasticity_xx15.F90",
+      "task": "detect_dependencies",
+      "why": "escalated: no_evidence"
+    }
+  ],
+  "totals": {
+    "sources": 6,
+    "fields_agreeing_with_registry": 23,
+    "fields_disagreeing": 13,
+    "agreement": 0.639,
+    "escalated_answers": 9,
+    "seconds": 740.6
+  }
+}

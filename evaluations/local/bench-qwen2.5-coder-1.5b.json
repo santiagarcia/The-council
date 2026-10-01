@@ -1,0 +1,1716 @@
+{
+  "model": "qwen2.5-coder:1.5b",
+  "started": "2026-09-30T21:00:09",
+  "inventory": {
+    "gpu": "Quadro RTX 4000",
+    "vram_mib": 7974,
+    "backend": "vulkan (driver too old for the CUDA 12 runtime)"
+  },
+  "scored": [
+    {
+      "case_id": "classify_umat:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Analytical_Example/3D/MMAFile/Example4-Torus/Growth-MinSur3.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 4,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 2,
+          "got": 1,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 33.24,
+      "tokens": 6021
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Analytical_Example/3D/MMAFile/Example4-Torus/Growth-MinSur3.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "both",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 2,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 180,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 30.12,
+      "tokens": 5832
+    },
+    {
+      "case_id": "classify_umat:abuganza__UMAT_anisotropic_damage/UMAT_Tissue_2d_plane_stress.f",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 48,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:abuganza__UMAT_anisotropic_damage/UMAT_Tissue_2d_plane_stress.f",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 10,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 11,
+          "got": 20,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 5,
+      "grounded_fraction": 0.833,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 11.49,
+      "tokens": 4537
+    },
+    {
+      "case_id": "classify_umat:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/Flat/Th01/BodyForce-Growth-2Stages.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 3,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 83,
+          "got": 483,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 9,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.07,
+      "tokens": 4696
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/Flat/Th01/BodyForce-Growth-2Stages.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 1,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 20,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 11.59,
+      "tokens": 4553
+    },
+    {
+      "case_id": "classify_umat:mauroarcidiacono__Crystal-Plasticity-UMAT/umat_abaqus.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 4,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 1,
+          "got": 502,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": false,
+          "got": true,
+          "verdict": "wrong"
+        },
+        "writes_stress": {
+          "expected": false,
+          "got": true,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 7,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 14.61,
+      "tokens": 4784
+    },
+    {
+      "case_id": "extract_umat_contract:mauroarcidiacono__Crystal-Plasticity-UMAT/umat_abaqus.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "both",
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 10.69,
+      "tokens": 4472
+    },
+    {
+      "case_id": "classify_umat:mholla__BMMB24/simulations/input files/umat_transverseIsotropicStretch.f",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 5,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 21,
+          "got": 20,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "umat",
+          "got": "umat",
+          "verdict": "correct"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 17.58,
+      "tokens": 6434
+    },
+    {
+      "case_id": "extract_umat_contract:mholla__BMMB24/simulations/input files/umat_transverseIsotropicStretch.f",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "small_strain",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 7,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 8,
+          "got": 8,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 5,
+      "grounded_fraction": 0.833,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 14.19,
+      "tokens": 6051
+    },
+    {
+      "case_id": "classify_umat:mkhadijeh26__UMAT_for_Viscoelastictiy/Linking Mechanical with Aging Code/CoupledMechanicalAgingCode.f",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 3,
+      "details": {
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:mkhadijeh26__UMAT_for_Viscoelastictiy/Linking Mechanical with Aging Code/CoupledMechanicalAgingCode.f",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 12.73,
+      "tokens": 4616
+    },
+    {
+      "case_id": "classify_umat:CAEAssistant-Group__UMAT-Abaqus-Tsai-Hill-Orthotropic-Composite-Subroutine/PLANESTRESS-ORTHOTROPIC.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 15,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:CAEAssistant-Group__UMAT-Abaqus-Tsai-Hill-Orthotropic-Composite-Subroutine/PLANESTRESS-ORTHOTROPIC.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 9,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 1,
+          "got": 81,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 28.33,
+      "tokens": 3051
+    },
+    {
+      "case_id": "classify_umat:BAMresearch__fenics-constitutive/examples/umat/src/umat_linear_elastic.f",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 1,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:BAMresearch__fenics-constitutive/examples/umat/src/umat_linear_elastic.f",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 1,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "classify_umat:HIT-FSW-314__abaqus/abaqus-umat/uel/UEL9_VPDCL.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 64,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "UEL",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "__not_umat__",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:HIT-FSW-314__abaqus/abaqus-umat/uel/UEL9_VPDCL.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.07,
+      "tokens": 4658
+    },
+    {
+      "case_id": "classify_umat:Woowinehouse__Abaqus_UMAT_sanisand/merge/source.F90",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 2,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 3431,
+          "got": 831,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "Umat",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": false,
+          "verdict": "wrong"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.37,
+      "tokens": 4731
+    },
+    {
+      "case_id": "extract_umat_contract:Woowinehouse__Abaqus_UMAT_sanisand/merge/source.F90",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "small_strain",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 1,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 20,
+          "got": 15,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 15,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 14.53,
+      "tokens": 4797
+    },
+    {
+      "case_id": "classify_umat:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Mesh_Convergence_test/3D/Helicoid/10/Growth-Helicoid.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 4,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 2,
+          "got": 4,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 7,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 16.87,
+      "tokens": 6148
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Mesh_Convergence_test/3D/Helicoid/10/Growth-Helicoid.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 2,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 2,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 9,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 30.61,
+      "tokens": 5962
+    },
+    {
+      "case_id": "classify_umat:irfancn__Abaqus-UMAT-viscoelastic/umat_viscoelastic.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 6,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:irfancn__Abaqus-UMAT-viscoelastic/umat_viscoelastic.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "both",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 3,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 1,
+          "got": 14,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 9,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 14.67,
+      "tokens": 2919
+    },
+    {
+      "case_id": "classify_umat:zning8251-jpg__ufc-fem-kernel/docs/02_Developer_Guide/Legacy_Adapters_Reference/Adapters/Material/Adapters/UMAT_Adapter.f90",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 50,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": false,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": false,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:zning8251-jpg__ufc-fem-kernel/docs/02_Developer_Guide/Legacy_Adapters_Reference/Adapters/Material/Adapters/UMAT_Adapter.f90",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 12.29,
+      "tokens": 2535
+    },
+    {
+      "case_id": "classify_umat:AnargyrosKarakalas__UMAT_3D/UMAT_3D_Coupled_ML_IP_Original.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 2,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 13,
+          "got": 201,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "fragment",
+          "verdict": "wrong"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 9.21,
+      "tokens": 4406
+    },
+    {
+      "case_id": "extract_umat_contract:AnargyrosKarakalas__UMAT_3D/UMAT_3D_Coupled_ML_IP_Original.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "both",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 38,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 32,
+          "got": 7,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 11,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.17,
+      "tokens": 4689
+    },
+    {
+      "case_id": "classify_umat:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/ArcDown/Th005/BodyForce-Growth-2Stages.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 3,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 83,
+          "got": 536,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 7,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 15.07,
+      "tokens": 4825
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/ArcDown/Th005/BodyForce-Growth-2Stages.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 1,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 20,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 11.89,
+      "tokens": 4599
+    },
+    {
+      "case_id": "classify_umat:longbiscuit__DuncanEB-Abaqus6.14-5-UMAT-constative-model/Duncan-Chang_EB_UMAT_ABAQUS6.14-5.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 4,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 1,
+          "got": 2,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 5,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 14.09,
+      "tokens": 7172
+    },
+    {
+      "case_id": "extract_umat_contract:longbiscuit__DuncanEB-Abaqus6.14-5-UMAT-constative-model/Duncan-Chang_EB_UMAT_ABAQUS6.14-5.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 36.32,
+      "tokens": 7442
+    },
+    {
+      "case_id": "classify_umat:thealanjason__umat_finite_viscoelasticity/UMAT/VISC_OGDEN_3EL.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 4,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 26,
+          "got": 1734,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "not_fortran_subroutine",
+          "verdict": "wrong"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": false,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 10.72,
+      "tokens": 4506
+    },
+    {
+      "case_id": "extract_umat_contract:thealanjason__umat_finite_viscoelasticity/UMAT/VISC_OGDEN_3EL.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "small_strain",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 18,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 18,
+          "got": 2,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 8,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.1,
+      "tokens": 4673
+    },
+    {
+      "case_id": "classify_umat:MCM-QMUL__PhaseFieldComp/Subroutine/UELUMATPhaseField_AT2.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 5,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 562,
+          "got": 562,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "umat",
+          "got": "UMAT",
+          "verdict": "correct"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 14.26,
+      "tokens": 4805
+    },
+    {
+      "case_id": "extract_umat_contract:MCM-QMUL__PhaseFieldComp/Subroutine/UELUMATPhaseField_AT2.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 2,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 6,
+          "got": 27,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 10.82,
+      "tokens": 4479
+    },
+    {
+      "case_id": "classify_umat:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Analytical_Example/3D/MMAFile/Example3-Sphere/Growth-MinSur3.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 4,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 2,
+          "got": 1,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 27.25,
+      "tokens": 6021
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Realization-of-planar-and-surface-conformal-mappings/Analytical_Example/3D/MMAFile/Example3-Sphere/Growth-MinSur3.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 3,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "both",
+          "verdict": "wrong"
+        },
+        "max_props_index": {
+          "expected": 2,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 180,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "none",
+      "seconds": 26.09,
+      "tokens": 5832
+    },
+    {
+      "case_id": "classify_umat:hamza-djeloud__thesis_project/plate_with_notch.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 4,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 569,
+          "got": 567,
+          "verdict": "correct"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 14.22,
+      "tokens": 4797
+    },
+    {
+      "case_id": "extract_umat_contract:hamza-djeloud__thesis_project/plate_with_notch.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 2,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 16,
+          "got": 18,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 11.41,
+      "tokens": 4545
+    },
+    {
+      "case_id": "classify_umat:jcmcmurry__pipelining/elmerfem/fem/src/modules/ElasticSolve.F90",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 3,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 1964,
+          "got": 1644,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 13.08,
+      "tokens": 4735
+    },
+    {
+      "case_id": "extract_umat_contract:jcmcmurry__pipelining/elmerfem/fem/src/modules/ElasticSolve.F90",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 0,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "small_strain",
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 7,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 15.11,
+      "tokens": 4816
+    },
+    {
+      "case_id": "classify_umat:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/HelixUp/Th002/BodyForce-Growth-2Stages.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 3,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 83,
+          "got": 487,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 5,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 12.56,
+      "tokens": 4654
+    },
+    {
+      "case_id": "extract_umat_contract:Jeff97__Programming-Plane-Strain-Plates-through-Growth-Under-Body-Forces/Examples-In-Section-3/HelixUp/Th002/BodyForce-Growth-2Stages.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 1,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "finite_strain",
+          "got": "finite_strain",
+          "verdict": "correct"
+        },
+        "max_props_index": {
+          "expected": 1,
+          "got": 14,
+          "verdict": "wrong"
+        },
+        "max_statev_index": {
+          "expected": 9,
+          "got": 20,
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 11.65,
+      "tokens": 4561
+    },
+    {
+      "case_id": "classify_umat:CAEAssistant-Group__Abaqus-CAE-UMAT-subroutine-for-Composite-fatigue-simulation/CAE_ASSISTANT_UMAT_Subroutine_ABAQUS_COMPOSITE_FATIGUE.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 5,
+      "details": {
+        "entry_line": {
+          "expected": 18,
+          "got": null,
+          "verdict": "missing"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": null,
+          "verdict": "missing"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_ddsdde": {
+          "expected": false,
+          "got": null,
+          "verdict": "missing"
+        },
+        "writes_stress": {
+          "expected": false,
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "extract_umat_contract:CAEAssistant-Group__Abaqus-CAE-UMAT-subroutine-for-Composite-fatigue-simulation/CAE_ASSISTANT_UMAT_Subroutine_ABAQUS_COMPOSITE_FATIGUE.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 0,
+      "missing": 1,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": null,
+          "verdict": "missing"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 0,
+      "grounded_fraction": 0.0,
+      "schema_valid": false,
+      "escalated": "schema_invalid",
+      "seconds": 0.0,
+      "tokens": 0
+    },
+    {
+      "case_id": "classify_umat:glu46__3D_anisotropic_viscoelastic_model/TIRockCreep_CANEY.for",
+      "task": "classify_umat",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 3,
+      "wrong": 2,
+      "missing": 0,
+      "details": {
+        "entry_line": {
+          "expected": 4,
+          "got": 201,
+          "verdict": "wrong"
+        },
+        "entry_routine": {
+          "expected": "UMAT",
+          "got": "UEL",
+          "verdict": "wrong"
+        },
+        "verdict": {
+          "expected": "genuine_umat",
+          "got": "genuine_umat",
+          "verdict": "correct"
+        },
+        "writes_ddsdde": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        },
+        "writes_stress": {
+          "expected": true,
+          "got": true,
+          "verdict": "correct"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 15.27,
+      "tokens": 4840
+    },
+    {
+      "case_id": "extract_umat_contract:glu46__3D_anisotropic_viscoelastic_model/TIRockCreep_CANEY.for",
+      "task": "extract_umat_contract",
+      "model": "qwen2.5-coder:1.5b",
+      "correct": 0,
+      "wrong": 1,
+      "missing": 0,
+      "details": {
+        "kinematics": {
+          "expected": "small_strain",
+          "got": "finite_strain",
+          "verdict": "wrong"
+        }
+      },
+      "hallucinated_citations": 0,
+      "total_citations": 6,
+      "grounded_fraction": 1.0,
+      "schema_valid": true,
+      "escalated": "no_evidence",
+      "seconds": 17.08,
+      "tokens": 8701
+    }
+  ],
+  "summary": {
+    "cases": 48,
+    "fields_scored": 172,
+    "accuracy": 0.384,
+    "wrong": 66,
+    "missing": 40,
+    "hallucination_rate": 0.0,
+    "schema_validity": 0.792,
+    "grounded_fraction": 0.618,
+    "escalated": 34,
+    "seconds_total": 625.4,
+    "seconds_per_case": 13.0,
+    "tokens_total": 191895,
+    "by_task": {
+      "classify_umat": {
+        "correct": 51,
+        "scored": 118,
+        "seconds": 254.5,
+        "accuracy": 0.432
+      },
+      "extract_umat_contract": {
+        "correct": 15,
+        "scored": 54,
+        "seconds": 370.9,
+        "accuracy": 0.278
+      }
+    }
+  },
+  "failures": []
+}

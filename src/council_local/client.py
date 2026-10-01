@@ -187,6 +187,7 @@ class LocalClient:
         answers: dict | None = None,
     ) -> Envelope:
         """A full task call, returned as an envelope with the rules applied."""
+        started = time.time()
         try:
             payload, usage = self.generate(
                 system=system,
@@ -196,7 +197,15 @@ class LocalClient:
                 model=model,
             )
         except LocalModelError as error:
-            usage = Usage(model=model or self.model, backend=_backend())
+            # A failed call still cost the time it spent failing, and a retry
+            # costs twice. Reporting 0.0s there understates the price of the
+            # answers that do not arrive, which is exactly the number needed
+            # to decide whether delegating is worth it.
+            usage = Usage(
+                model=model or self.model,
+                backend=_backend(),
+                seconds=round(time.time() - started, 2),
+            )
             envelope = Envelope(
                 agent=agent, task=task, usage=usage, files_examined=[str(p) for p in files_examined]
             )
