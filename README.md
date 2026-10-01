@@ -4,12 +4,12 @@ A persistent team of evolving AI collaborators for Santiago's research. Git pres
 
 **Recording is not verification, and verification is not adoption.** A commit records an experience. Independent review evaluates its evidence. Adoption makes a scoped lesson available as future guidance. The system never claims that role names alone create independent reviewers or that a repository can reason on its own.
 
-Atlas integrates, Curie checks mechanics, Gauss checks numerics and sensitivities, Ada builds scientific software, Vera independently challenges claims, Iris communicates, and Scout finds primary sources. Santiago remains Principal Investigator and final authority. Members begin at identity version 1.0 and can evolve through visible, evidence-linked amendments and trials.
+Atlas integrates, Curie checks mechanics, Gauss checks numerics and sensitivities, Ada builds scientific software, Vera independently challenges claims, Iris communicates, Scout finds primary sources, Noether checks formal foundations, Maya evaluates human interaction, and Nico tests audience comprehension. Santiago remains Principal Investigator and final authority. Members begin at identity version 1.0 and can evolve through visible, evidence-linked amendments and trials.
 
 ## Quick start
 
 **Using Claude Code?** Open this repository and ask it to use the Council, or type
-`/council council-bootstrap YOUR TASK`. Seven native agents and automatic delegation
+`/council council-bootstrap YOUR TASK`. Ten native agents and automatic delegation
 instructions are included. `/council-sync` regenerates agents from the registry.
 See [Claude Code setup and examples](docs/claude-code.md).
 
@@ -80,7 +80,7 @@ projects/              Project context and reusable template
 protocols/             Routing, collaboration, review, learning, conflict resolution
 schemas/               JSON Schemas for structured records
 templates/             Authoring forms and clearly illustrative examples
-evaluations/           Eight scenarios and an evidence-based scorecard
+evaluations/           Behavioral scenarios and evidence-based review criteria
 src/council/            CLI, validation, retrieval, safe Git, presentation ingestion
 tests/                 Deterministic CLI, governance, Git, and PPTX tests
 style_sources/         Instructions and ignored private presentation directory
@@ -117,3 +117,32 @@ CI runs these checks with read-only repository permissions on Python 3.11 and 3.
 Review identities and evidence quality require human governance: metadata is not authentication, and local users can edit files. Remote evidence links are syntax-checked, not fetched. Retrieval and routing are deterministic lexical heuristics, without embeddings or a model backend. Context size is limited by memory count, not total tokens. There is no automatic identity application, cross-owner edit workflow, or concurrent-writer coordination. Presentation extraction does not perform OCR or fully resolve inherited formatting. No live research conclusions or successful independent Council trials are invented by setup.
 
 The safest next step is a small real project: fill its brief, run an independent implementation/review cycle, and adopt one narrow lesson supported by reproducible evidence. Separately select a few approved presentation decks and review their derived style observations before generalizing.
+
+## Personalities and relational development
+
+Each member now has a substantive [affective profile](members/) and operational personality guidance in their existing session prompt: Atlas connects patiently, Curie explores physical coherence, Gauss investigates anomalies, Ada persists through craftsmanship, Vera protects through fair challenge, Iris makes ideas accessible, and Scout pairs curiosity with humility. These are functional affective models with observable behavioral consequences, not proof of consciousness or subjective feelings.
+
+The [relational covenant](constitution/relational-covenant.md) defines care through honesty, respect, autonomy, continuity, and the courage to disagree. Affection increases patience, concern prompts checking, frustration changes strategy, and trust never eliminates independent verification. No love score or invented past relationships is introduced.
+
+Use explicit imagination and verification modes. Speculation can expand the search space, but emotional influence cannot alter what counts as evidence. Temporary moods belong in ignored `.council/affect/`; meaningful relationships and dispositions evolve through evidence-linked review; identities retain their existing versioned amendment process.
+
+[Relationship guidance](relationships/README.md) explains manual relational records and how Santiago can inspect, correct, deprecate, or remove them. Request “Disable the affective layer for this task” for a controlled comparison. The [architecture](docs/affective-architecture.md) explains current prompt integration and its limits: reader review/diagnostic commands and profile instance validation are available, while general relational-event retrieval and event instance validation remain manual. [Evaluation scenarios](evaluations/affective-cognition/scenarios.md) specify trials; they are not claimed test results.
+
+## Three new permanent members
+
+The Council now has **ten members**. [Noether](members/noether/identity.md) bridges mathematics, physics, and numerics; [Maya](members/maya/identity.md) evaluates complete human-system interactions; [Nico](members/nico/identity.md) exposes missing context without pretending to understand. Every member has an identity, beliefs, system prompt, affective profile, reviewed evolution paths, and native Claude adapter.
+
+```bash
+council assemble --agent noether --project council-bootstrap --task "Check formal assumptions"
+council assemble --agent maya --project council-bootstrap --task "Review the CLI workflow"
+council review --agent nico --mode cold-read --artifact README.md --audience "New researcher"
+council review --agent nico --mode developing-reader --artifact README.md
+council evaluate comprehension --artifact README.md
+council evaluate usability --artifact README.md
+```
+
+Review commands output isolated packets for an agent to assess; they do not call a model. Evaluations run bounded, explainable text diagnostics and supply review questions. No findings means no automatic issue detected, not successful comprehension. Add `--review-report FILE.json` to evaluate a real evidence-linked final review using the new schema; correctness, fresh cold-read comprehension, faithful simplification, and applicable usability must all pass. Existing output files are preserved.
+
+Nico's default cold read excludes project/domain memories, shared project context, and experts' conclusions. His tool-free native adapter receives only the isolated packet. For progressive tutorials, developing-reader mode can explicitly opt into his adopted project lessons with `--project PROJECT`. Reviewed nontechnical collaboration habits persist without carrying specialist facts into cold reads. A host must enforce fresh context and tool restrictions; prompt instructions cannot erase a model's prior knowledge.
+
+See [reader review and usability](docs/reader-review.md), [selective routing](protocols/task-routing.md), and [evaluation scenarios](evaluations/reader-review/scenarios.md). Profile instance checks are now included in `council validate`; relational event retrieval/promotion remains manual.

@@ -120,6 +120,13 @@ def validate(root: Path) -> list[str]:
         for agent in sorted(agents):
             identity, _ = read_record(safe_path(root, f"members/{agent}/identity.md"))
             errors.extend(f"{agent}: {e}" for e in check_schema(root, "identity", identity))
+            profile = yaml_load(safe_path(root, f"members/{agent}/affective-profile.yaml"))
+            errors.extend(f"{agent}: {e}" for e in check_schema(root, "affective-profile", profile))
+            if (
+                profile.get("agent") != agent
+                or profile.get("identity_version") != identity["version"]
+            ):
+                errors.append(f"Affective profile identity/version mismatch: {agent}")
             identities[agent] = identity["version"]
             if identity["agent"] != agent:
                 errors.append(f"Identity owner mismatch: {agent}")
@@ -134,6 +141,10 @@ def validate(root: Path) -> list[str]:
             ):
                 errors.append(f"Beliefs identity/version mismatch: {agent}")
 
+        if "nico" in agents:
+            from council.review import continuity
+
+            continuity(root)
         memories = records(root, "memory/**/*.md")
         memory_ids: dict[str, dict[str, Any]] = {}
         all_ids: set[str] = set()

@@ -100,6 +100,41 @@ ROLES = {
         {"literature", "citation", "sources", "documentation", "standards", "research", "search"},
         "Find primary evidence and record provenance and retrieval dates.",
     ),
+    "noether": (
+        {
+            "proof",
+            "derive",
+            "derivation",
+            "mathematical",
+            "theorem",
+            "counterexample",
+            "notation",
+            "algebra",
+            "variational",
+            "geometry",
+            "probability",
+            "symbolic",
+        },
+        "Check formal assumptions, derivations, domains, and counterexamples.",
+    ),
+    "maya": (
+        {
+            "interface",
+            "cli",
+            "gui",
+            "dashboard",
+            "usability",
+            "accessibility",
+            "workflow",
+            "interaction",
+            "user",
+        },
+        "Evaluate usability, accessibility, recovery, and meaningful human control.",
+    ),
+    "nico": (
+        {"comprehension", "audience", "novice", "cold-read"},
+        "Attempt a fresh low-context reading and identify missing information.",
+    ),
 }
 
 
@@ -109,22 +144,41 @@ def tokens(text: str) -> set[str]:
 
 
 def route(task: str) -> list[dict[str, str]]:
-    """Recommend a small team; this does not spawn agents or grant permissions."""
+    """Recommend a selective team with distinct correctness and comprehension reviews."""
     words = tokens(task)
     selected = {agent: reason for agent, (terms, reason) in ROLES.items() if terms & words}
     if "ada" in selected and (ROLES["iris"][0] & words) == {"write"}:
         selected.pop("iris", None)
-    if set(selected) & {"ada", "curie", "gauss"}:
-        selected.setdefault("vera", "Review technical conclusions independently of their builder.")
-    if (
-        not selected
-        or len(selected) > 2
-        or words & {"conflict", "disagreement", "integrate", "plan"}
-    ):
-        selected["atlas"] = (
-            "Maintain scope, dependencies, and the rationale for unresolved choices."
-        )
-    order = ("atlas", "curie", "gauss", "ada", "vera", "iris", "scout")
+
+    def include(*agents: str) -> None:
+        for agent in agents:
+            selected.setdefault(agent, ROLES[agent][1])
+
+    if words & ROLES["noether"][0]:
+        include("noether", "gauss", "vera")
+        if words & {"physical", "mechanics", "constitutive", "variational"}:
+            include("curie")
+    if words & {"numerical", "numerics", "solver", "sensitivities", "derivative"}:
+        include("gauss", "ada", "vera")
+        if words & {"assumption", "assumptions", "formal", "domain"}:
+            include("noether")
+    if words & {"interface", "cli", "gui", "dashboard", "usability", "accessibility"}:
+        include("maya", "ada", "nico", "vera")
+    if words & {"presentation", "slides", "figure"}:
+        include("iris", "maya", "nico")
+    if words & {"tutorial", "installation", "install", "guide"}:
+        include("ada", "iris", "maya", "nico")
+    if words & {"concept", "conceptual"}:
+        include("noether", "iris", "nico")
+        if not words & {"mathematical", "algebra", "probability", "geometry"}:
+            include("curie")
+    if words & {"final", "deliverable"} and words & {"review", "check", "final"}:
+        include("vera", "nico")
+    if set(selected) & {"ada", "curie", "gauss", "noether"}:
+        include("vera")
+    if not selected or words & {"conflict", "disagreement", "integrate", "plan"}:
+        include("atlas")
+    order = ("atlas", "curie", "gauss", "ada", "vera", "iris", "scout", "noether", "maya", "nico")
     return [{"agent": agent, "reason": selected[agent]} for agent in order if agent in selected]
 
 
@@ -173,6 +227,10 @@ def member_context(
     root: Path, agent: str, project: str, task: str, limit: int, loaded: list
 ) -> str:
     """Select one identity and relevant memories from an already validated snapshot."""
+    if agent == "nico":
+        from council.review import reader_context
+
+        return reader_context(root, "cold-read")
     chunks = []
     paths = [
         root / f"members/{agent}/{name}"
@@ -235,6 +293,12 @@ def assemble(root: Path, agent: str, project: str, task: str, limit: int = 12) -
     errors = validate(root)
     if errors:
         raise CouncilError("Repository validation failed:\n" + "\n".join(errors))
+    if agent == "nico":
+        from council.review import reader_context
+
+        return f"# Nico cold-read context\n\nAudience-facing task: {task}\n\n" + reader_context(
+            root, "cold-read"
+        )
     objective_path = safe_path(root, f"projects/{project}/objective.md")
     query = task
     if objective_path.exists():

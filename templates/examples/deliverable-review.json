@@ -1,0 +1,33 @@
+{
+  "artifact": "PUBLIC-ARTIFACT.md",
+  "builder": "ada",
+  "correctness": {
+    "reviewer": "vera",
+    "decision": "pending",
+    "evidence_refs": [],
+    "mathematical_status": "not-applicable",
+    "physical_status": "not-applicable",
+    "numerical_status": "not-applicable",
+    "assumptions": [],
+    "limitations": "Illustrative draft; evidence and independent assessment not yet supplied."
+  },
+  "comprehension": {
+    "reviewer": "nico",
+    "decision": "pending",
+    "evidence_refs": [],
+    "restatement": "",
+    "technically_faithful": false,
+    "mode": "cold-read"
+  },
+  "usability": {
+    "reviewer": "maya",
+    "decision": "pending",
+    "evidence_refs": [],
+    "implementation_constraints_considered": false,
+    "limitations": "Illustrative draft; real walkthrough and constraints not yet supplied."
+  },
+  "blocking_findings": [
+    "Replace this draft with actual evidence and assessed findings."
+  ],
+  "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}
