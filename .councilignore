@@ -1,0 +1,39 @@
+# What a model -- local or hosted -- may read on this machine.
+#
+#   <glob> <open|internal|restricted> [owner=<name>] [reason=<text>]
+#
+# Later lines win, so a broad restriction can be narrowed by a grant below it.
+# Unmatched paths default to "internal": analysable here, not redistributable.
+#
+# "restricted" means NO model may read it. A collaborator's no-AI condition is
+# a condition on analysis, not on egress, so running the model locally does
+# not satisfy it.
+
+# --- collaborator and sponsor material under a no-AI condition ---
+jhu_codex_evidence/ restricted owner=jhu reason=collaborator material pending an explicit AI-use grant
+**/jhu/** restricted owner=jhu reason=collaborator material pending an explicit AI-use grant
+JHU_PREPARATION_COMPLETION_LEDGER.md restricted owner=jhu reason=collaborator preparation record
+**/nasa/** restricted owner=nasa reason=sponsor material; no AI-use grant on file
+**/cmu/** restricted owner=cmu reason=collaborator material; no AI-use grant on file
+**/export_controlled/** restricted owner=export-controlled reason=ITAR/EAR screening not performed
+
+# --- private research material ---
+style_sources/presentations/ restricted reason=unpublished decks, may contain collaborator content
+**/*.pptx restricted reason=decks may carry sponsor or collaborator content
+**/.env restricted reason=credentials
+**/id_*  restricted reason=private keys
+
+# --- the scraped corpus: analysable, not redistributable ---
+# Every source here is third-party. Licences vary and several are unstated,
+# so these are internal: a model may read them, nothing may republish them.
+discovery_cache/ internal reason=third-party scraped sources; licence varies by repository
+corpus_run/ internal reason=derived from third-party sources
+
+# --- this project's own work ---
+src/ open
+tests/ open
+docs/ open
+scripts/ open
+members/ open
+protocols/ open
+constitution/ open

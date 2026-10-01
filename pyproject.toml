@@ -14,12 +14,16 @@ dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 
 [project.scripts]
 council = "council.cli:main"
+council-local-mcp = "council_local.mcp_server:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/council"]
+packages = ["src/council", "src/council_local"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "local_model: needs the local inference server running",
+]
 
 [tool.ruff]
 target-version = "py311"

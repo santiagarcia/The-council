@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Start, stop, check and benchmark the local Council inference service.
+#
+#   council-local up|down|status|health|bench|models|unload <model>
+#
+# Everything is user-space and bound to loopback. Nothing here needs root and
+# nothing is installed system-wide.
+set -euo pipefail
+
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PY="${COUNCIL_PY:-/home/ammslab3/softwarex_work/.venv/bin/python}"
+export PYTHONPATH="$HERE/src${PYTHONPATH:+:$PYTHONPATH}"
+export OLLAMA_HOST="${OLLAMA_HOST:-127.0.0.1:11434}"
+
+usage() { sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; }
+
+case "${1:-status}" in
+  up)
+    "$PY" -c "
+from council_local.runtime import Server
+s = Server().start()
+print(f'ready at {s.base_url} (log: {s.log_file})')"
+    ;;
+  down)
+    "$PY" -c "
+from council_local.runtime import Server
+print('stopped' if Server().stop() else 'nothing this tool started was running')"
+    ;;
+  status|health)
+    "$PY" -c "
+import json
+from council_local.runtime import Server
+print(json.dumps(Server().health(), indent=2))"
+    ;;
+  models)
+    "$PY" -c "
+from council_local.hardware import inventory
+for m in inventory().models_present:
+    print(f\"{m['gib']:>6.2f} GiB  {m['name']}\")"
+    ;;
+  unload)
+    "$PY" -c "
+import sys
+from council_local.runtime import Server
+Server().unload(sys.argv[1]); print('unloaded', sys.argv[1])" "${2:?usage: council-local unload <model>}"
+    ;;
+  hardware)
+    "$PY" -m council_local.hardware
+    ;;
+  bench)
+    shift
+    "$PY" "$HERE/scripts/local/benchmark.py" "$@"
+    ;;
+  *)
+    usage; exit 2
+    ;;
+esac
