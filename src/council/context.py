@@ -101,13 +101,34 @@ ROLES = {
         "Find primary evidence and record provenance and retrieval dates.",
     ),
     "noether": (
-        {"proof", "derive", "derivation", "mathematical", "theorem", "counterexample",
-         "notation", "algebra", "variational", "geometry", "probability", "symbolic"},
+        {
+            "proof",
+            "derive",
+            "derivation",
+            "mathematical",
+            "theorem",
+            "counterexample",
+            "notation",
+            "algebra",
+            "variational",
+            "geometry",
+            "probability",
+            "symbolic",
+        },
         "Check formal assumptions, derivations, domains, and counterexamples.",
     ),
     "maya": (
-        {"interface", "cli", "gui", "dashboard", "usability", "accessibility", "workflow",
-         "interaction", "user"},
+        {
+            "interface",
+            "cli",
+            "gui",
+            "dashboard",
+            "usability",
+            "accessibility",
+            "workflow",
+            "interaction",
+            "user",
+        },
         "Evaluate usability, accessibility, recovery, and meaningful human control.",
     ),
     "nico": (
@@ -157,8 +178,7 @@ def route(task: str) -> list[dict[str, str]]:
         include("vera")
     if not selected or words & {"conflict", "disagreement", "integrate", "plan"}:
         include("atlas")
-    order = ("atlas", "curie", "gauss", "ada", "vera", "iris", "scout",
-             "noether", "maya", "nico")
+    order = ("atlas", "curie", "gauss", "ada", "vera", "iris", "scout", "noether", "maya", "nico")
     return [{"agent": agent, "reason": selected[agent]} for agent in order if agent in selected]
 
 

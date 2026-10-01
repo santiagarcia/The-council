@@ -30,11 +30,15 @@ def nico_lesson(repo):
         owner="nico",
         status="adopted",
         observation="DOMAIN_MEMORY_SENTINEL",
-        reviewers=[{
-            "agent": "vera", "decision": "accept", "date": "2026-09-29",
-            "evidence_refs": [meta["evidence"][0]["ref"]],
-            "notes": "Separate fixture review; no claim of live verification.",
-        }],
+        reviewers=[
+            {
+                "agent": "vera",
+                "decision": "accept",
+                "date": "2026-09-29",
+                "evidence_refs": [meta["evidence"][0]["ref"]],
+                "notes": "Separate fixture review; no claim of live verification.",
+            }
+        ],
     )
     path = repo / "memory/agents/nico/mem-nico-domain.md"
     path.write_text(render_record(meta, body), encoding="utf-8")
@@ -44,12 +48,11 @@ def review_report():
     """Return explicit review metadata for testing gates, not actual agent conclusions."""
     return {
         "artifact": "public-artifact.md",
-        "artifact_sha256": hashlib.sha256(
-            b"A clear explanation of one idea."
-        ).hexdigest(),
+        "artifact_sha256": hashlib.sha256(b"A clear explanation of one idea.").hexdigest(),
         "builder": "ada",
         "correctness": {
-            "reviewer": "vera", "decision": "pass",
+            "reviewer": "vera",
+            "decision": "pass",
             "evidence_refs": ["public-artifact.md"],
             "mathematical_status": "supported",
             "physical_status": "not-applicable",
@@ -58,13 +61,16 @@ def review_report():
             "limitations": "Fixture scalar argument only.",
         },
         "comprehension": {
-            "reviewer": "nico", "decision": "pass",
+            "reviewer": "nico",
+            "decision": "pass",
             "evidence_refs": ["public-artifact.md"],
             "restatement": "The conclusion holds under the stated nonzero assumption.",
-            "technically_faithful": True, "mode": "cold-read",
+            "technically_faithful": True,
+            "mode": "cold-read",
         },
         "usability": {
-            "reviewer": "maya", "decision": "pass",
+            "reviewer": "maya",
+            "decision": "pass",
             "evidence_refs": ["public-artifact.md"],
             "implementation_constraints_considered": True,
             "limitations": "Fixture walkthrough only.",
@@ -85,16 +91,24 @@ def test_new_members_assemble_without_replacing_foundation(repo):
 @pytest.mark.parametrize(
     "task,required,absent",
     [
-        ("mathematical derivation of a constitutive model",
-         {"noether", "curie", "gauss", "vera"}, {"maya", "nico", "scout"}),
-        ("numerical solver with formal assumptions",
-         {"gauss", "noether", "ada", "vera"}, {"maya", "nico"}),
-        ("design a CLI interface",
-         {"maya", "ada", "nico", "vera"}, {"curie", "gauss", "noether"}),
+        (
+            "mathematical derivation of a constitutive model",
+            {"noether", "curie", "gauss", "vera"},
+            {"maya", "nico", "scout"},
+        ),
+        (
+            "numerical solver with formal assumptions",
+            {"gauss", "noether", "ada", "vera"},
+            {"maya", "nico"},
+        ),
+        ("design a CLI interface", {"maya", "ada", "nico", "vera"}, {"curie", "gauss", "noether"}),
         ("write presentation slides", {"iris", "maya", "nico"}, {"ada", "vera", "scout"}),
         ("installation tutorial", {"ada", "iris", "maya", "nico"}, {"noether", "gauss"}),
-        ("explain a new scientific concept",
-         {"curie", "noether", "iris", "nico"}, {"scout", "maya"}),
+        (
+            "explain a new scientific concept",
+            {"curie", "noether", "iris", "nico"},
+            {"scout", "maya"},
+        ),
         ("final deliverable review", {"vera", "nico"}, {"curie", "gauss", "maya"}),
     ],
 )
@@ -143,7 +157,9 @@ def test_nico_retains_only_reviewed_nontechnical_relational_continuity(repo):
     item = {
         "id": "reader-patient-clarification",
         "participants": ["nico", "iris"],
-        "status": "adopted", "review_status": "accepted", "reviewer": "vera",
+        "status": "adopted",
+        "review_status": "accepted",
+        "reviewer": "vera",
         "evidence_refs": ["public-artifact.md"],
         "qualities": [{"quality": "trust", "level": "moderate"}],
         "practices": ["ask-without-apology", "request-concrete-example"],
@@ -169,8 +185,13 @@ def test_dispatch_has_a_separate_nico_handoff(repo):
 
 
 @pytest.mark.parametrize(
-    "path", ["../outside.md", "memory/shared/proposed/secret.md",
-             "style_sources/presentations/private/raw.md", ".env"]
+    "path",
+    [
+        "../outside.md",
+        "memory/shared/proposed/secret.md",
+        "style_sources/presentations/private/raw.md",
+        ".env",
+    ],
 )
 def test_review_rejects_private_memory_and_unsafe_inputs(repo, path):
     with pytest.raises(CouncilError):
@@ -197,8 +218,13 @@ def test_diagnostics_expose_acronyms_prerequisites_and_recovery_gaps(repo):
     code, result = evaluate_artifact(repo, "usability", artifact)
     assert code == 1
     rules = {f["rule"] for f in result["findings"]}
-    assert {"possibly-undefined-acronym", "missing-prerequisites",
-            "missing-success-feedback", "missing-recovery", "assumed-understanding"} <= rules
+    assert {
+        "possibly-undefined-acronym",
+        "missing-prerequisites",
+        "missing-success-feedback",
+        "missing-recovery",
+        "assumed-understanding",
+    } <= rules
     assert result["final_review_passed"] is None
     assert result["status"] == "needs-human-review"
 
@@ -233,8 +259,13 @@ def test_usability_review_requires_implementation_constraints(repo):
 
 
 @pytest.mark.parametrize(
-    "change", [{"decision": "fail"}, {"restatement": ""},
-               {"technically_faithful": False}, {"mode": "developing-reader"}]
+    "change",
+    [
+        {"decision": "fail"},
+        {"restatement": ""},
+        {"technically_faithful": False},
+        {"mode": "developing-reader"},
+    ],
 )
 def test_correct_but_incomprehensible_or_false_simplification_fails(repo, change):
     public_artifact(repo)
@@ -269,9 +300,20 @@ def test_reader_cli_outputs_packets_and_final_gate_results_without_overwriting(r
     report = review_report()
     report["comprehension"]["decision"] = "fail"
     (repo / "review.json").write_text(json.dumps(report), encoding="utf-8")
-    assert main(base + [
-        "evaluate", "comprehension", "--artifact", artifact, "--review-report", "review.json"
-    ]) == 1
+    assert (
+        main(
+            base
+            + [
+                "evaluate",
+                "comprehension",
+                "--artifact",
+                artifact,
+                "--review-report",
+                "review.json",
+            ]
+        )
+        == 1
+    )
     assert json.loads(capsys.readouterr().out)["final_review_passed"] is False
 
 

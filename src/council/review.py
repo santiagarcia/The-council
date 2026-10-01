@@ -82,8 +82,12 @@ def reader_context(root: Path, mode: str) -> str:
     if mode not in {"cold-read", "developing-reader"}:
         raise CouncilError("Unknown reader mode")
     chunks = [f"# Nico: {mode}\n\n{READER_RULES}\n"]
-    for name in ("identity.md", "system-prompt.md", "operating-beliefs.yaml",
-                 "affective-profile.yaml"):
+    for name in (
+        "identity.md",
+        "system-prompt.md",
+        "operating-beliefs.yaml",
+        "affective-profile.yaml",
+    ):
         path = safe_path(root, f"members/nico/{name}")
         chunks.append(f"## Source: members/nico/{name}\n\n{path.read_text(encoding='utf-8')}")
     chunks.append("## Reviewed nontechnical continuity\n" + json.dumps(continuity(root), indent=2))
@@ -122,8 +126,11 @@ def review_packet(
                 and memory["status"] == "adopted"
             ):
                 lessons.append(
-                    {"id": memory["id"], "observation": memory["observation"],
-                     "limitations": memory["limitations"]}
+                    {
+                        "id": memory["id"],
+                        "observation": memory["observation"],
+                        "limitations": memory["limitations"],
+                    }
                 )
     return {
         "format_version": 1,
@@ -131,7 +138,8 @@ def review_packet(
         "mode": mode,
         "audience": audience or "No audience supplied; report this evaluation limitation.",
         "artifact": {
-            "path": path, "content": text,
+            "path": path,
+            "content": text,
             "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
         },
         "reader_context": context,
@@ -151,39 +159,57 @@ def diagnostics(text: str, kind: str) -> list[dict]:
     for number, line in enumerate(text.splitlines(), 1):
         if re.search(r"\b(idiot|stupid|childish|dumb)\b", line, re.IGNORECASE):
             findings.append(
-                {"rule": "possible-humiliation", "line": number,
-                 "detail": "Check for ridicule or infantilization; inspect context."}
+                {
+                    "rule": "possible-humiliation",
+                    "line": number,
+                    "detail": "Check for ridicule or infantilization; inspect context.",
+                }
             )
         if re.search(r"\b(obviously|trivial|simply understand)\b", line, re.IGNORECASE):
             findings.append(
-                {"rule": "assumed-understanding", "line": number,
-                 "detail": "Check whether required steps are explained without dismissal."}
+                {
+                    "rule": "assumed-understanding",
+                    "line": number,
+                    "detail": "Check whether required steps are explained without dismissal.",
+                }
             )
         for acronym in sorted(set(re.findall(r"\b[A-Z][A-Z0-9]{1,7}\b", line))):
             if acronym in {"TODO", "NOTE", "WARNING", "PATH"}:
                 continue
             if not re.search(r"\(" + re.escape(acronym) + r"\)", text):
                 findings.append(
-                    {"rule": "possibly-undefined-acronym", "line": number,
-                     "detail": f"Check whether {acronym} is defined for this audience."}
+                    {
+                        "rule": "possibly-undefined-acronym",
+                        "line": number,
+                        "detail": f"Check whether {acronym} is defined for this audience.",
+                    }
                 )
     if kind == "usability":
         lower = text.lower()
         if re.search(r"\b(install|pip|uv sync|npm)\b", lower):
             if not re.search(r"\b(prerequisite|requires|required|python [0-9])", lower):
                 findings.append(
-                    {"rule": "missing-prerequisites", "line": 1,
-                     "detail": "Installation text may omit prerequisites."}
+                    {
+                        "rule": "missing-prerequisites",
+                        "line": 1,
+                        "detail": "Installation text may omit prerequisites.",
+                    }
                 )
             if not re.search(r"\b(expect|success|verify|check|output)\b", lower):
                 findings.append(
-                    {"rule": "missing-success-feedback", "line": 1,
-                     "detail": "The workflow may omit expected output or a success check."}
+                    {
+                        "rule": "missing-success-feedback",
+                        "line": 1,
+                        "detail": "The workflow may omit expected output or a success check.",
+                    }
                 )
         if not re.search(r"\b(error|fail|recover|undo|rollback|revert)\b", lower):
             findings.append(
-                {"rule": "missing-recovery", "line": 1,
-                 "detail": "Check whether failure handling and reversal are discoverable."}
+                {
+                    "rule": "missing-recovery",
+                    "line": 1,
+                    "detail": "Check whether failure handling and reversal are discoverable.",
+                }
             )
     return findings
 
@@ -251,7 +277,9 @@ def evaluate_artifact(
             "Pattern checks cannot prove understanding, mathematical/physical validity, "
             "accessibility, or truthful simplification. Review labels are not authentication."
         ),
-        "review_questions": list(QUESTIONS) if kind == "comprehension" else [
+        "review_questions": list(QUESTIONS)
+        if kind == "comprehension"
+        else [
             "Is system status visible and uncertainty calibrated?",
             "Can the user predict consequences and retain meaningful control?",
             "Are inputs, outputs, units, errors, and prerequisites understandable?",

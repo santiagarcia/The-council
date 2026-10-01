@@ -101,7 +101,8 @@ def dispatch(
     memories = records(root, "memory/**/*.md")
     assignments = []
     builders = [
-        r["agent"] for r in recommendations
+        r["agent"]
+        for r in recommendations
         if r["agent"] in {"ada", "gauss", "curie", "noether", "maya", "iris"}
     ]
     for item in recommendations:
@@ -131,7 +132,7 @@ def dispatch(
                 "instructions": (
                     "Use council review --agent nico --mode cold-read --artifact PATH. "
                     "Send its isolated packet alone. Never attach the shared objective, "
-                    "shared_context, project memories, or other specialists\' conclusions."
+                    "shared_context, project memories, or other specialists' conclusions."
                 ),
             }
     packet = {

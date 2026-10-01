@@ -121,9 +121,7 @@ def validate(root: Path) -> list[str]:
             identity, _ = read_record(safe_path(root, f"members/{agent}/identity.md"))
             errors.extend(f"{agent}: {e}" for e in check_schema(root, "identity", identity))
             profile = yaml_load(safe_path(root, f"members/{agent}/affective-profile.yaml"))
-            errors.extend(
-                f"{agent}: {e}" for e in check_schema(root, "affective-profile", profile)
-            )
+            errors.extend(f"{agent}: {e}" for e in check_schema(root, "affective-profile", profile))
             if (
                 profile.get("agent") != agent
                 or profile.get("identity_version") != identity["version"]
