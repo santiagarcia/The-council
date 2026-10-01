@@ -99,9 +99,18 @@ unproven.**
 - **The research cycle has no fetcher.** Its policy, budget and corroboration
   rules are tested offline; network egress is the caller's decision and no
   caller supplies one yet.
-- **Noether, Maya and Nico are local roles only**, with no versioned identity,
-  no operating beliefs and no reflection history. Promoting them changes the
-  Council roster, which the charter reserves for Santiago.
+- **All ten members now load a versioned identity**, since the ten-member
+  roster was merged. Nico is special and the speciality is enforced in code:
+  his role refuses to build a prompt that names the task, because a cold read
+  is worthless once the reader has been told what the document was meant to
+  achieve. The one prompt it will build carries his disposition and the
+  intended audience only.
+- **This package cannot guarantee Nico's isolation, only its own half of it.**
+  It controls what goes into the prompt it builds. It cannot stop a caller
+  adding text, cannot sandbox the model's pretrained knowledge, and shares one
+  server with every other member. If isolation is not enforced by the host,
+  `docs/reader-review.md` is explicit that no genuine cold read may be
+  claimed, and that applies here.
 - **The 1.5B tier is unproven for anything but screening.**
 - **Residual Assembler tasks are implemented but unbenchmarked.**
   `audit_conventions` and `explain_interface_contract` exist and are wired
