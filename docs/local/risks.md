@@ -103,8 +103,11 @@ unproven.**
   no operating beliefs and no reflection history. Promoting them changes the
   Council roster, which the charter reserves for Santiago.
 - **The 1.5B tier is unproven for anything but screening.**
-- **Residual Assembler tasks are described, not implemented.** The delegable
-  RA work (convention audits, interface contracts) has no task function yet.
+- **Residual Assembler tasks are implemented but unbenchmarked.**
+  `audit_conventions` and `explain_interface_contract` exist and are wired
+  into the bridge, but there is no registry field to score them against, so
+  their accuracy on this codebase is unmeasured. Treat their output as a
+  reading aid, not a finding.
 
 ## 9. The failure mode to watch for
 

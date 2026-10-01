@@ -6,6 +6,7 @@ Tasks never write to a repository; proposing a change is a separate step that
 produces a patch for review.
 """
 
+from .residual import audit_conventions, explain_interface_contract
 from .umat import (
     classify_umat,
     detect_dependencies,
@@ -20,6 +21,8 @@ __all__ = [
     "detect_dependencies",
     "triage_failure",
     "review_transformation",
+    "audit_conventions",
+    "explain_interface_contract",
     "TASKS",
 ]
 
@@ -30,4 +33,6 @@ TASKS = {
     "detect_dependencies": detect_dependencies,
     "triage_failure": triage_failure,
     "review_transformation": review_transformation,
+    "audit_conventions": audit_conventions,
+    "explain_interface_contract": explain_interface_contract,
 }
