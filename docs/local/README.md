@@ -145,7 +145,32 @@ absent; hallucinated citations are counted separately from ordinary error; and
 grounding is scored even when the answer is right, because an ungrounded
 correct answer cannot be told from a lucky guess.
 
-Results live in `evaluations/local/`.
+Results live in `evaluations/local/`. Measured 2026-09-30 over 48 cases from
+24 stratified sources:
+
+| model | accuracy | wrong | missing | hallucinated citations | schema valid | s/case |
+|---|---|---|---|---|---|---|
+| `qwen2.5-coder:7b` | **54.1 %** | 48 | 31 | **0.0 %** | 85 % | 39.8 |
+| `qwen2.5-coder:1.5b` | **38.4 %** | 66 | 40 | **0.0 %** | 79 % | 13.0 |
+
+Per field, for the 7B: kinematics 70.8 %, max_props_index 66.7 %,
+entry_routine 60.9 %, verdict 58.3 %, writes_ddsdde 54.2 %, writes_stress
+50.0 %, max_statev_index 40.0 %, **entry_line 30.4 %**.
+
+**No task clears a bar worth delegating unreviewed on**, and the gate that
+withholds write access until a task passes its benchmark therefore refuses
+every task today. That is the gate working.
+
+Two results are worth separating from the rest. **Zero hallucinated
+citations** across 96 model answers: every line cited exists in the file
+named. And the weakest field is not weak because the model could not see the
+answer -- for 15 of the 16 wrong line numbers, the correct line was visible
+in the model's own prompt. It is a reading failure, not a context failure.
+
+What the system is good for, measured: reading 391 files overnight at about
+40 s each and returning cited, self-escalating claims that a reviewer
+confirms in seconds instead of opening every file. That is a pre-filter, not
+autonomy.
 
 ## What is not here yet
 
