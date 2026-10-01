@@ -46,8 +46,8 @@ def test_unparsable_output_becomes_an_escalated_envelope(tmp_path):
 
 def test_a_batch_records_a_failure_instead_of_shrinking(tmp_path):
     """A file that failed is reported as failed, never dropped from the count."""
-    from council_local.bench.run import run_benchmark
     from council_local.bench.cases import Case
+    from council_local.bench.run import run_benchmark
 
     class Exploding(LocalClient):
         def generate(self, **kwargs):
