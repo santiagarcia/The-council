@@ -31,7 +31,7 @@ def test_dispatch_validates_once_and_factors_shared_instructions(repo):
     with patch("council.dispatch.validate", wraps=validate) as checker:
         packet = dispatch(repo, "council-bootstrap", all_agents=True)
     assert checker.call_count == 1
-    assert len(packet["assignments"]) == 7
+    assert len(packet["assignments"]) == 10
     assert packet["objective"]["constraints"] == ["No push"]
     assert "constitution/permissions.md" in packet["shared_context"]
     assert "AGENTS.md" in packet["shared_context"]
@@ -40,14 +40,14 @@ def test_dispatch_validates_once_and_factors_shared_instructions(repo):
         assert f"members/{agent}/identity.md" in assignment["member_context"]
         assert "constitution/permissions.md" not in assignment["member_context"]
     vera = next(a for a in packet["assignments"] if a["agent"] == "vera")
-    assert set(vera["after"]) == {"ada", "curie", "gauss"}
+    assert set(vera["after"]) == {"ada", "curie", "gauss", "noether", "maya", "iris"}
     assert dispatch(repo, "council-bootstrap", all_agents=True) == packet
 
 
 def test_dispatch_routes_subtask_and_refreshes_after_objective_change(repo):
     set_objective(repo, "council-bootstrap", "Implement research software")
     packet = dispatch(repo, "council-bootstrap", "write presentation slides")
-    assert [a["agent"] for a in packet["assignments"]] == ["iris"]
+    assert [a["agent"] for a in packet["assignments"]] == ["iris", "maya", "nico"]
     set_objective(repo, "council-bootstrap", "Document verified sensitivity results")
     new_packet = dispatch(repo, "council-bootstrap", "write presentation slides")
     assert new_packet["snapshot_id"] != packet["snapshot_id"]

@@ -26,3 +26,10 @@ The CLI provides validation, role recommendations, scoped context assembly, proj
 Recorded reviewer and approver names are not authenticated, and actual independence and evidence quality still require review. Remote evidence links are not fetched. Routing and retrieval use lexical matches; context bundles have a memory-count limit rather than a token budget. Identity application remains a reviewed manual Git change. Simultaneous writers are not coordinated. Presentation classification is heuristic, inherited formatting is incomplete, and raster plot labels require manual inspection. CI is configured but has not run remotely because no push was made.
 
 The next useful step is an independent review of the tooling and one small real research cycle. Fill a project brief, assemble context, capture one narrow candidate lesson, and reproduce its evidence with a reviewer separate from the builder before adoption. Have Santiago review presentation-derived style decisions before treating observed conventions as preferences.
+
+## Subsequent extension
+
+The current registry has ten members, adding Noether, Maya, and Nico. The original
+seven-member implementation and measurements above are historical. Current affective
+profiles, selective routing, isolated reader packets, and review diagnostics are
+documented in `docs/affective-architecture.md` and `docs/reader-review.md`.

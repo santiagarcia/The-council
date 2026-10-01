@@ -18,6 +18,7 @@ def repo(tmp_path):
         "constitution",
         "members",
         "memory",
+        "relationships",
         "projects",
         "protocols",
         "schemas",

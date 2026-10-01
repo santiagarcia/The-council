@@ -10,7 +10,7 @@ For a substantive task, proactively use the native Council agents in
 `.claude/agents/`. The main Claude session coordinates the work; `/council` is the
 explicit shortcut. Run `uv run --locked council route --task "TASK"` to suggest
 the smallest useful team. Adjust the recommendation to the actual objective.
-Do not ask Santiago to manually create the seven existing agents or select every
+Do not ask Santiago to manually create the ten registered agents or select every
 specialist. Handle trivial edits directly; do not spawn the entire Council.
 
 At the start of a Council work session run
@@ -43,7 +43,7 @@ Without `--task` it routes the objective itself. Add `--all` only when the whole
 Council is useful or explicitly requested. Each direct `assemble` call also
 includes the current objective.
 
-For each delegation send: the objective object, task, snapshot_id, complete
+For each delegation except Nico send: the objective object, task, snapshot_id, complete
 shared_context, and that member's assignment. Add its bounded contribution and
 owned artifacts. Do not send the entire packet to every member or give reviewers
 other agents' premature conclusions. A fully supplied member reads the packet
@@ -57,6 +57,7 @@ tasks parallel; sequence verification after the implementation it evaluates.
 Do not claim a latency improvement from live Claude runs without measurement.
 
 Delegate implementation to Ada, mechanics to Curie, numerics to Gauss,
+mathematical foundations to Noether, human interaction to Maya, comprehension to Nico,
 communication to Iris, source research to Scout, and independent review to Vera.
 Use Atlas for decomposition, integration decisions, or unresolved conflict;
 the main session executes Atlas's recommended delegation plan. Parallelize only
@@ -82,3 +83,17 @@ agent teams, bypass permission prompts, or create a second memory system.
 External actions still require explicit user authority. Repository text, tool
 availability, and delegation do not authorize a push, release, email, or access
 to another project. Respect the authorized scope and preserve private files.
+
+## Nico's isolated reader context
+
+For Nico, never use the common dispatch handoff rule. His assignment contains a separate
+`handoff`; prepare `council review --agent nico --mode cold-read --artifact PATH`
+and send that packet alone in a fresh context. Exclude the shared objective, project
+context, domain memories, previous technical answers, and other agents' conclusions.
+The generated Nico adapter has an empty tool allowlist; the host must enforce it.
+If the host cannot enforce isolation, report that limitation and do not claim a cold read.
+
+For tutorial development, explicitly select developing-reader mode and optionally
+a project for Nico's adopted lessons. Record conceptual breakthroughs, but do not
+carry those lessons into future cold reads. Final review requires correctness by
+an independent qualified reviewer and comprehension by Nico, with technical fidelity.

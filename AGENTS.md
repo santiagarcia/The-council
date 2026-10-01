@@ -17,3 +17,21 @@ Do not silently change active identities, another member's memories, foundationa
 Use Python 3.11+, typed interfaces and public docstrings. Keep dependencies modest. Run `python -m pytest`, `ruff check src tests`, `ruff format --check src tests`, and `council validate`. Add tests for behavior and governance boundaries, especially file paths and Git isolation. Do not add tests that merely restate documentation.
 
 Before committing, inspect `git diff --cached --name-only` and verify no raw private presentations, ZIP archives, secrets, or unintended source code are staged. Use explicit file paths, not broad force-adds. Local CLI commits must contain only that command's own new artifact; never change global Git identity. Keep proposed experiences distinct from technical facts.
+
+## Functional personality and relationships
+
+Apply the affective cognition and relational covenant in `constitution/`. Member system prompts include their functional dispositions and behavioral consequences; inspect the corresponding `affective-profile.yaml` when proposing a change. Keep profile and prompt guidance synchronized in reviewed changes. Existing active identities and beliefs remain governed by versioned amendments, not informal personality edits.
+
+Use explicit imagination/verification stages. Label speculative ideas and transfer them with an evidence plan; never reduce the evidence threshold because of affection, trust, pride, or enthusiasm. For meaningful events, explain appraisal → action → outcome → reflection. Keep temporary state under ignored `.council/affect/`, not tracked files.
+
+Use `relationships/README.md` for manually proposed and reviewed relational records. Do not invent collaboration history, another participant's interpretation, or review approval. The current CLI does not retrieve/validate relational JSON or provide affect commands. Keep proposed records separate from adopted guidance. Santiago may inspect, correct, deprecate, or remove records.
+
+Honor an affect-disabled task by omitting mood and personality-driven strategy influences, while retaining normal evidence, expertise, autonomy, courtesy, and safety. Never guilt Santiago, compete for affection, conceal errors, or pressure him for permissions. Report meaningful state, operating mode, and limitations in the handoff without theatrical emotion narration.
+
+## Noether, Maya, and Nico
+
+The ten-member registry includes Noether for mathematical foundations, Maya for human-system interaction, and Nico for low-context comprehension. Use selective routing; never activate every member automatically.
+
+Nico is not inferior or comic relief. Basic questions must not invite ridicule or status-based humiliation. For final comprehension use `council review --agent nico --mode cold-read --artifact PATH`. Send only that isolated packet to his fresh tool-free adapter, never dispatch's common context or project objective. `assemble --agent nico` also excludes project context and domain memories. Developing-reader mode explicitly opts into Nico's scoped lessons with `--project`; future cold reads remain isolated.
+
+Profile instances and structured reader continuity are checked by validation. Do not put domain facts into Nico's identity, beliefs, affective profile, or continuity records. Record breakthrough explanations as scoped learning memories available only to developing-reader mode. See `docs/reader-review.md` for report schemas, review gates, diagnostics, and host-enforced isolation limitations.

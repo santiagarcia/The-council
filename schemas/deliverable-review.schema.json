@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Correctness, comprehension, and usability review",
+  "type": "object",
+  "properties": {
+    "artifact": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "builder": {
+      "enum": [
+        "atlas",
+        "curie",
+        "gauss",
+        "ada",
+        "vera",
+        "iris",
+        "scout",
+        "noether",
+        "maya",
+        "nico",
+        "santiago"
+      ]
+    },
+    "correctness": {
+      "type": "object",
+      "properties": {
+        "reviewer": {
+          "enum": [
+            "atlas",
+            "curie",
+            "gauss",
+            "ada",
+            "vera",
+            "iris",
+            "scout",
+            "noether",
+            "maya",
+            "nico",
+            "santiago"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not-applicable"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "mathematical_status": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "not-applicable"
+          ]
+        },
+        "physical_status": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "not-applicable"
+          ]
+        },
+        "numerical_status": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "not-applicable"
+          ]
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "reviewer",
+        "decision",
+        "evidence_refs",
+        "mathematical_status",
+        "physical_status",
+        "numerical_status",
+        "assumptions",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "comprehension": {
+      "type": "object",
+      "properties": {
+        "reviewer": {
+          "const": "nico"
+        },
+        "decision": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "restatement": {
+          "type": "string"
+        },
+        "technically_faithful": {
+          "type": "boolean"
+        },
+        "mode": {
+          "enum": [
+            "cold-read",
+            "developing-reader"
+          ]
+        }
+      },
+      "required": [
+        "reviewer",
+        "decision",
+        "evidence_refs",
+        "restatement",
+        "technically_faithful",
+        "mode"
+      ],
+      "additionalProperties": false
+    },
+    "usability": {
+      "type": "object",
+      "properties": {
+        "reviewer": {
+          "enum": [
+            "atlas",
+            "curie",
+            "gauss",
+            "ada",
+            "vera",
+            "iris",
+            "scout",
+            "noether",
+            "maya",
+            "nico",
+            "santiago"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not-applicable"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "implementation_constraints_considered": {
+          "type": "boolean"
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "reviewer",
+        "decision",
+        "evidence_refs",
+        "implementation_constraints_considered",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "artifact_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "artifact",
+    "builder",
+    "correctness",
+    "comprehension",
+    "usability",
+    "blocking_findings",
+    "artifact_sha256"
+  ],
+  "additionalProperties": false
+}

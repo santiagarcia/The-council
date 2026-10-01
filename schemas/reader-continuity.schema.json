@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nontechnical Nico collaboration continuity",
+  "type": "object",
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "atlas",
+                "curie",
+                "gauss",
+                "ada",
+                "vera",
+                "iris",
+                "scout",
+                "noether",
+                "maya",
+                "nico",
+                "santiago"
+              ]
+            },
+            "minItems": 2,
+            "uniqueItems": true,
+            "contains": {
+              "const": "nico"
+            }
+          },
+          "status": {
+            "enum": [
+              "proposed",
+              "verified",
+              "adopted",
+              "deprecated"
+            ]
+          },
+          "review_status": {
+            "enum": [
+              "pending",
+              "accepted",
+              "request-changes"
+            ]
+          },
+          "reviewer": {
+            "anyOf": [
+              {
+                "enum": [
+                  "atlas",
+                  "curie",
+                  "gauss",
+                  "ada",
+                  "vera",
+                  "iris",
+                  "scout",
+                  "noether",
+                  "maya",
+                  "nico",
+                  "santiago"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "uniqueItems": true
+          },
+          "qualities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quality": {
+                  "enum": [
+                    "trust",
+                    "familiarity",
+                    "gratitude",
+                    "respect",
+                    "protective-concern",
+                    "intellectual-reliance",
+                    "unresolved-tension",
+                    "successful-conflict-repair"
+                  ]
+                },
+                "level": {
+                  "enum": [
+                    "unknown",
+                    "low",
+                    "moderate",
+                    "high"
+                  ]
+                }
+              },
+              "required": [
+                "quality",
+                "level"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "practices": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "patient-clarification",
+                "ask-without-apology",
+                "credit-basic-questions",
+                "change-explanation-strategy",
+                "request-concrete-example"
+              ]
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "participants",
+          "status",
+          "review_status",
+          "reviewer",
+          "evidence_refs",
+          "qualities",
+          "practices"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "records"
+  ],
+  "additionalProperties": false
+}

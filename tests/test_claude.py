@@ -18,7 +18,7 @@ def test_sync_preview_and_check_do_not_write(repo):
 def test_generates_native_members_and_is_idempotent(repo):
     assert sync(repo)[0] == 0
     files = sorted((repo / ".claude/agents").glob("*.md"))
-    assert len(files) == 7
+    assert len(files) == 10
     for path in files:
         metadata, body = read_record(path)
         assert metadata["name"] == path.stem
@@ -27,7 +27,11 @@ def test_generates_native_members_and_is_idempotent(repo):
         assert "description" in metadata
         assert "memory" not in metadata
         assert f"members/{path.stem}/identity.md" in body
-        assert f"assemble --agent {path.stem}" in body
+        if path.stem == "nico":
+            assert metadata["tools"] == []
+            assert "review --agent nico" in body
+        else:
+            assert f"assemble --agent {path.stem}" in body
     assert "Write" in read_record(repo / ".claude/agents/ada.md")[0]["tools"]
     assert "Write" not in read_record(repo / ".claude/agents/vera.md")[0]["tools"]
     assert "WebSearch" in read_record(repo / ".claude/agents/scout.md")[0]["tools"]
@@ -108,6 +112,9 @@ def test_new_registered_member_generates_without_hardcoded_mapping(repo):
     beliefs = yaml_load(folder / "operating-beliefs.yaml")
     beliefs["agent"] = "maxwell"
     (folder / "operating-beliefs.yaml").write_text(yaml.safe_dump(beliefs), encoding="utf-8")
+    profile = yaml_load(folder / "affective-profile.yaml")
+    profile["agent"] = "maxwell"
+    (folder / "affective-profile.yaml").write_text(yaml.safe_dump(profile), encoding="utf-8")
     config = yaml_load(repo / "council.yaml")
     config["agents"].append("maxwell")
     (repo / "council.yaml").write_text(yaml.safe_dump(config), encoding="utf-8")

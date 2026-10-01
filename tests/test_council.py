@@ -51,7 +51,7 @@ def test_seed_and_examples_validate(repo):
     ):
         meta, _ = read_record(repo / f"templates/examples/{name}.md")
         assert check_schema(repo, kind, meta) == []
-    assert len(yaml_load(repo / "council.yaml")["agents"]) == 7
+    assert len(yaml_load(repo / "council.yaml")["agents"]) == 10
 
 
 @pytest.mark.parametrize(
