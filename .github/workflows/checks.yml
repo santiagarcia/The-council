@@ -17,7 +17,7 @@ jobs:
       - run: uv sync --locked --extra dev --python ${{ matrix.python }}
       - run: uv run --locked python -m pytest
       - run: uv run --locked ruff check src tests scripts
-      - run: uv run --locked ruff format --check src tests scripts
+      - run: uv run --locked ruff format --check --diff src tests scripts
       - run: uv run --locked council validate
       - run: uv run --locked council claude sync --check
       - run: uv run --locked council dispatch --project council-bootstrap --all --output .council/ci-dispatch.json

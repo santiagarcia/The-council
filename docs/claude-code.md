@@ -1,7 +1,7 @@
 # Using The Council with Claude Code
 
 Open this repository in Claude Code. The checked-in `.claude/agents/` files make
-all seven members available as native subagents; `CLAUDE.md` asks the main session
+all ten members available as native subagents; `CLAUDE.md` asks the main session
 to delegate substantive work automatically. You do not need to create each agent
 by hand or configure an API key for the Council CLI. Claude Code itself still
 requires its normal installation and account setup.
@@ -174,3 +174,11 @@ ordering, output preservation, and compatibility with existing memory retrieval.
 Claude Code was not available on the test shell's PATH, so live model delegation
 has not been exercised. Restart a Claude Code session in this repository and try
 `/council council-bootstrap inspect the shared objective and assign the next task`.
+
+## Mathematical foundations, human factors, and cold reads
+
+Noether, Maya, and Nico are permanent registered members. Routing remains selective.
+Nico's adapter deliberately has no tools; supply only an isolated `council review`
+packet in a fresh context. Do not forward dispatch's common objective or shared context.
+See [reader review](reader-review.md). The historical seven-member timing results
+above describe the original experiment; they are not ten-member performance claims.

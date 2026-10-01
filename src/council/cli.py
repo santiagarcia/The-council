@@ -159,6 +159,24 @@ def parser() -> argparse.ArgumentParser:
         "--limit", type=int, default=6, help="Maximum relevant memories per member"
     )
     dispatch.add_argument("--output", help="New repository-relative JSON output file")
+    review = commands.add_parser("review", help="Prepare an isolated Nico artifact review")
+    review.add_argument("--agent", choices=["nico"], required=True)
+    review.add_argument("--mode", choices=["cold-read", "developing-reader"], default="cold-read")
+    review.add_argument(
+        "--artifact", required=True, help="Public repository-relative text artifact"
+    )
+    review.add_argument("--audience", default="", help="Minimal intended-reader description")
+    review.add_argument("--project", help="Opt-in Nico lessons; developing-reader only")
+    review.add_argument("--output", help="New repository-relative JSON packet")
+    evaluation = commands.add_parser(
+        "evaluate", help="Inspect artifacts without claiming AI review"
+    )
+    evaluations = evaluation.add_subparsers(dest="evaluation_kind", required=True)
+    for kind in ("comprehension", "usability"):
+        check = evaluations.add_parser(kind, help="Run bounded diagnostics and prepare review")
+        check.add_argument("--artifact", required=True)
+        check.add_argument("--review-report", help="Optional evidence-linked final review JSON")
+        check.add_argument("--output", help="New repository-relative JSON report")
     return cli
 
 
@@ -191,6 +209,26 @@ def create_record(
 def run(args: argparse.Namespace) -> int:
     """Dispatch commands; return a process exit code."""
     root = root_at(args.root)
+    if args.command in {"review", "evaluate"}:
+        from council.review import evaluate_artifact, review_packet
+
+        if args.command == "review":
+            result = review_packet(
+                root, args.agent, args.mode, args.artifact, args.audience, args.project
+            )
+            code = 0
+        else:
+            code, result = evaluate_artifact(
+                root, args.evaluation_kind, args.artifact, args.review_report
+            )
+        text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+        if args.output:
+            path = safe_path(root, args.output)
+            write_new(path, text)
+            print(path.relative_to(root).as_posix())
+        else:
+            print(text)
+        return code
     if args.command == "objective":
         from council.dispatch import get_objective, set_objective
 

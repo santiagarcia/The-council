@@ -6,7 +6,7 @@ This extension builds on the existing charter, evidence-governed memories, versi
 
 `council assemble` already includes all constitution Markdown and each selected member's system prompt. The profiles' operative behavioral consequences are therefore embedded in the prompts. Native Claude adapters read those prompts through assembly or their documented fallback. Generated adapters, identity versions, operating beliefs, Python code, and CLI command conventions remain intact.
 
-`members/<agent>/affective-profile.yaml` is the inspectable disposition source. A profile change must update the prompt's corresponding operational section in the same reviewed change. The files are intentionally kept explicit rather than silently relying on a loader that does not exist. `schemas/affective-profile.schema.json` specifies their structure, but the existing validator does not yet validate profile instances.
+`members/<agent>/affective-profile.yaml` is the inspectable disposition source. A profile change must update the prompt's corresponding operational section in the same reviewed change. The files are intentionally kept explicit rather than silently relying on a loader that does not exist. `schemas/affective-profile.schema.json` specifies their structure, and profile instances are now validated against their configured member and identity version.
 
 Transient appraisal is optional task context under ignored `.council/affect/`. The agent explains the appraisal and behavioral choice in the task or handoff when it matters. No background process runs and no mood is automatically persisted. Qualitative levels avoid pretending to measure real emotional intensity.
 
@@ -26,6 +26,10 @@ To disable the layer, Santiago says “Disable the affective layer for this task
 
 ## Remaining automation
 
-This personality-focused change does not implement new affect/relationship commands, automatic relational retrieval, schema instance checks in `council validate`, runtime tracking checks, or automatic identity changes. Do not advertise those features as working. `affective-event.schema.json` defines optional transient appraisal notes for future tooling. The evaluation scenarios are specifications for observed trials, not test passes or independent review.
+The extension validates profile instances and reader continuity and provides isolated reader review and artifact diagnostics. General affect/relationship commands, automatic relational-event retrieval, runtime tracking checks, and automatic identity changes remain unimplemented. Do not advertise those features as working. `affective-event.schema.json` defines optional transient appraisal notes for future tooling. The evaluation scenarios are specifications for observed trials, not test passes or independent review.
 
 Next: trial one real collaboration and one matched enabled/disabled task. Independently review the outcome before adopting a relational lesson or extending Python automation.
+
+## Ten-member extension
+
+Noether, Maya, and Nico extend the same registry and memory architecture. See `docs/reader-review.md` for the updated architecture diagram, selective routing, Nico's context projection, developing-reader lessons, and final review gates. Cold-read continuity is deliberately structured and nontechnical; reviewed general relational events remain manually managed.

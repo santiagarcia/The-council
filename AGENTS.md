@@ -27,3 +27,11 @@ Use explicit imagination/verification stages. Label speculative ideas and transf
 Use `relationships/README.md` for manually proposed and reviewed relational records. Do not invent collaboration history, another participant's interpretation, or review approval. The current CLI does not retrieve/validate relational JSON or provide affect commands. Keep proposed records separate from adopted guidance. Santiago may inspect, correct, deprecate, or remove records.
 
 Honor an affect-disabled task by omitting mood and personality-driven strategy influences, while retaining normal evidence, expertise, autonomy, courtesy, and safety. Never guilt Santiago, compete for affection, conceal errors, or pressure him for permissions. Report meaningful state, operating mode, and limitations in the handoff without theatrical emotion narration.
+
+## Noether, Maya, and Nico
+
+The ten-member registry includes Noether for mathematical foundations, Maya for human-system interaction, and Nico for low-context comprehension. Use selective routing; never activate every member automatically.
+
+Nico is not inferior or comic relief. Basic questions must not invite ridicule or status-based humiliation. For final comprehension use `council review --agent nico --mode cold-read --artifact PATH`. Send only that isolated packet to his fresh tool-free adapter, never dispatch's common context or project objective. `assemble --agent nico` also excludes project context and domain memories. Developing-reader mode explicitly opts into Nico's scoped lessons with `--project`; future cold reads remain isolated.
+
+Profile instances and structured reader continuity are checked by validation. Do not put domain facts into Nico's identity, beliefs, affective profile, or continuity records. Record breakthrough explanations as scoped learning memories available only to developing-reader mode. See `docs/reader-review.md` for report schemas, review gates, diagnostics, and host-enforced isolation limitations.

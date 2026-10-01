@@ -4,15 +4,8 @@
   "type": "object",
   "properties": {
     "agent": {
-      "enum": [
-        "atlas",
-        "curie",
-        "gauss",
-        "ada",
-        "vera",
-        "iris",
-        "scout"
-      ]
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
     },
     "project": {
       "type": "string",

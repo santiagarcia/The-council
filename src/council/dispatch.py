@@ -100,7 +100,10 @@ def dispatch(
     common = shared_context(root, project)
     memories = records(root, "memory/**/*.md")
     assignments = []
-    builders = [r["agent"] for r in recommendations if r["agent"] in {"ada", "gauss", "curie"}]
+    builders = [
+        r["agent"] for r in recommendations
+        if r["agent"] in {"ada", "gauss", "curie", "noether", "maya", "iris"}
+    ]
     for item in recommendations:
         agent = item["agent"]
         assignments.append(
@@ -117,6 +120,20 @@ def dispatch(
                 ),
             }
         )
+    for assignment in assignments:
+        if assignment["agent"] == "nico":
+            assignment["after"] = builders
+            assignment["handoff"] = {
+                "task": "Cold-read only the supplied audience-facing artifact.",
+                "mode": "cold-read",
+                "artifact_required": True,
+                "member_context": assignment["member_context"],
+                "instructions": (
+                    "Use council review --agent nico --mode cold-read --artifact PATH. "
+                    "Send its isolated packet alone. Never attach the shared objective, "
+                    "shared_context, project memories, or other specialists\' conclusions."
+                ),
+            }
     packet = {
         "format_version": 1,
         "council_root": str(root.resolve()),
@@ -125,7 +142,8 @@ def dispatch(
         "task": task,
         "handoff_rule": (
             "Send objective, task, snapshot_id, the full shared_context, and only the recipient's "
-            "assignment together. Add artifact ownership and bounded acceptance conditions. "
+            "assignment together. For Nico send only his isolated handoff and the review artifact; "
+            "never send him this shared_context or objective. Add artifact ownership. "
             "Agents read the supplied packet instead of repeating validation or assembly. "
             "Refresh after objective, identity, governance, or memory changes; update the reviewer "
             "handoff with the actual implementation evidence after builders finish."
