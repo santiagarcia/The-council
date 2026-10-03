@@ -100,3 +100,23 @@ transformer fingerprint. The next Abaqus pass records the then-current harness f
 Routine-level D-8 count after pass18: 88 eligible (growth 81, elastic 3, visco 1, other 3, others 0); Abaqus six-gate 67.
 17 growth sources are inconclusive at routine level only because the driver passes COORDS = 0 to position-dependent growth laws
 (Jeff97 circular plate/shell/conformal, mholla BMMB24) — a driver artefact, being fixed (run at an integration point of the author's deck).
+
+## 2026-10-02 — D-18 which harness run decides each feature (after Gauss B5)
+The routine-level driver runs all perturbations of a path in ONE process, so an original that STOPs under one perturbation (RitioL: PROPS(57)+h)
+ends every column queued after it. Whether DDSDDE can be judged therefore depended on which OTHER features were requested — an artefact of
+batching, not of the tangent. Decision: primal_stress_state and ddsdde cells come from the primal+ddsdde run (pass19_harness/run, own
+hidden-state gate); parameter/state-sensitivity cells from the full-feature run (pass19_harness_full + rerun3c). Splitting perturbations across
+processes (resume after a STOP) is NOT adopted: it would spread hidden-state evidence over processes; revisit only with a design Vera reviews.
+
+## 2026-10-02 — D-19 material data published outside decks counts (Santiago)
+Santiago's decision on the pending question: material constants that the author published outside an input deck count as adequate material data,
+with their provenance recorded. Sources are the author's paper, README, code comments, example or test files in the same repository, or a cited dataset.
+Every constant records where it came from (URL or path at the pinned commit, line or page, a verbatim quote) and how confident the reading is.
+Constants that are guessed, typical or taken from the literature for "a similar material" do NOT count. Sources that use such constants are
+counted in their own stage ("author-published, outside deck"), so the deck-only figures stay reportable. Where a source has no author deck,
+the experiment is a council-designed deck inside the author's documented domain (design by Curie, reviewed by Vera).
+
+## 2026-10-02 — D-20 commit and push verified progress (Santiago)
+Every batch that adds verified results (Abaqus or routine-level), after Vera's review, is committed and pushed: final-umat and final-ra branch
+`corpus/robustness-2026-10-01` to the GitHub repositories (public), and the council repo. Pushing does not bypass D-2: nothing whose licence
+does not permit redistribution may be in a pushed tree; Vera checks this before every push.
