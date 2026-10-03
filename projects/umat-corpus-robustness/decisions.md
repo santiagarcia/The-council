@@ -133,7 +133,7 @@ Conditions:
 Rationale: verification compares transformed and original code on identical inputs. The constants need to be admissible and informative, not the author's own. The tier split keeps the provenance claim honest.
 
 ## 2026-10-02 — D-21a acceptance of the D-21 selection rule, and rulings (Vera review; lead)
-**Rule.** The D-21 selection rule is accepted with changes and FROZEN at sha256 73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0 (corpus_campaign/material_data/d21_selection_rule.json).
+**Rule.** The D-21 selection rule is accepted with changes. The version Vera reviewed has sha256 73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0 (corpus_campaign/material_data/d21_selection_rule.json). It is NOT yet the frozen value: the rule, its amendment file (R-1..R-8) and the constants file are frozen together, after Curie applies every amendment and Vera re-checks, before the first comparison. (Corrected after Vera's addendum.)
 - Changes R-1..R-6 live in a separate amendment file with its own sha, which Vera reviews before the first comparison:
   - R-1: documented parameter restrictions are hard constraints.
   - R-2: author-kept constants are exempt from the G4 move rule.
