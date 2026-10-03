@@ -1,0 +1,96 @@
+{
+  "what_this_is": "Scout's answers to Curie's D-21 lookups (2026-10-02). Each answer cites a source that was actually fetched and read; quotes are verbatim from the extracted PDF text. 'verdict' compares against the values in d21_council_constants.jsonl. This file does not edit Curie's file.",
+  "lookups": {
+    "L-HASHIN-1": {
+      "verdict": "CONFIRMED with two corrections: Xt is 2326.2 MPa (Curie used 2326), and Xc is 1200.1 MPa (Curie used 1200). Gft and Gfc are confirmed only as Camanho's longitudinal fracture energies G1+ and G1-. All other requested values match.",
+      "source": {
+        "citation": "Camanho P.P., Maimí P., Dávila C.G. (2007) Prediction of size effects in notched laminates using continuum damage mechanics. Compos. Sci. Technol. 67:2715-2727; NASA-hosted author manuscript",
+        "url": "https://ntrs.nasa.gov/api/citations/20070035071/downloads/20070035071.pdf",
+        "access": "open (NASA NTRS)"
+      },
+      "values": [
+        {"name": "E1", "value": 171.42, "unit": "GPa", "where": "manuscript p.38, Table 1", "quote": "Table 1 Measured ply elastic properties for IM7-8552. ... E1 (GPa) Ref. [20] 171.42 2.38 1.39", "curie": 171420.0, "match": true},
+        {"name": "E2", "value": 9.08, "unit": "GPa", "where": "p.38, Table 1", "quote": "E2 (GPa) Ref. [20] 9.08 0.09 1.03", "curie": 9080.0, "match": true},
+        {"name": "G12", "value": 5.29, "unit": "GPa", "where": "p.38, Table 1", "quote": "G12 (GPa) Ref. [22] 5.29 0.13 2.53", "curie": 5290.0, "match": true},
+        {"name": "nu12", "value": 0.32, "unit": "-", "where": "p.38, Table 1", "quote": "υ12 Ref. [20] 0.32 0.02 6.18", "curie": 0.32, "match": true},
+        {"name": "Xt", "value": 2326.2, "unit": "MPa", "where": "p.39, Table 2", "quote": "Table 2 Measured ply strengths for IM7-8552. ... XT Ref. [20] 2326.2 134.1 5.8", "curie": 2326.0, "match": false, "note": "use 2326.2"},
+        {"name": "Xc", "value": 1200.1, "unit": "MPa", "where": "p.39, Table 2", "quote": "XC Ref. [21] 1200.1 145.7 12.1", "curie": 1200.0, "match": false, "note": "use 1200.1"},
+        {"name": "Yt", "value": 62.3, "unit": "MPa", "where": "p.39, Table 2", "quote": "YTud Ref. [20] 62.3 5.3 8.5", "curie": 62.3, "match": true, "note": "unidirectional (not in-situ) value; the in-situ values are in Table 4 (thin embedded ply YT 160.2)"},
+        {"name": "Yc", "value": 199.8, "unit": "MPa", "where": "p.39, Table 2", "quote": "YC Ref. [21] 199.8 20.5 10.2", "curie": 199.8, "match": true},
+        {"name": "Sl", "value": 92.3, "unit": "MPa", "where": "p.39, Table 2", "quote": "SLud Ref. [22] 92.3 0.6 0.7", "curie": 92.3, "match": true},
+        {"name": "Gft (G1+)", "value": 81.5, "unit": "kJ/m2 (= N/mm)", "where": "p.42, Table 5", "quote": "Table 5 Fracture energies for longitudinal fracture for IM7-8552 (kJ/m2 ). ... G1+ 81.5 6.1 7.6", "curie": 81.5, "match": true},
+        {"name": "Gfc (G1-)", "value": 106.3, "unit": "kJ/m2 (= N/mm)", "where": "p.42, Table 5", "quote": "G1- 106.3 2.2 2.1", "curie": 106.3, "match": true}
+      ],
+      "also_published_not_requested": [
+        {"name": "G2+ (mode I transverse)", "value": 0.2774, "unit": "kJ/m2", "where": "p.40, Table 3", "quote": "Table 3 Measured fracture energies for transverse fracture for IM7-8552 (kJ/m2 ). ... G2+ 0.2774 0.0246 0.88"},
+        {"name": "G6 (shear)", "value": 0.7879, "unit": "kJ/m2", "where": "p.40, Table 3", "quote": "G6 0.7879 0.0803 10.19"}
+      ],
+      "notes": "Camanho et al. give no E3, G13, G23, nu13, nu23, Zt, Zc or St. Curie's Gmt=0.5 and Gmc=5.0 differ from the measured G2+=0.2774 and G6=0.7879, a deliberate snap-back choice; flag for Vera. Also checked: the NCAMP report CAM-RP-2009-015 Rev A (https://energy.ornl.gov/CFCrush/materials/uou/CAM-RP-2009-015_Rev_A_April_22_2011_Hexcel_8552_IM7_Uni_Data_Report.pdf), Table 2-1 p.33, gives the same class in ksi/Msi by environment (e.g. 'F1 (ksi) from UNC0 296.49 ...'); not used, because it would need a unit conversion and a choice of environment."
+    },
+    "L-CREEP-1": {
+      "verdict": "NOT FOUND (constants). The paper is paywalled and the repo and Zenodo carry no B_ij or n_ij. Axis convention: partly established from the code and README (2 = L confirmed; 1 = R vs 3 = T inferred, not stated).",
+      "source": {
+        "citation": "Pan C., Bunger A.P., Lu G. (2026) A 3-D anisotropic viscoelastic model using the finite element method. Int. J. Solids Struct. 332, 113923",
+        "doi": "10.1016/j.ijsolstr.2026.113923",
+        "note_on_404": "The earlier 404 came from the wrong year in the DOI (2025). The correct DOI resolves to https://linkinghub.elsevier.com/retrieve/pii/S0020768326000958. Unpaywall reports is_oa=false, sciencedirect returns 403 to automated fetches, and no arXiv preprint was found.",
+        "companion_dataset": {"url": "https://zenodo.org/records/18611076", "content": "OrthoWoodCreep_General.for, OrthoWoodCreep_Column.for, Ortho_WoodCreep_Cube.for, README.md, LICENSE only", "quote": "UMAT files used in Abaqus simulations for the journal publication “A 3-D Anisotropic Viscoelastic Model Using the Finite Element Method”."},
+        "shale_paper": "Lu, Pan, Benge, Bunger (2026, in review), cited in the repo README; not available. A related open lead, not read: Benge et al. (2023) Creep Properties of Shale ... Caney Shale, Rock Mech. Rock Eng. 56(8):5903-5921, https://link.springer.com/article/10.1007/s00603-023-03362-8"
+      },
+      "axis_convention": {
+        "finding": "Wood: local axis 2 = longitudinal (L). Local axes 1 and 3 span the R-T plane. That matches Curie's 1=R, 2=L, 3=T for axis 2. Whether 1 is R or T is not stated by the author; it depends on the sign convention of ROT. In the code, at a point to the +x side of the ring centre, x' is along +x, i.e. radial, which supports 1=R, 3=T. Inferred, not author-stated.",
+        "evidence": [
+          {"where": "https://github.com/glu46/3D_anisotropic_viscoelastic_model/blob/59e88cbfd2eeb20c329dddfb798d706a4229dc49/README.md", "quote": "OrthoWoodCreep_Cube is a UMAT for modeling the creep of a wood cube (0.5m X 0.5m X 0.5m) with the origin of growth rings located at the center of T-R plane"},
+          {"where": "Ortho_WoodCreep_Cube.for:46-47,82", "quote": "XCENTER(1) = 0.25D0 / XCENTER(2) = 0.25D0 ... ROT = DATAN((COORDS(3)-XCENTER(2))/(COORDS(1)-XCENTER(1)))"},
+          {"where": "Ortho_WoodCreep_Cube.for:84-87", "quote": "ROT, ANGLE FOR ROTATION, IS POSITIVE IF MEASURED FROM X TO X' IS CLOCKWISE. IN THIS CASE, Y IS IDENTICAL TO Y'."},
+          {"where": "Ortho_WoodCreep_Cube.for:96-108", "quote": "XCOSL(1) = COS(ROT) ... XCOSL(3) = -1.D0*SIN(ROT) ... XCOSM(2) = 1.D0 ... XCOSN(1) = SIN(ROT) ... XCOSN(3) = COS(ROT)"},
+          {"where": "TIRockCreep_GENERAL.for and all wood files :37-38", "quote": "IN THIS CODE, THE Z AXIS IS SET TO BE PERPENDICULAR TO THE BEDDING PLANE."}
+        ],
+        "notes": "The Z-normal-to-bedding comment is copied into the wood files too, so for wood it carries no meaning. The ring centre is in the global X-Z plane, so the global Y axis = L for the Cube. For the General and Column variants, the axis to material mapping must be read from their own rotation code; not checked here. The code warns that the Voigt order differs from Abaqus ('VOIGT NOTATION OF STRESS AND STRAIN IS SLIGHTLY DIFFERENT FROM ABAQUS CONVENTIONAL ONE'), which Curie's slot map (PROPS 4 -> XMATD(6,6), 6 -> XMATD(4,4)) already reflects."
+      }
+    },
+    "L-CART-1": {
+      "verdict": "PARTLY WRONG. E2 = 3670 MPa is confirmed. E1 = 4.316 MPa belongs to a DIFFERENT fibril law (Wilson et al. 2004/2006 viscoelastic fibrils, paired with E2 = 19.97 MPa). For this author's model the matching linear constant is 4.63 MPa: the author's own paper lists it, and their sibling code hard-codes it. Recommend E1MP = 4.63 MPa with E2MP = 3670 MPa.",
+      "sources": [
+        {
+          "citation": "Sajjadinia S.S., Haghpanahi M., Razi M. (2019) Computational simulation of the multiphasic degeneration of the bone-cartilage unit during osteoarthritis ... Proc IMechE H 233(9):871-882 (the hml/bioumat author's own paper), accepted preprint",
+          "url": "https://shayansss.github.io/files/2019_09_preprint.pdf",
+          "where": "Table 1 (preprint p.3)",
+          "quote": "Table 1: BCU material parameters ... Also, the fibrillar and non-fibrillar material coefficients of the healthy AC was gathered by Wilson et al. [28] from former studies ... Eε (MPa) 3670 917.5 / E0 (MPa) 4.63 / Gm (MPa) 0.723 / C F (-) 3.009 / α2 (-) 3.22",
+          "ref28": "W. Wilson, J. M. Huyghe, and C. C. Van Donkelaar, “Depth-dependent compressive equilibrium properties of articular cartilage explained by its composition,” Biomechanics and Modeling in Mechanobiology, vol. 6, p. 43–53, Jan 2007."
+        },
+        {
+          "citation": "same author, sibling routine: shayansss/bioumat SUBROUTINES.FOR at pinned commit 70c0ee3e40",
+          "where": "SUBROUTINES.FOR:270-271",
+          "quote": "E1MP=4.63D0 ! LINEAR MATERIAL CONSTANT OF FIBRILLAR PART / E2MP=3670D0 ! NONLINEAR MATERIAL CONSTANT OF FIBRILLAR PART"
+        },
+        {
+          "citation": "Where 4.316 comes from: open-access PMC2779377 (Composition of the pericellular matrix modulates the deformation behaviour of chondrocytes, 2009), citing Wilson, Huyghe, van Donkelaar (2006) Osteoarthr Cartil 14:554-560, doi 10.1016/j.joca.2005.12.006",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2779377/fullTextXML",
+          "quote": "Values for E 1 and k 1 (describing the behaviour of the linear part of the collagen stiffness) were set to 4.316 MPa and 16.85, respectively [ 27 ]. Values for E 2 , k 2 and n 0 (describing the behaviour of the nonlinear part of the collagen stiffness) for ECM were previously determined to be 19.97 MPa, 41.49 and 1.424 × 10 5 MPa s, respectively [ 27 ]."
+        }
+      ],
+      "notes": "Pairing E1 = 4.316 with E2 = 3670 mixes two parameterisations. The hml code's own comment ('E2MP=3670/FOUR ! FOR OA', NONLIPLS.for:329, per Curie) matches the author's Table 1 'Degenerated 917.5' = 3670/4, which supports the 4.63 / 3670 pair. ALPHA1 = 0.0075 is Curie's midpoint of a sampling range; under D-21 that is a council choice, not a lookup. The author's Table 1 gives the depth-layer values α̂1 0.005 ... 0.060 MPa if a per-layer value is preferred."
+    },
+    "L-LEONOV-1": {
+      "verdict": "PARTIAL. Eyring activation volume and activation energy were found for both iPP and HDPE, and the pressure coefficient mu for HDPE only. Nothing found for the EGP softening (hsoft, Dinf) or hardening modulus H of either, or mu for iPP. Converting to the code's units (mJ/mol, mm3/mol, A0 in s) is a unit conversion, plus the author's own relation if A0 is to come from a rate factor; flag as interpreted.",
+      "iPP": {
+        "citation": "van Erp T.B. (2012) Structure development and mechanical performance of polypropylene. PhD thesis, TU Eindhoven, doi 10.6100/IR733403",
+        "url": "https://pure.tue.nl/ws/files/3522959/733403.pdf",
+        "where": "thesis p.42, Table 2.2",
+        "quote": "Table 2.2: Ree-Eyring-parameters for polypropylene-based materials. i Vi [nm3 ] ∆Ui [kJ.mol−1 ] I 14.20 503.7 II 4.44 158.0",
+        "values": {"V_I_nm3": 14.20, "dU_I_kJ_per_mol": 503.7, "V_II_nm3": 4.44, "dU_II_kJ_per_mol": 158.0},
+        "notes": "Two Ree-Eyring processes; the rate factors depend on crystallinity and cooling rate (no single value), and mu is not tabulated there. The single-process Leonov in the code would take one process (process II governs room-temperature, moderate-rate yield); choosing it is a council choice."
+      },
+      "HDPE": {
+        "citation": "Kanters M.J.W. (2015) Prediction of long-term performance of load-bearing thermoplastics. PhD thesis, TU Eindhoven (PE100 pipe grade)",
+        "url": "https://pure.tue.nl/ws/files/3880439/797320.pdf",
+        "where": "thesis p.21-22, Table 2.3 and Eq. 2.7",
+        "quote": "Material x Vx∗ [nm3 ] ∆Ux [kJ/mol] ε̇0,x [s−1 ] εcr [-] µ [-] / HDPE I 33.9 900 2·10107 0.247 0.415 / II 3.17 141 4.6·1018 ... This results in a value of 0.415 for the pressure dependency, µ, for this particular PE100",
+        "values": {"V_I_nm3": 33.9, "dU_I_kJ_per_mol": 900, "rate_I_per_s": "2e107", "V_II_nm3": 3.17, "dU_II_kJ_per_mol": 141, "rate_II_per_s": "4.6e18", "mu": 0.415}
+      },
+      "unit_conversion_for_code": "vp_leonov_model.f comments: 'delta_H = props(3) ! enthalpy (mJ/mol)', 'v_star = props(5) ! shear volume (mm3/mol)'. kJ/mol -> mJ/mol is a factor 1e6. nm3 per molecule -> mm3/mol is V*·1e-18·N_A (N_A = 6.02214076e23). Whether the code's v* is the shear activation volume or the tensile V* (EGP uses V* = sqrt(3)·...) must be read from the code; not resolved here.",
+      "not_found": ["A0 / pre-exponential time constant in the code's own form", "hsoft, Dinf (softening)", "H (strain hardening modulus)", "mu for iPP", "E and nu (not looked up; standard datasheet values would be council choices)"]
+    }
+  },
+  "web_time": "about 6 minutes of fetching and searching for these four lookups (timer 351 s from the first lookup call to the write-up); one WebFetch returned 403 (sciencedirect) and the Porto repository needs a login"
+}

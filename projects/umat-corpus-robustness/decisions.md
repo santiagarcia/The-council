@@ -151,3 +151,23 @@ Rationale: verification compares transformed and original code on identical inpu
 - (e) Static-scan false positives may be cleared by a machine-readable static_scan_override, with static and dynamic evidence, accepted by Vera per instance and re-checked every pass.
 
 **Licence.** marioruiarruda Hashin and Mazars state "all rights reserved … no part may be reproduced or used in any manner without written permission". They are excluded from verification and counting until Santiago decides (default: excluded).
+
+## 2026-10-02 — D-21b freeze of the D-21 council-chosen constants (Vera)
+**Frozen:**
+- rule 73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0
+- amendment f818e9d45fd1f86d2780223094bdaf0fada221c9f06fa6cef754e4f771ab5bf8
+- constants 6b0ed48d654a43aaef068d3d397100fecfcb19be07396ee123a89db3d156b758 (34 rows)
+- built by build_d21.py 85245a709595654844f28da8b7637e5b8301f86c5a0d85c4f9cd8959e96b5c1e
+
+All files are in corpus_campaign/material_data/. No comparison had run at freeze time.
+
+**Conditions:**
+- Any later change comes as a numbered amendment with a new constants sha, before the affected row's first comparison (e.g. an L-EC2-1 correction).
+- CANEY counts only after the five-band dynamic run (bit-identical STRESS/DDSDDE/STATEV). baw-de counts only after its TEMP = 0/500 run.
+- Not counting until resolved:
+  - Hashin/Mazars: licence hold;
+  - glu46 Column: refused under R2;
+  - Cube: until its harvest geometry is in;
+  - compile- and helper-blocked rows;
+  - BC2_60cc: duplicate.
+- Every row needs Vera acceptance of its template and instance (R6.5).

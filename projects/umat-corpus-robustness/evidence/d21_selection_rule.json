@@ -1,0 +1,71 @@
+{
+  "schema": "d21_selection_rule/1",
+  "decision": "D-21 (Santiago, 2026-10-02), condition 1: written per family before any comparison runs; reviewed by Vera",
+  "author": "Curie",
+  "date": "2026-10-02",
+  "status": "proposed, awaiting Vera review; no comparison has been run with these values",
+  "scope": "registry sources at missing_material_data whose harvest row (d19_harvest.jsonl) is PARTIAL or NONE or ineligible for an uncertain constant, plus the 'no material constants' sources the lead named. An author deck or D-19 author-published constants always win (D-19a R0); D-21 fills only what the author did not publish.",
+  "general": {
+    "G1_basis": "Pick the material class the code, its comments, README or repository names (e.g. 'concrete per EC2/MC2010', 'bone', 'wood L-T-R', 'pe/pp', 'hydrogel', 'skin'). If none is named, use a generic representative class for the model's family: steel/aluminium for isotropic elasticity, UD CFRP/GFRP for transverse isotropy, drained sand/clay for soil models. Values are handbook-level class values (confidence class-typical), values taken from the author's own design file or sibling fit (looked-up), or values set by this rule to place a mechanism threshold in the probe window (chosen). Author-published constants that exist are kept unchanged (author-kept) in the set that represents the author's material.",
+    "G2_activation": {
+      "ceilings": "small strain 0.02, finite strain 0.2 (D-19a R3, amplitude_search.CEILING never exceeded)",
+      "plasticity_damage_onset": "threshold strain (yield or damage onset) <= 0.5 x ceiling preferred, <= 0.8 x ceiling required, so search_amplitude (1e-4, x5) reaches it before the cap",
+      "rate": "characteristic time (relaxation, retardation, viscosity/modulus, Eyring rate term) within [0.1, 10] x the probe period (1.0 s undocumented default), so the base run and the 0.01 x period fast run differ measurably; power-law creep: 100^n >= 1.1",
+      "growth": "theta_g - 1 >= 1% inside the experiment time; prescribed growth: time constant <= 0.4 x total time",
+      "softening_regularisation": "fracture energy G >= 2 x sigma0^2 Lc/(2E) with Lc = council element size (1 length unit) so no snap-back in the probe element",
+      "R4_unchanged": "D-19a R4 informativeness gate and D-21 cond. 2 apply unchanged; a set that is not informative is a failed set, not a reason to re-pick"
+    },
+    "G3_validity": [
+      "elastic stiffness (or compliance) positive definite: smallest eigenvalue of the 6x6 matrix the code builds computed and recorded per set",
+      "isotropic nu < 0.5; orthotropic: S positive definite (Poisson ratios above 0.5 allowed only if S stays PD)",
+      "no STOP / error branch reachable on the probe: e.g. matmodlab NSTATV=12, HFE single-phase elements only, Hashin PROPS(35)=0, MC psi <= phi",
+      "units consistent with the code: units stated in code comments are used (Leonov MPa, mJ/mol, mm3/mol, s, K; Hashin MPa, mm; HFE hard-coded MPa); unit-free codes use MPa-mm-s (soils kPa) and say so",
+      "switches and integer PROPS keep the author's value or the author's instruction"
+    ],
+    "G4_second_set": "Each source gets >= 2 sets. Set B is a different material of the same class (preferred: steel vs aluminium, sand vs clay, C30/37 vs C50/60, spruce vs beech, PP vs PE) or, where only one class member is sensible, every hardening/rate/growth/damage constant moves by >= 30% and the elastic constants by >= 20%. Set B must still satisfy G2 and G3. Where cheap, set B exercises a different code branch (Christensen T/C >= 0.5, HFE cortical vs trabecular) and records it.",
+    "G5_fixity": "Values are fixed in d21_council_constants.jsonl before any comparison. They are never re-picked after a verdict. A source counts as verified only if every set passes; any failed set stands (D-21 cond. 3).",
+    "G6_lookups": "Where a class value is uncertain AND it matters for admissibility or informativeness, a LOOKUP is filed for Scout instead of guessing; the chosen value stays as the fallback only if Vera accepts it.",
+    "G7_non_props_inputs": "Temperature, orientation/direction vectors, SDVINI input files and growth total time are recorded per set as non_props_choices (value, basis, confidence) under D-21 cond. 5. Where D-19a R2 still refuses (TEMP before G5, COORDS-dependent material, growth time not from the source) the row is marked covered_blocked_non_data or covered_needs_ruling.",
+    "G8_record": "Each constant: index, name, value, unit, basis, confidence in {author-kept, looked-up, class-typical, chosen}; each PROPS index carries the quoted source line that reads it; each row carries nstatv with its basis, initial STATEV, CMNAME switch, TEMP/COORDS/NOEL reads."
+  },
+  "families": {
+    "elasticity": {
+      "classes": "set A structural steel E=210000 MPa nu=0.30; set B aluminium alloy E=70000 MPa nu=0.33 (or concrete C30/37 33000/0.2 for a structural-engineering front end; soil 50000/0.25 and 5000/0.35 kPa for soil repositories; thermoelastic: steel vs aluminium with E(T) and alpha)",
+      "activation": "none (elastic gate); sources that also write output STATEV (Christensen) flagged for the R4 'demanded nstatv > 0' rule",
+      "temperature": "thermoelastic: TEMP ramp 293 -> 493 K so the modulus interpolation and thermal strain are active"
+    },
+    "other_anisotropic_elastic": {
+      "classes": "transverse isotropy: set A T300/epoxy-class UD CFRP, set B E-glass/epoxy-class GFRP; stiffness inputs computed as inv(S) from engineering constants",
+      "activation": "none"
+    },
+    "concrete_geomaterials": {
+      "classes": "Mohr-Coulomb: set A medium dense sand (E 30 MPa, c 5 kPa, phi 32, psi 2), set B stiff clay (E 10 MPa, c 15 kPa, phi 24, psi 0), kPa",
+      "activation": "uniaxial compressive strength 2c sqrt(k) reached at strain <= 0.005"
+    },
+    "damage": {
+      "concrete": "EC2 Table 3.1 / MC2010 class values: set A C30/37, set B C50/60; fracture-energy branch (GfIt>0); residual fractions and viscosity +-30%",
+      "fibre_composites": "set A = author's GFRP with council-chosen missing constants (Si = St, residual fraction 5% = midpoint of author's 1-10%); set B = IM7/8552-class CFRP (LOOKUP) with matrix fracture energies chosen above the snap-back limit",
+      "bone": "set A trabecular single phase (BV/TV 0.25, fabric 0.85/0.95/1.20), set B cortical single phase (BV/TV 0.90, near-isotropic fabric); hard-coded constants untouched",
+      "activation": "onset strain <= 0.8 x ceiling (concrete tension 1e-4; bone ~0.4%; composites 1.1-1.4% fibre tension)"
+    },
+    "growth": {
+      "author_design_points": "when the author publishes a sampled design (abuganza LHS), set A = low corner row, set B = high corner row of that design, verbatim with the author's '%.3f' formatting; experiment = author deck + generated param.param",
+      "prescribed_growth": "neo-Hookean normalised E=1: set A nu=0.3 (lam 0.577, mu 0.385 = sibling decks), set B nu=0.45; tmax 1.5/1.2, tau 0.25/0.4 with council total time 1.0 (loading choice, needs ruling); growth direction council-chosen (cond. 5)",
+      "activation": "theta_g - 1 >= 1% (achieved 18-49%)"
+    },
+    "hyperelasticity": {
+      "classes": "neo-Hookean normalised as for growth; cartilage fibril model: Wilson et al. fibril constants (LOOKUP) and -30%, GAG constant inside the author's sampling range",
+      "activation": "finite-strain probe 0.2; fibrils active in tension"
+    },
+    "viscoelasticity_rate": {
+      "polymers_eyring_leonov": "class named by author (pe, pp): set A iPP, set B HDPE; E, nu, H, mu class-typical; dH in 100-300 kJ/mol; tau* 0.8-1 MPa; A* computed so that uniaxial yield equals the class-typical yield at 0.35/s; viscoelastic mode gt 0.5-1 s",
+      "power_law_creep": "wood L-T-R (spruce, beech; axes 1=R 2=L 3=T) and shale TI (Caney-class, stiffer shale); compliances built directly from engineering constants; one exponent per set (0.15/0.20 wood, 0.03/0.045 shale) keeps J(t) PD for every t; COORDS-layered sources get identical layer blocks",
+      "hydrogel_visco_ogden": "first 8 constants of the author's own 2EL and 3EL hydrogel fits (tau_dev 0.79 s and 0.43 s)",
+      "viscoplastic_pavement": "set A asphalt concrete (K 4444, G 1481 MPa, threshold 0.5 MPa), set B unbound granular base (K 200, G 120 MPa, threshold 0.05 MPa); viscosity time 1.0/0.3 s",
+      "activation": "rate criterion of D-19a R3 with characteristic times inside [0.1,10] s; yield strains 2% (polymers, finite ceiling 0.2)"
+    },
+    "crystal_plasticity": {
+      "rule": "not applied: the one named source (harshaa765 UMAT.for) has an author deck with all 160 constants (Al single crystal, SI units). Its refusal is a deck-reading defect, so the author's deck is used under D-19a R0. If a crystal-plasticity source without constants appears later: set A FCC Cu, set B FCC Al, CRSS by LOOKUP (CRSS is alloy- and temper-specific and decides activation), orientation <100> and <111> (cond. 5)."
+    }
+  }
+}

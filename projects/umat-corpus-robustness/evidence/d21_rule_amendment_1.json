@@ -1,0 +1,95 @@
+{
+  "schema": "d21_rule_amendment/1",
+  "amends": {
+    "file": "corpus_campaign/material_data/d21_selection_rule.json",
+    "sha256": "73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0",
+    "note": "the rule file itself is unchanged; it is frozen together with this amendment and the constants file after Vera re-checks"
+  },
+  "decision": "D-21a (Vera acceptance with changes; lead rulings a-e; licence hold), plus Vera's addendum folding in Scout's d21_lookups.json",
+  "author": "Curie",
+  "date": "2026-10-02",
+  "status": "proposed, awaiting Vera re-check; no comparison has been run",
+  "amendments": {
+    "R-1": {
+      "title": "Documented parameter restrictions are hard constraints",
+      "text": "Any restriction the source states on a parameter (header, comment, README, input instructions) is a hard constraint on every set, on top of G3. Example: MohrCoulombAbaqus.for:14-15 '4) friction angle, phi [degrees] Cannot be set to zero / 5) dilation angle, psi [degrees] Cannot be set to zero' -> 0 < psi <= phi in every set. Each such restriction is recorded in the row's validity block.",
+      "applied_to": [
+        "baw-de MohrCoulomb set B psi 0 -> 3 deg"
+      ]
+    },
+    "R-2": {
+      "title": "Author-kept constants and switches are exempt from G4",
+      "text": "Constants labelled author-kept (the author's value for this routine, or the author's instruction such as '(insert 1.0)') and integer/flag switches keep their value in every set and are exempt from G4's >=30% / >=20% move rule. G4 is met by the remaining constants.",
+      "reading_of_G4_for_vera": "The >=30%/>=20% move rule is the fallback route of G4 ('where only one class member is sensible'). When set B is a different material of the same class (the preferred route), individual constants may coincide or move less (e.g. nu 0.30 vs 0.33, Mazars eps_cu1 3.5 per mille for both classes); the row states the route in each set's 'independence' field. Vera to confirm this reading.",
+      "vera_condition_on_G4_reading": "Accepted by Vera (re-check) on conditions: a different-material set B is a named, different member of the class; constants coincide only where the class value genuinely does; mechanism constants (threshold, rate, growth, damage) differ on every route. Every set B carries g4_route in {different_material, same_material_fallback}; different_material sets list coinciding_constants for review."
+    },
+    "R-3": {
+      "title": "Label author-other-context split from looked-up",
+      "text": "author-other-context = a value the same author published in another context than this routine and its deck (README usage example, a sibling routine or deck, the author's other fit, the author's design file whose points the council designates). looked-up = a value from a publication or dataset that Scout fetched and verified. Both count only in the council tier (D-21a c).",
+      "applied_to": [
+        "Christensen T=100, C=300 (README usage example)",
+        "abuganza LHS design points (D-21a b, corner rule)",
+        "thealanjason 2EL/3EL fits",
+        "mholla sibling-deck lam/mu",
+        "hml E0/Eepsilon (author's own paper and sibling code)",
+        "Yutu0k E=210000 (README example)"
+      ]
+    },
+    "R-4": {
+      "title": "A publication-attributed value stands only once Scout has verified it",
+      "text": "A value attributed to a named publication, standard or table is labelled looked-up and stands only after Scout has fetched the source and quoted it (d21_lookups.json); until then it carries verification='pending ...' and the row cannot run. 'As recalled' is never a basis or a fallback. Only uncited handbook-level values may be class-typical. The builder asserts both (no 'as recalled'; no class-typical constant whose basis cites a table, standard or author).",
+      "pending": [
+        "L-EC2-1: EN 1992-1-1 Table 3.1 and fib MC2010 eq. 5.1-9 for the Mazars sets (row on licence hold anyway)"
+      ]
+    },
+    "R-5": {
+      "title": "Record CELENT, 3D-only formulation and KINC==1 STATEV resets per row",
+      "text": "Each row records: celent (whether CELENT enters the response and the council element size, a non-PROPS choice); formulation_3d_only (the code hard-codes 6 stress/DDSDDE components, so only NTENS=6 elements are admissible: BAM, calculix, compas iso, compas transverse-iso, CriticalSoil, Christensen); kinc1_statev_reset (code that resets STATEV when KINC==1, which re-zeroes state at the first increment of every step: Hashin, Mazars; KSTEP==1 & KINC==1 resets: HFE, thealanjason)."
+    },
+    "R-6": {
+      "title": "Acceptance and amendments live outside the frozen file",
+      "text": "d21_selection_rule.json is never edited. Acceptance (D-21a in the council decisions.md) and every change (this file and later numbered amendments) are separate files with their own sha256; rows carry selection_rule_ref and amendment_ref."
+    },
+    "R-7": {
+      "title": "Measured or looked-up values are kept unless they violate G2",
+      "text": "A measured or looked-up value is kept unless it violates G2. If it does, prefer shrinking the element (council CELENT) over changing the value; if the value must be raised, record the measured value, its source and the reason.",
+      "applied_to": [
+        "Hashin set B: measured G2+ = 0.2774 and G6 = 0.7879 kJ/m2 (Camanho 2007 Table 3 p.40) kept; council CELENT 0.15 mm (needs Lc <= 0.18 mm for Gmc, <= 0.65 mm for Gmt); mapping the code's matrix-compression energy to G6 is labelled interpreted"
+      ]
+    },
+    "R-8": {
+      "title": "Family text updates",
+      "cartilage": "E0 = 4.63 MPa with Eepsilon = 3670 MPa (the author's pair: Sajjadinia et al. 2019 Table 1; bioumat SUBROUTINES.FOR:270-271). Set B = osteoarthritic cartilage, Eepsilon = 917.5 MPa (author Table 1, degenerated) passed via PROPS(2), because SDVINI sets STATEV(1)=1 (:160) and the code's own OA override (:328-329, STATEV(1) /= 1) is never reached.",
+      "polymers": "Eyring-Leonov: activation energy from the looked-up Ree-Eyring process II (iPP 158.0 kJ/mol, van Erp 2012 Table 2.2; HDPE 141 kJ/mol, Kanters 2015 Table 2.3), unit conversion to mJ/mol labelled interpreted, choice of process II chosen; HDPE mu = 0.415 looked-up (Kanters Table 2.3). v* is the shear-form activation volume in this code (vp_leonov_model.f:94 with C2 = sqrt(1/2)*||s||); the thesis V values are not adopted because the theses' defining equations (shear vs tensile form) have not been quoted, so v* = R*T/tau* stays chosen. A* is set by the yield rule (chosen).",
+      "fibre_composites": "Set B cites Camanho, Maimi, Davila 2007 (Compos Sci Technol 67:2715; NASA NTRS 20070035071) Tables 1, 2 and 5 for E1, E2, G12, nu12, Xt 2326.2, Xc 1200.1, Yt, Yc, Sl, Gft, Gfc (looked-up), Table 3 for Gmt (looked-up) and Gmc (interpreted); E3, G13, G23, nu13, nu23, Zt, Zc, St, Si, Git, Gic are chosen with the basis stated.",
+      "wood_creep": "Axis mapping 1=R, 2=L, 3=T is recorded as interpreted (2=L supported by README and ROT about y; 1=R/3=T inferred from the ROT sign). Reference DOI 10.1016/j.ijsolstr.2026.113923 (constants not available: paywalled).",
+      "growth": "D-21a (a): a council total time is allowed when theta_g depends on time only through time/tau with tau a PROPS constant and the law is bounded for t >= 0; recorded as loading_origin=council_choice with T/tau (mholla morph: T=1, T/tau = 4.0 and 2.5).",
+      "elasticity": "D-21a (d): a source with write-only STATEV is 'elastic with output state'; deterministic NaN of the original goes to undefined_outputs (nan_in_original) and is never compared (Christensen FN at zero stress)."
+    },
+    "R-9": {
+      "title": "Vera re-check fixes F1-F4 (builder-enforced)",
+      "F1": "'verification' is set only from an explicit map to a name in the matching lookup's values (or also_published_not_requested for Hashin G2+/G6, Scout-quoted in the same lookup) in d21_lookups.json; the builder asserts it. Removed the false flags (Hashin set B E3/St, Leonov set A mu). Pending checks use 'verification_pending' (Mazars, L-EC2-1). hml E1/E2 carry 'verification_note' only, because L-CART-1 has quotes but no values list.",
+      "F2": "thealanjason set B (both copies) is a same-material fallback; KVIS 60 -> 78 (+30%, chosen).",
+      "F3": "Builder asserts on same_material_fallback sets (abuganza x5, thealanjason x2) that every non-exempt constant moves >= 20% (elastic: lam, mu, k(bulk), MU, ALPHA, KELAS) or >= 30% (all others) relative to set A. Coinciding constants on different_material sets as built: matmodlab T0, T_INITIAL (reference temperature, test condition); Mazars nu 0.2 and eps_cu1 3.5 per mille (EC2 class value shared by both strength classes); hml E0 4.63 (the author's Table 1 lists a single E0); Leonov T 296 K and p_atm (test conditions). Vera to confirm these are genuine shared class values.",
+      "F4": "CANEY: static_scan_overrides entry for reads_coords_or_noel (static evidence TIRockCreep_CANEY.for:50-66, data evidence = builder assertion that PROPS 1-18/19-36/37-54/55-72/73-90 are bitwise identical in each set, dynamic evidence pending); status covered_pending_override.",
+      "cosmetic": "baw-de reads_temp_note: :127 is the TEMP dummy-argument declaration."
+    }
+  },
+  "row_changes": [
+    "Christensen: T, C relabelled author-other-context; undefined_outputs FN nan_in_original; formulation_3d_only",
+    "baw-de MohrCoulomb: set B psi 3 deg (R-1); static_scan_override proposal for reads_temp (D-21a e)",
+    "Hashin: nu units '-'; set B Xt 2326.2, Xc 1200.1, looked-up labels with table refs, Gm per R-7, CELENT 0.15 mm, KINC==1 reset; status licence_hold",
+    "Mazars: set B ec1 0.00245 (EC2 C50/60 2.45 per mille); EC2/MC2010 values looked-up pending L-EC2-1; CELENT; KINC==1 reset; status licence_hold",
+    "thealanjason (both copies): set B equilibrium MU/ALPHA/KELAS +25% (chosen); author fits labelled author-other-context",
+    "shayansss hml: set A E1 4.63 / E2 3670 author-other-context; set B OA Eepsilon 917.5, ALPHA1 0.010; stays covered_blocked_non_data (DATA.txt helper)",
+    "abuganza (5 rows): LHS values author-other-context with the corner rule; BC2_60cc duplicate_of BC1_60cc, counts_in_tier=false",
+    "mholla morph (3 rows): total time council_choice with T/tau; status covered",
+    "glu46: axis_mapping recorded (wood interpreted); DOI corrected; Cube needs element inside [0,0.5]^3 with integration points away from x=0.25 and z=0.25 (status covered_pending_harvest_geometry); Column refused_R2_needs_documented_geometry; CANEY still covered_needs_ruling",
+    "Leonov vp/vevp: dH = process II dU (interpreted), HDPE mu 0.415 (looked-up), A* recomputed by the yield rule",
+    "Yutu0k: new D-21 row, family elasticity, set A E 210000 author-other-context with deck nu 0.3 author-kept, set B aluminium; registry state unsupported_formulation and plane-stress (CPS3/CPS4R) template noted; R1 route not taken",
+    "CriticalSoil, BAM, calculix, compas iso/transverse-iso: formulation_3d_only recorded",
+    "HFE: KSTEP==1 & KINC==1 reset of STATEV(1:18) recorded",
+    "F1-F4 and cosmetic per R-9"
+  ],
+  "builder": "corpus_campaign/material_data/build_d21.py"
+}
