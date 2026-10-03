@@ -193,3 +193,6 @@ All D-21b conditions still apply.
 - NLGEOM is unchanged.
 
 The PlatypusBytes MohrCoulomb harvest row records 3D-only (d19_harvest.jsonl 9de30ef1…).
+
+## 2026-10-03 — D-17 superseded by G10 (lead)
+The Abaqus D-4 tangent gate (G10) imports corpus_features.fd. Abaqus rows therefore DO depend on corpus_features code from G10 onward. The harness fingerprint, which covers abaqus and corpus_features, is the governing identity for both Abaqus and routine-level rows. D-17's "Abaqus rows unaffected by corpus_features changes" applies only to passes before G10.
