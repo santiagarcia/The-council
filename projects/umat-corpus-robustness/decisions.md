@@ -196,3 +196,17 @@ The PlatypusBytes MohrCoulomb harvest row records 3D-only (d19_harvest.jsonl 9de
 
 ## 2026-10-03 — D-17 superseded by G10 (lead)
 The Abaqus D-4 tangent gate (G10) imports corpus_features.fd. Abaqus rows therefore DO depend on corpus_features code from G10 onward. The harness fingerprint, which covers abaqus and corpus_features, is the governing identity for both Abaqus and routine-level rows. D-17's "Abaqus rows unaffected by corpus_features changes" applies only to passes before G10.
+
+## 2026-10-03 — D-22 hold-out selection rules R-H1, R-H2 (Vera)
+**R-H1.** A pick counts only if its source_id is fully_verified at the pass the hold-out runs on. A pick that is not leaves the selection. It is replaced only if the family falls below 5 picks AND its pool was stratified (more than 5 candidates). The replacement is the next candidate in the same owner's recorded seeded order (seed 20261003), else the next owner. Other picks are never redrawn.
+
+**R-H2.** A pick tests the template only if every input its council plan needs comes from the template's own rules, fixed before any run. A reviewed rule reading the author's documented geometry (G12 placement) is valid. An input copied from the author's deck that no template rule decides (e.g. a TEMP or growth-field history), or an input the template refuses, is not. Such a pick leaves as "not a template test", with replacement only under R-H1.
+
+**Applied at pass21:**
+- growth 6: PureGrowth, Growth-frac, Worlthen simplified_curing, abuganza Iso_Example, mholla iso_morph, mholla iso_stretch. keisuke58 phase2 leaves (R-H1), visco_2ch leaves (R-H2).
+- hyperelasticity 2: mholla transverse, Sina CompresibleNeoHookean. BMMB24 leaves (R-H1). holdout_possible stays false.
+- Other templates unchanged.
+
+**Conditions:**
+- PureGrowth's placement comes from the author's mesh, with no zero coordinate, and NOEL/NPT within ReadDetF bounds. STATEV(7) is unassigned and goes in undefined_outputs.
+- The reviewed TEMP/COORDS scan (corpus_campaign/holdout/reviewed_scan.jsonl): all 10 rows Vera-accepted.
