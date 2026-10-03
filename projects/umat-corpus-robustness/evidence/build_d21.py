@@ -103,7 +103,7 @@ def row(source_id, *, material_class, class_basis, unit_system, props_map, sets,
         celent=celent, formulation_3d_only=formulation_3d_only, kinc1_statev_reset=kinc1_statev_reset,
         licence_hold=licence_hold, duplicate_of=duplicate_of, counts_in_tier=counts_in_tier,
         static_scan_overrides=list(static_scan_overrides), undefined_outputs=list(undefined_outputs),
-        amendment_ref='corpus_campaign/material_data/d21_rule_amendment_1.json',
+        amendment_ref=['corpus_campaign/material_data/d21_rule_amendment_1.json', 'corpus_campaign/material_data/d21_rule_amendment_2.json'],
         selection_rule_ref='corpus_campaign/material_data/d21_selection_rule.json',
         chosen_by='Curie', chosen_on='2026-10-02', vera_accepted_template=False, vera_accepted_instance=False,
     ))
@@ -748,6 +748,45 @@ for r in ROWS:   # F1: 'verification' only from VERIF, i.e. only for names in th
         for k in s_['constants']:
             if 'verification' in k:
                 assert k['verification'].startswith('verified by Scout: d21_lookups.json ') and any(t in r['source_id'] for t in VERIF_ROWS), (r['source_id'], k)
+
+# ---------------------------------------------------------------- amendment 2: council formulation statements (D-21b; code evidence quoted)
+FORMULATION = {
+    'artorg-unibe-ch__HFE/02_CODE/abq/UMAT_BIPHASIC.f': ('3D', 'C3D8 (NTENS=6), NLGEOM as recorded', [
+        'UMAT_BIPHASIC.f:690 "DO K1 = 1,6" (return-mapping loop over the NTENS-dimensioned residual RR)',
+        'UMAT_BIPHASIC.f:986-987 "DO K1 = 1,6 / STATEV(8+K1) = SS1(K1)" (SDV 9-14 NOMINAL STRESS VECTOR, 6 components)',
+        'UMAT_BIPHASIC.f:1066-1074 STATEV(23..31) = DFGRD1(1..3,1..3)']),
+    'simoneponcioni__HFE/02_CODE/abq/UMAT_BIPHASIC.f': ('3D', 'C3D8 (NTENS=6), NLGEOM as recorded', [
+        'UMAT_BIPHASIC.f:691 "DO K1 = 1,6"', 'UMAT_BIPHASIC.f:987-988 "DO K1 = 1,6 / STATEV(8+K1) = SS1(K1)"',
+        'UMAT_BIPHASIC.f:1067-1075 STATEV(23..31) = DFGRD1(1..3,1..3)']),
+    'marioruiarruda__Hashin_3D_UMAT/umat_hashin3D_f90.f90': ('3D', 'C3D8 (NDI=3, NTENS=6)', [
+        'umat_hashin3D_f90.f90:16 "UMAT 2D AND 3D ELEMENTS WITH HASHIN LINEAR DAMAGE"',
+        'umat_hashin3D_f90.f90:190 "if (ndi==3) then !!!! FOR 3D ANALYSIS" (also :269, :293, :348, :395); the 3D branch is chosen, the 2D branch is not exercised']),
+    'marioruiarruda__Mazars_UMAT/umat_mazars_f90.f90': ('3D', 'C3D8 (NDI=3, NTENS=6)', [
+        'umat_mazars_f90.f90:150 "if (ndi==3) then ! FOR 3D SOLID ANALYSIS" / :154 "else ! FOR 2D PLANE ANALYSIS"',
+        'umat_mazars_f90.f90:411 "if (ndi==3) then ! FOR 3D SOLID ANALYSIS" with Cij(6,6) at :424; the 3D branch is chosen']),
+    'baw-de__poroMechanicalFoam/abaqusUMATs/abaqusUmatMohrCoulomb/MohrCoulombAbaqus.for': ('3D', 'C3D8 (NTENS=6)', [
+        'MohrCoulombAbaqus.for:267-269 "Plane situations (plane stress, plane strain and axisymmetry): Sigma = [sig_x sig_y sig_z tau_xy] ... General 3D: Sigma = [sig_x sig_y sig_z tau_xy tau_xz tau_yz]"',
+        'MohrCoulombAbaqus.for:203 "call MohrCoulombStressReturn(SigB,NTENS,...)" and :410 / :1019 "if (nsigma == 4) then" (4-component branch); NTENS=6 general-3D path chosen']),
+    'RafalMichalczyk__PavementDesign/Subroutines/umat_ms_plast.for': ('3D', 'C3D8 (NTENS=6 only)', [
+        'umat_ms_plast.for:64-67 "do i=1, 3 / devstraininc(i)=dstran(i)-volstraininc / devstraininc(i+3)=dstran(i+3)" (6 components hard-coded)',
+        'umat_ms_plast.for:120-126 "stress(i+3) = stress(i+3)+ 2.*xg*(...)" for i=1..3', 'umat_ms_plast.for:136-137 "... devstressnew(5)**2+devstressnew(6)**2"']),
+    'bessagroup__f3dasm_simulate/src/f3dasm_simulate/abaqus/scriptbase/benchmark_abaqus_scripts/vp_leonov_model.f': ('3D', 'C3D8 (NTENS=6), NLGEOM=YES', [
+        'vp_leonov_model.f:314 "if (NTENS == 4) then" (plane strain/axisymmetric branch, shear 13/23 set to zero) ... :322-328 else branch uses Strain(5), Strain(6): NTENS=6 3D path chosen']),
+    'bessagroup__f3dasm_simulate/src/f3dasm_simulate/abaqus/scriptbase/benchmark_abaqus_scripts/vevp_leonov_model.f': ('3D', 'C3D8 (NTENS=6), NLGEOM=YES', [
+        'vevp_leonov_model.f:583 "if (NTENS == 4) then" ... :597 else branch "eTrialStrain(2,3) = Strain(6) + DStrain(6)/ R2": NTENS=6 3D path chosen']),
+    'glu46__3D_anisotropic_viscoelastic_model/OrthoWoodCreep_General.for': ('3D', 'C3D8 (NTENS=6 only)', [
+        'OrthoWoodCreep_General.for:275-277 "DO I = 1, 6 / DO J = 1,6 / YU_IN(KMU,I,J) = STATEV(K1)" (6x6 hard-coded state)',
+        'OrthoWoodCreep_General.for:53 "XMATD(6,6) = PROPS(4)" and TRANSFORM_T(1..6,6) at :144-149 on NTENS-dimensioned arrays', 'repository name "3D_anisotropic_viscoelastic_model"']),
+    'glu46__3D_anisotropic_viscoelastic_model/TIRockCreep_GENERAL.for': ('3D', 'C3D8 (NTENS=6 only)', [
+        'TIRockCreep_GENERAL.for:270-272 "DO I = 1, 6 / DO J = 1,6 / YU_IN(KMU,I,J) = STATEV(K1)"',
+        'TIRockCreep_GENERAL.for:50 "XMATD(6,6) = PROPS(4)" and TRANSFORM_T(1..6,6) at :139-144', 'repository name "3D_anisotropic_viscoelastic_model"']),
+}
+for r in ROWS:
+    if r['source_id'] in FORMULATION:
+        st, el, ev = FORMULATION[r['source_id']]
+        r['formulation'] = dict(statement=st, element=el, evidence=ev, origin='council_choice',
+                                ref='corpus_campaign/material_data/d21_rule_amendment_2.json')
+
 # ---------------------------------------------------------------- write
 OUT.write_text(''.join(json.dumps(r, sort_keys=False) + '\n' for r in ROWS))
 print(len(ROWS), 'rows')

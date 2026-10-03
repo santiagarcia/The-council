@@ -171,3 +171,25 @@ All files are in corpus_campaign/material_data/. No comparison had run at freeze
   - compile- and helper-blocked rows;
   - BC2_60cc: duplicate.
 - Every row needs Vera acceptance of its template and instance (R6.5).
+
+## 2026-10-02 — D-21c amendment 2 (formulation statements) accepted; new joint freeze (Vera)
+**Freeze (replaces D-21b's freeze line):**
+- rule 73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0
+- amendment 1 f818e9d45fd1f86d2780223094bdaf0fada221c9f06fa6cef754e4f771ab5bf8
+- amendment 2 2c0e93222bb62565a8ed4dcb0258ddb5383fc50e18f9d693eea3b52014348919
+- constants 35326c2e7ddb93068c168787980301bb2db827cd78bc017eff94706410bac88a
+- built by build_d21.py 32d50da574159a19bbdf8b2c0a85cd780e7e4f6d58bb6bb6aca85262bb63c037
+
+All D-21b conditions still apply.
+
+**R-10.** A formulation is stated only with quoted code evidence; for a branching code the general 3D branch is chosen. This is legitimate under D-19's council-designed deck within the documented domain.
+
+**Conditions:**
+- For branching rows, every cell and figure says "verified on the 3D branch (NTENS=6); the plane branch was not exercised", naming the branch:
+  - Mohr-Coulomb: nsigma==4;
+  - Hashin and Mazars: ndi<3;
+  - Leonov: NTENS==4.
+- The choice is never re-picked. A plane-branch experiment would be a separate later amendment.
+- NLGEOM is unchanged.
+
+The PlatypusBytes MohrCoulomb harvest row records 3D-only (d19_harvest.jsonl 9de30ef1…).

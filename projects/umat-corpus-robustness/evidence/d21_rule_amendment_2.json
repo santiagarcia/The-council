@@ -1,0 +1,151 @@
+{
+  "schema": "d21_rule_amendment/1",
+  "number": 2,
+  "amends": {
+    "rule": {
+      "file": "corpus_campaign/material_data/d21_selection_rule.json",
+      "sha256": "73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0"
+    },
+    "previous_amendment": {
+      "file": "corpus_campaign/material_data/d21_rule_amendment_1.json",
+      "sha256": "f818e9d45fd1f86d2780223094bdaf0fada221c9f06fa6cef754e4f771ab5bf8"
+    }
+  },
+  "decision": "D-21 / D-21b: the council may choose the formulation, only with quoted code evidence; the amendment precedes each row's first comparison",
+  "trigger": "Gauss plan_council (corpus_campaign/batches/B7/gauss_g3/council_all.json) refused 11 rows with formulation_not_documented (settle() has no silent 3D default)",
+  "author": "Curie",
+  "date": "2026-10-02",
+  "status": "proposed, awaiting Vera review; no comparison run",
+  "rule": {
+    "R-10": {
+      "title": "Council formulation statement",
+      "text": "Where settle() cannot fix the formulation and the author documents none, the council states it (3D / plane strain / plane stress / axisymmetric) only with code evidence quoted by file:line: hard-coded 6-component loops or DDSDDE/STRESS indices 4..6 (3D only), NTENS/NDI/NSHR/nsigma branches (the branch chosen is named; other branches are not exercised), or author comments. Rule of choice: if the code is 3D-only, 3D; if it branches, the general 3D branch (NTENS=6) is chosen, because it exercises every component and needs no plane-stress condensation. Recorded per row as formulation {statement, element, evidence, origin=council_choice, ref}. Kinematics (NLGEOM) stays as already recorded (registry/harvest).",
+      "no_silent_default": "No row receives 3D without a quote; rows not listed here are unaffected."
+    }
+  },
+  "statements": {
+    "baw-de__poroMechanicalFoam/abaqusUMATs/abaqusUmatMohrCoulomb/MohrCoulombAbaqus.for": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6)",
+      "evidence": [
+        "MohrCoulombAbaqus.for:267-269 \"Plane situations (plane stress, plane strain and axisymmetry): Sigma = [sig_x sig_y sig_z tau_xy] ... General 3D: Sigma = [sig_x sig_y sig_z tau_xy tau_xz tau_yz]\"",
+        "MohrCoulombAbaqus.for:203 \"call MohrCoulombStressReturn(SigB,NTENS,...)\" and :410 / :1019 \"if (nsigma == 4) then\" (4-component branch); NTENS=6 general-3D path chosen"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "artorg-unibe-ch__HFE/02_CODE/abq/UMAT_BIPHASIC.f": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6), NLGEOM as recorded",
+      "evidence": [
+        "UMAT_BIPHASIC.f:690 \"DO K1 = 1,6\" (return-mapping loop over the NTENS-dimensioned residual RR)",
+        "UMAT_BIPHASIC.f:986-987 \"DO K1 = 1,6 / STATEV(8+K1) = SS1(K1)\" (SDV 9-14 NOMINAL STRESS VECTOR, 6 components)",
+        "UMAT_BIPHASIC.f:1066-1074 STATEV(23..31) = DFGRD1(1..3,1..3)"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "simoneponcioni__HFE/02_CODE/abq/UMAT_BIPHASIC.f": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6), NLGEOM as recorded",
+      "evidence": [
+        "UMAT_BIPHASIC.f:691 \"DO K1 = 1,6\"",
+        "UMAT_BIPHASIC.f:987-988 \"DO K1 = 1,6 / STATEV(8+K1) = SS1(K1)\"",
+        "UMAT_BIPHASIC.f:1067-1075 STATEV(23..31) = DFGRD1(1..3,1..3)"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "marioruiarruda__Hashin_3D_UMAT/umat_hashin3D_f90.f90": {
+      "statement": "3D",
+      "element": "C3D8 (NDI=3, NTENS=6)",
+      "evidence": [
+        "umat_hashin3D_f90.f90:16 \"UMAT 2D AND 3D ELEMENTS WITH HASHIN LINEAR DAMAGE\"",
+        "umat_hashin3D_f90.f90:190 \"if (ndi==3) then !!!! FOR 3D ANALYSIS\" (also :269, :293, :348, :395); the 3D branch is chosen, the 2D branch is not exercised"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "marioruiarruda__Mazars_UMAT/umat_mazars_f90.f90": {
+      "statement": "3D",
+      "element": "C3D8 (NDI=3, NTENS=6)",
+      "evidence": [
+        "umat_mazars_f90.f90:150 \"if (ndi==3) then ! FOR 3D SOLID ANALYSIS\" / :154 \"else ! FOR 2D PLANE ANALYSIS\"",
+        "umat_mazars_f90.f90:411 \"if (ndi==3) then ! FOR 3D SOLID ANALYSIS\" with Cij(6,6) at :424; the 3D branch is chosen"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "RafalMichalczyk__PavementDesign/Subroutines/umat_ms_plast.for": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6 only)",
+      "evidence": [
+        "umat_ms_plast.for:64-67 \"do i=1, 3 / devstraininc(i)=dstran(i)-volstraininc / devstraininc(i+3)=dstran(i+3)\" (6 components hard-coded)",
+        "umat_ms_plast.for:120-126 \"stress(i+3) = stress(i+3)+ 2.*xg*(...)\" for i=1..3",
+        "umat_ms_plast.for:136-137 \"... devstressnew(5)**2+devstressnew(6)**2\""
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "bessagroup__f3dasm_simulate/src/f3dasm_simulate/abaqus/scriptbase/benchmark_abaqus_scripts/vp_leonov_model.f": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6), NLGEOM=YES",
+      "evidence": [
+        "vp_leonov_model.f:314 \"if (NTENS == 4) then\" (plane strain/axisymmetric branch, shear 13/23 set to zero) ... :322-328 else branch uses Strain(5), Strain(6): NTENS=6 3D path chosen"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "bessagroup__f3dasm_simulate/src/f3dasm_simulate/abaqus/scriptbase/benchmark_abaqus_scripts/vevp_leonov_model.f": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6), NLGEOM=YES",
+      "evidence": [
+        "vevp_leonov_model.f:583 \"if (NTENS == 4) then\" ... :597 else branch \"eTrialStrain(2,3) = Strain(6) + DStrain(6)/ R2\": NTENS=6 3D path chosen"
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "glu46__3D_anisotropic_viscoelastic_model/OrthoWoodCreep_General.for": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6 only)",
+      "evidence": [
+        "OrthoWoodCreep_General.for:275-277 \"DO I = 1, 6 / DO J = 1,6 / YU_IN(KMU,I,J) = STATEV(K1)\" (6x6 hard-coded state)",
+        "OrthoWoodCreep_General.for:53 \"XMATD(6,6) = PROPS(4)\" and TRANSFORM_T(1..6,6) at :144-149 on NTENS-dimensioned arrays",
+        "repository name \"3D_anisotropic_viscoelastic_model\""
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    },
+    "glu46__3D_anisotropic_viscoelastic_model/TIRockCreep_GENERAL.for": {
+      "statement": "3D",
+      "element": "C3D8 (NTENS=6 only)",
+      "evidence": [
+        "TIRockCreep_GENERAL.for:270-272 \"DO I = 1, 6 / DO J = 1,6 / YU_IN(KMU,I,J) = STATEV(K1)\"",
+        "TIRockCreep_GENERAL.for:50 \"XMATD(6,6) = PROPS(4)\" and TRANSFORM_T(1..6,6) at :139-144",
+        "repository name \"3D_anisotropic_viscoelastic_model\""
+      ],
+      "origin": "council_choice",
+      "ref": "corpus_campaign/material_data/d21_rule_amendment_2.json"
+    }
+  },
+  "proposed_harvest_addition": {
+    "for": "Scout (harvest row, not a council row)",
+    "source_id": "PlatypusBytes__ConstitutiveModels/fortran_models/mohr_coulomb/UMAT_MohrCoulomb.f",
+    "harvest_key": "2c0d3454d261d1ee04bda9d8",
+    "statement": "3D",
+    "element": "C3D8 (NTENS=6 only)",
+    "evidence": [
+      "UMAT_MohrCoulomb.f:27 \"Dimension DE(6,6), dSig(6), ...\" (6x6 elastic matrix hard-coded)",
+      "UMAT_MohrCoulomb.f:129-135 \"Call MZeroR(DDSDDE,36)\" ... \"Do i=1,3 ... DDSDDE(i+3,i+3) = G\" (DDSDDE filled as 6x6 regardless of NTENS)",
+      "UMAT_MohrCoulomb.f:51, :114 and :142-147 AbaqusToPlaxisStressOrdering swaps S(5) and S(6) (3D shear ordering)"
+    ],
+    "origin": "proposed: derived from code (council), to be recorded by Scout with its own provenance"
+  },
+  "constants_rebuilt": {
+    "file": "corpus_campaign/material_data/d21_council_constants.jsonl",
+    "sha256": "35326c2e7ddb93068c168787980301bb2db827cd78bc017eff94706410bac88a",
+    "builder": "corpus_campaign/material_data/build_d21.py",
+    "builder_sha256": "32d50da574159a19bbdf8b2c0a85cd780e7e4f6d58bb6bb6aca85262bb63c037",
+    "note": "only change vs amendment 1: formulation field on the 10 rows below and amendment_ref now a list; two rebuilds byte-identical"
+  }
+}
