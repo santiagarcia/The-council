@@ -112,8 +112,8 @@ processes (resume after a STOP) is NOT adopted: it would spread hidden-state evi
 Santiago's decision on the pending question: material constants that the author published outside an input deck count as adequate material data,
 with their provenance recorded. Sources are the author's paper, README, code comments, example or test files in the same repository, or a cited dataset.
 Every constant records where it came from (URL or path at the pinned commit, line or page, a verbatim quote) and how confident the reading is.
-Constants that are guessed, typical or taken from the literature for "a similar material" do NOT count. Sources that use such constants are
-counted in their own stage ("author-published, outside deck"), so the deck-only figures stay reportable. Where a source has no author deck,
+Constants that are guessed, typical or taken from the literature for "a similar material" do NOT count. Sources whose constants are
+author-published outside a deck are counted in their own stage ("author-published, outside deck"), so the deck-only figures stay reportable. Where a source has no author deck,
 the experiment is a council-designed deck inside the author's documented domain (design by Curie, reviewed by Vera).
 
 ## 2026-10-02 — D-20 commit and push verified progress (Santiago)
