@@ -120,3 +120,14 @@ the experiment is a council-designed deck inside the author's documented domain 
 Every batch that adds verified results (Abaqus or routine-level), after Vera's review, is committed and pushed: final-umat and final-ra branch
 `corpus/robustness-2026-10-01` to the GitHub repositories (public), and the council repo. Pushing does not bypass D-2: nothing whose licence
 does not permit redistribution may be in a pushed tree; Vera checks this before every push.
+
+## 2026-10-02 — D-21 council-chosen material constants (Santiago)
+Santiago amends D-19: where the author published no usable constants, the council may choose them. Curie chooses them by physical judgement; when in doubt she asks Scout to look up published values for the material class the code names (alloy, FCC metal, soil, tissue…), with provenance.
+Conditions:
+1. A written selection rule per family (Curie, reviewed by Vera) is fixed BEFORE any comparison runs. Values are never re-picked after a verdict.
+2. The constants must activate the mechanism the code implements (yield, damage onset, hardening, rate effect, growth). The informativeness gates and D-19a R4 apply unchanged.
+3. Each source gets ≥2 independent parameter sets. It counts as verified only if every set passes; any failure stands.
+4. Values stay inside the model's validity: positive definite elasticity, ν < 0.5, no error or STOP branches, units consistent with the code.
+5. Orientation and other "material data by default" inputs (Q2 ruling) may now be council-chosen under this decision, recorded the same way.
+6. Reported as its own tier, material_data_origin = council_chosen, beside the author-deck and author-published-outside-deck tiers. Every figure states the split.
+Rationale: verification compares transformed and original code on identical inputs. The constants need to be admissible and informative, not the author's own. The tier split keeps the provenance claim honest.
