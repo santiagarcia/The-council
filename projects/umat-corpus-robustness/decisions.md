@@ -131,3 +131,23 @@ Conditions:
 5. Orientation and other "material data by default" inputs (Q2 ruling) may now be council-chosen under this decision, recorded the same way.
 6. Reported as its own tier, material_data_origin = council_chosen, beside the author-deck and author-published-outside-deck tiers. Every figure states the split.
 Rationale: verification compares transformed and original code on identical inputs. The constants need to be admissible and informative, not the author's own. The tier split keeps the provenance claim honest.
+
+## 2026-10-02 — D-21a acceptance of the D-21 selection rule, and rulings (Vera review; lead)
+**Rule.** The D-21 selection rule is accepted with changes and FROZEN at sha256 73db38cb2be9da0a942167864aa49ae28a630f3b61ed6b3f3ac0983eaa25b5f0 (corpus_campaign/material_data/d21_selection_rule.json).
+- Changes R-1..R-6 live in a separate amendment file with its own sha, which Vera reviews before the first comparison:
+  - R-1: documented parameter restrictions are hard constraints.
+  - R-2: author-kept constants are exempt from the G4 move rule.
+  - R-3: label `author-other-context` is split from `looked-up`.
+  - R-4: a publication-attributed value stands only once verified.
+  - R-5: CELENT, 3D-only formulations and KINC==1 STATEV resets are recorded per row.
+  - R-6: amendments live outside the frozen file.
+- The constants file is re-frozen after the row fixes, before any comparison.
+
+**Rulings.**
+- (a) Growth total time stays loading data, except as follows (lead decision, on Vera's recommendation). A council total time is allowed when θ_g depends on time only through time/τ with τ a PROPS constant, and the law is defined and bounded for all t ≥ 0. It is recorded as loading_origin=council_choice with T/τ. glu46 Cube may clear R2 via the README-documented geometry; glu46 Column stays refused.
+- (b) The author's LHS design points are acceptable as council_chosen designations (corner rule fixed in advance; verbatim values; BC2_60cc counts once).
+- (c) The author's other fits are acceptable as council class values, labelled author-other-context and counted only in the council tier.
+- (d) A source with write-only STATEV (static and dynamic proof) is classed "elastic with output state". Deterministic NaN in the original is listed under undefined_outputs (nan_in_original) and never compared.
+- (e) Static-scan false positives may be cleared by a machine-readable static_scan_override, with static and dynamic evidence, accepted by Vera per instance and re-checked every pass.
+
+**Licence.** marioruiarruda Hashin and Mazars state "all rights reserved … no part may be reproduced or used in any manner without written permission". They are excluded from verification and counting until Santiago decides (default: excluded).
