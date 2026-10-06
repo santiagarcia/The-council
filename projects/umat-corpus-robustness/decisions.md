@@ -219,3 +219,13 @@ Differentiating through a Jacobi/eigen routine (DSYEVJ3 and similar, lifted unch
 - No general transform-level fix exists. Dropping the derivative of a negligible rotation or substituting an analytic eigenvalue rule would change generated code for every user of these routines, so it requires a council decision.
 - Any count that includes such a source must carry this limitation. Gauss's earlier remark that the lifted routine "fails to converge on most calls" was wrong: the non-convergence is the author's routine on NaN input.
 - Possible follow-up (harness, not done): flag a tangent with zero or non-finite entries as "derivative ill-conditioned (repeated eigenvalues)".
+
+## 2026-10-06 — D-24 the project's reference UMATs cannot validate a hold-out template (Vera)
+The project's own reference UMATs (final-umat parameter_sensitivity/models; ravi_package_v2) cannot serve as the author-deck side of a hold-out under D-22:
+- they are not in the corpus registry or the 242 eligible (R-H1, D-8);
+- we wrote the models, the council plans and the harness, so reproducing their verdicts shows self-consistency, not independence;
+- the set is chosen because it verifies, so it cannot be blind;
+- R-H2 cannot be ruled out where we wrote both sides.
+They may be run as an "internal calibration set, not independent; template not validated per D-22" (≥5 per family: plasticity and elasticity only), with plan inputs and template rules hash-frozen and Vera-reviewed before any run, and Vera signing that no rule changed after the first comparison. They never enter D-8, D-11 or the 242 denominator.
+Routes by which a non-growth template can be validated: (a) the family reaches ≥5 fully_verified author-deck sources in the corpus pool (the seeded stratified draw is then rerun); (b) Santiago widens D-22 to externally and independently authored non-corpus UMATs, which must exclude anything the project wrote and needs its own acceptance rule.
+Effect: council rows count only in growth. Every other family reports its council rows in a separate "template not validated" column.
