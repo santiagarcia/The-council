@@ -229,3 +229,25 @@ The project's own reference UMATs (final-umat parameter_sensitivity/models; ravi
 They may be run as an "internal calibration set, not independent; template not validated per D-22" (≥5 per family: plasticity and elasticity only), with plan inputs and template rules hash-frozen and Vera-reviewed before any run, and Vera signing that no rule changed after the first comparison. They never enter D-8, D-11 or the 242 denominator.
 Routes by which a non-growth template can be validated: (a) the family reaches ≥5 fully_verified author-deck sources in the corpus pool (the seeded stratified draw is then rerun); (b) Santiago widens D-22 to externally and independently authored non-corpus UMATs, which must exclude anything the project wrote and needs its own acceptance rule.
 Effect: council rows count only in growth. Every other family reports its council rows in a separate "template not validated" column.
+
+## 2026-10-06 — D-25 growth template accepted; three council instances accepted with conditions (Vera R6.5)
+**Template growth-morphoelasticity: ACCEPTED WITH CONDITIONS.** Hold-out: 5 picks (PureGrowth, Growth-frac, Worlthen simplified_curing, abuganza Iso_Example, mholla iso_stretch), all agreeing at routine level, at ec609ab41bb45a02. A routine-only hold-out validates the template for a routine-level count. No council row is Abaqus-verified (the Abaqus route is not wired for council manifests).
+Not shown by the hold-out, to be stated on every quote:
+- the hold-out uses the author deck's constants, so it validates the experiment design, placement and plan, not the D-21 council-chosen constants (Q4: inputs not independent);
+- the council total-time rule D-21a(a) (3τ) is reviewed, not hold-out tested;
+- exactly 5 picks, no margin;
+- Iso_Example's agreement is on the cells both sides produce (its DDSDDE is not fully defined).
+
+**Instances (mholla fiber_morph_Abaqus 9268105c, area_morph_Abaqus c2624232, iso_morph_Abaqus sha 4432ac86): ACCEPTED WITH CONDITIONS.**
+- Distinct from every counted source. umat_iso_morph.f (e2bbc942, the author-deck row and hold-out pick, θ = 1 + α·t) is a different file and law.
+- Constants admissible and informative (growth ≈47% in set A, ≈19% in set B, against the 1% gate).
+- The count is 3 once these are recorded, and 0 until then:
+  1. The static-scan override (D-21a(e)) needs its dynamic evidence: one rerun per instance with COORDS and NOEL changed gives bit-identical STRESS, DDSDDE and STATEV.
+  2. The three rows are not independent (same repository, constants, exponential law and plan template): one model class in three direction variants.
+  3. fiber_morph's state_param_sens_local/total failures on objectivity_rotated and objectivity_rotated_fine (both sets, ratio ~3e12), the same paths on which the author-deck sibling umat_area_morph.f fails: disclose as "failed, cause not examined" until diagnosed. area_morph set B has sensitivities not_attempted on 3 paths (insufficient coverage): state it.
+  4. D-2: no mholla source text in any shipped case or tree.
+  5. The plan's path text for the 3τ rule says "taken from the author's own constants"; it should say council-chosen. The constants file basis says "council total time 1.0" but the plan runs 0.75 for set A: record this in a note.
+- Symlink view (plans_by_registry_key): no effect on evidence integrity (51 links checked); record the registry-key lookup in the evidence file.
+
+**Quotation form.** A separate tier, never summed with D-8 (114) or D-4 (106): "council_chosen, routine level, growth template validated (hold-out of 5 at pass23, ec609ab41bb45a02): 3 sources, each verified on 2 council constant sets over every path". With: not Abaqus-verified; constants and loading are the council's; D-21a(a) is reviewed, not hold-out tested; the hold-out used the authors' constants; three same-class rows; the fiber_morph disclosure. Growth only: "validated" is not extended to any other family.
+**Other families (~42 ready rows):** run as "council, template not validated, uncounted" at the same fingerprints; every outcome reported including failures; never in any table carrying counts or Fisher tests.
