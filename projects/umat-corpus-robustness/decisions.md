@@ -210,3 +210,12 @@ The Abaqus D-4 tangent gate (G10) imports corpus_features.fd. Abaqus rows theref
 **Conditions:**
 - PureGrowth's placement comes from the author's mesh, with no zero coordinate, and NOEL/NPT within ReadDetF bounds. STATEV(7) is unassigned and goes in undefined_outputs.
 - The reviewed TEMP/COORDS scan (corpus_campaign/holdout/reviewed_scan.jsonl): all 10 rows Vera-accepted.
+
+## 2026-10-06 — D-23 known limitation: AD through an eigen-solver at a degenerate spectrum (Ada B10)
+Differentiating through a Jacobi/eigen routine (DSYEVJ3 and similar, lifted unchanged) is ill-conditioned when the spectrum is exactly repeated and the off-diagonal is below the rounding resolution of the repeated eigenvalue. The lifted derivative is the exact derivative of the algorithm, which blows up (measured: correct at off-diagonal 1e-6, 2.625 vs 2.718 at 1e-15, 0 at 1e-30, −1.7e38 at 1e-54), while finite differences of the original stay correct because the composite is smooth. Only gap-perturbing derivative directions are damaged; d/d(off-diagonal) stays exact.
+- This is not a transformer defect: the real parts of the original and the lifted routine agree bit for bit (2240 matrices).
+- It explains thealanjason 3EL's job-level NaN (a tangent with zero shear stiffness, then ~1e123). It does NOT explain the routine-level 1.09× marginal disagreement, which is round-off in near-zero off-diagonals.
+- 29 stored sources lift an eigen-type routine; none is counted. The dsyevj3 ones: thealanjason 1EL/2EL/3EL (plus copies), MechMater visco and viscohybrid, lbrassart.
+- No general transform-level fix exists. Dropping the derivative of a negligible rotation or substituting an analytic eigenvalue rule would change generated code for every user of these routines, so it requires a council decision.
+- Any count that includes such a source must carry this limitation. Gauss's earlier remark that the lifted routine "fails to converge on most calls" was wrong: the non-convergence is the author's routine on NaN input.
+- Possible follow-up (harness, not done): flag a tangent with zero or non-finite entries as "derivative ill-conditioned (repeated eigenvalues)".
