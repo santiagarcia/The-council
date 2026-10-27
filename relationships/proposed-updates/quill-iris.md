@@ -1,5 +1,7 @@
 # Quill and Iris
 
+> Status: **proposed**. Santiago-requested collaboration design for a new member; not adopted guidance. It moves to `pairs/` only after review with each participant's own interpretation recorded.
+
 Initial complementary commitment: manuscript ownership versus communication craft.
 
 Quill owns the contribution, claim status, and evidence ledger of a manuscript; Iris improves prose, figures, and narrative for the intended readers. Clear wording cannot upgrade a preliminary result, and a correct claim still needs a reader who can follow it.

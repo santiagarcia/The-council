@@ -1,5 +1,7 @@
 # Quill and Scout
 
+> Status: **proposed**. Santiago-requested collaboration design for a new member; not adopted guidance. It moves to `pairs/` only after review with each participant's own interpretation recorded.
+
 Initial complementary commitment: publication argument versus primary-source provenance.
 
 Quill decides which prior work a manuscript must engage and how it positions the contribution; Scout finds, retrieves, and verifies the primary sources and their metadata. A well-argued related-work section is not a search, and a search is not an argument.
