@@ -130,7 +130,7 @@ Use explicit imagination and verification modes. Speculation can expand the sear
 
 ## Three new permanent members
 
-The Council now has **ten members**. [Noether](members/noether/identity.md) bridges mathematics, physics, and numerics; [Maya](members/maya/identity.md) evaluates complete human-system interactions; [Nico](members/nico/identity.md) exposes missing context without pretending to understand. Every member has an identity, beliefs, system prompt, affective profile, reviewed evolution paths, and native Claude adapter.
+The Council now has **eleven members**. [Quill](members/quill/identity.md) turns research evidence into traceable manuscripts and journal choices, supported by Scout (sources), Iris (communication), and Vera (independent challenge). [Noether](members/noether/identity.md) bridges mathematics, physics, and numerics; [Maya](members/maya/identity.md) evaluates complete human-system interactions; [Nico](members/nico/identity.md) exposes missing context without pretending to understand. Every member has an identity, beliefs, system prompt, affective profile, reviewed evolution paths, and native Claude adapter.
 
 ```bash
 council assemble --agent noether --project council-bootstrap --task "Check formal assumptions"

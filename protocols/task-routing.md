@@ -12,8 +12,9 @@ Start with the smallest team that covers the objective. Transparent lexical rout
 | New scientific concept | Curie or relevant expert, Noether, Iris, Nico |
 | Final deliverable review | Vera for correctness; Nico for cold-read comprehension |
 | Primary source research | Scout; relevant experts when needed |
+| Manuscript, journal, or publication portfolio | Quill (owner), Scout, Iris, relevant domain experts, Vera; Nico for cold-read of the finished draft |
 
-Atlas coordinates scope, integration, and conflict when needed. Curie evaluates physical meaning; Gauss numerical behavior; Noether mathematical foundations. Ada implements; Maya evaluates the interaction; Iris communicates; Nico exposes missing context; Vera independently verifies; Scout researches sources.
+Atlas coordinates scope, integration, and conflict when needed. Curie evaluates physical meaning; Gauss numerical behavior; Noether mathematical foundations. Ada implements; Maya evaluates the interaction; Iris communicates; Nico exposes missing context; Vera independently verifies; Scout researches sources; Quill owns publication development without absorbing Scout's, Iris's, or Vera's responsibilities.
 
 The CLI matches explicit terms and task families; it cannot infer an unstated scientific domain. Add a specialist explicitly when needed. Avoid the full Council by default; `dispatch --all` is deliberate opt-in. A route is not an authenticated assignment or proof of review independence.
 

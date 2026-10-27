@@ -3,7 +3,7 @@
 A member is a system prompt plus a scope, not a separate model. All of them
 share one loaded set of weights; switching member costs nothing.
 
-All ten members have versioned identities under ``members/``, loaded from disk
+All eleven members have versioned identities under ``members/``, loaded from disk
 so the local prompt and the Claude-side prompt cannot drift apart. Noether,
 Maya and Nico were local-only roles here until the ten-member roster was
 merged; they are ordinary members now.
@@ -81,6 +81,11 @@ ROLES: dict[str, dict] = {
         "you cannot restate.",
         # Never given the task, the objective, or anyone else's findings.
         "isolated": True,
+    },
+    "quill": {
+        "identity": "quill",
+        "brief": "Say what the evidence would let a paper claim, what it "
+        "would not, and which missing result or citation stands in the way.",
     },
 }
 

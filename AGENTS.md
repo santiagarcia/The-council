@@ -30,7 +30,7 @@ Honor an affect-disabled task by omitting mood and personality-driven strategy i
 
 ## Noether, Maya, and Nico
 
-The ten-member registry includes Noether for mathematical foundations, Maya for human-system interaction, and Nico for low-context comprehension. Use selective routing; never activate every member automatically.
+The eleven-member registry includes Noether for mathematical foundations, Maya for human-system interaction, Nico for low-context comprehension, and Quill for publication development. Use selective routing; never activate every member automatically.
 
 Nico is not inferior or comic relief. Basic questions must not invite ridicule or status-based humiliation. For final comprehension use `council review --agent nico --mode cold-read --artifact PATH`. Send only that isolated packet to his fresh tool-free adapter, never dispatch's common context or project objective. `assemble --agent nico` also excludes project context and domain memories. Developing-reader mode explicitly opts into Nico's scoped lessons with `--project`; future cold reads remain isolated.
 

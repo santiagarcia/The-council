@@ -1,6 +1,6 @@
 # Mathematical foundations, human factors, and reader review
 
-The Council has ten permanent members. Existing expertise is retained: Noether bridges formal foundations with Curie's physical reasoning and Gauss's numerical evidence; Maya evaluates the complete human-system interaction alongside Ada and Iris; Nico provides an honest low-context audience perspective alongside all members.
+The Council has eleven permanent members. Existing expertise is retained: Noether bridges formal foundations with Curie's physical reasoning and Gauss's numerical evidence; Maya evaluates the complete human-system interaction alongside Ada and Iris; Nico provides an honest low-context audience perspective alongside all members.
 
 ```mermaid
 flowchart LR

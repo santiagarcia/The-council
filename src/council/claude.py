@@ -21,9 +21,9 @@ def adapter(root: Path, agent: str) -> str:
     triggers = ", ".join(sorted(terms)) or identity["role"].lower()
     description = f"Council {identity['role']}. Use proactively for {triggers}. {reason}"
     tools = "Read, Grep, Glob, Bash"
-    if agent in {"ada", "iris"}:
+    if agent in {"ada", "iris", "quill"}:
         tools += ", Write, Edit"
-    if agent == "scout":
+    if agent in {"scout", "quill"}:
         tools += ", WebSearch, WebFetch"
     metadata = {
         "name": agent,

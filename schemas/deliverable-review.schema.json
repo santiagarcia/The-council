@@ -20,7 +20,8 @@
         "noether",
         "maya",
         "nico",
-        "santiago"
+        "santiago",
+        "quill"
       ]
     },
     "correctness": {
@@ -38,7 +39,8 @@
             "noether",
             "maya",
             "nico",
-            "santiago"
+            "santiago",
+            "quill"
           ]
         },
         "decision": {
@@ -166,7 +168,8 @@
             "noether",
             "maya",
             "nico",
-            "santiago"
+            "santiago",
+            "quill"
           ]
         },
         "decision": {

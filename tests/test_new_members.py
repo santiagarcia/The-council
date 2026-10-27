@@ -345,3 +345,43 @@ def test_nico_cannot_certify_correctness_and_ridicule_is_flagged(repo):
     public_artifact(repo, "You are stupid for asking that question.")
     _, result = evaluate_artifact(repo, "comprehension", artifact)
     assert any(f["rule"] == "possible-humiliation" for f in result["findings"])
+
+
+@pytest.mark.parametrize(
+    "task",
+    [
+        "select a journal for the manuscript",
+        "assess novelty before submission",
+        "draft the paper and bibliography",
+    ],
+)
+def test_publication_work_routes_to_quill_with_separate_support(task):
+    chosen = {item["agent"] for item in route(task)}
+    assert {"quill", "scout", "iris", "vera"} <= chosen
+    assert not chosen & {"maya", "nico", "noether"}
+
+
+def test_quill_is_not_routed_to_unrelated_work():
+    for task in ("design a CLI interface", "numerical solver convergence", "installation tutorial"):
+        assert "quill" not in {item["agent"] for item in route(task)}
+
+
+def test_quill_manuscripts_are_reviewed_by_vera_after_construction(repo):
+    set_objective(
+        repo, "council-bootstrap", "Draft a manuscript.", ["Draft exists."], ["No submission"]
+    )
+    packet = dispatch(repo, "council-bootstrap", "draft the manuscript and select a journal")
+    vera = next(a for a in packet["assignments"] if a["agent"] == "vera")
+    assert "quill" in vera["after"]
+    quill = next(a for a in packet["assignments"] if a["agent"] == "quill")
+    assert "members/quill/identity.md" in quill["member_context"]
+
+
+def test_quill_adapter_can_draft_and_search_but_reviewers_cannot_write(repo):
+    from council.claude import sync
+
+    assert sync(repo)[0] == 0
+    tools = read_record(repo / ".claude/agents/quill.md")[0]["tools"]
+    assert {"Write", "Edit", "WebSearch", "WebFetch"} <= set(tools.split(", "))
+    assert "Write" not in read_record(repo / ".claude/agents/vera.md")[0]["tools"]
+    assert "Write" not in read_record(repo / ".claude/agents/scout.md")[0]["tools"]

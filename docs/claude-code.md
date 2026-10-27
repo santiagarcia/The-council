@@ -1,7 +1,7 @@
 # Using The Council with Claude Code
 
 Open this repository in Claude Code. The checked-in `.claude/agents/` files make
-all ten members available as native subagents; `CLAUDE.md` asks the main session
+all eleven members available as native subagents; `CLAUDE.md` asks the main session
 to delegate substantive work automatically. You do not need to create each agent
 by hand or configure an API key for the Council CLI. Claude Code itself still
 requires its normal installation and account setup.

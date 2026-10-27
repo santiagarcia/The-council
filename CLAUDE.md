@@ -10,7 +10,7 @@ For a substantive task, proactively use the native Council agents in
 `.claude/agents/`. The main Claude session coordinates the work; `/council` is the
 explicit shortcut. Run `uv run --locked council route --task "TASK"` to suggest
 the smallest useful team. Adjust the recommendation to the actual objective.
-Do not ask Santiago to manually create the ten registered agents or select every
+Do not ask Santiago to manually create the eleven registered agents or select every
 specialist. Handle trivial edits directly; do not spawn the entire Council.
 
 At the start of a Council work session run
@@ -58,7 +58,7 @@ Do not claim a latency improvement from live Claude runs without measurement.
 
 Delegate implementation to Ada, mechanics to Curie, numerics to Gauss,
 mathematical foundations to Noether, human interaction to Maya, comprehension to Nico,
-communication to Iris, source research to Scout, and independent review to Vera.
+communication to Iris, source research to Scout, publication development (contributions, literature positioning, journals, manuscripts) to Quill, and independent review to Vera.
 Use Atlas for decomposition, integration decisions, or unresolved conflict;
 the main session executes Atlas's recommended delegation plan. Parallelize only
 independent tasks with disjoint artifact ownership. Keep initial assessments

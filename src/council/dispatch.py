@@ -103,7 +103,7 @@ def dispatch(
     builders = [
         r["agent"]
         for r in recommendations
-        if r["agent"] in {"ada", "gauss", "curie", "noether", "maya", "iris"}
+        if r["agent"] in {"ada", "gauss", "curie", "noether", "maya", "iris", "quill"}
     ]
     for item in recommendations:
         agent = item["agent"]

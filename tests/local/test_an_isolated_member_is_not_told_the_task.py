@@ -55,10 +55,10 @@ def test_the_cold_read_task_routes_to_the_isolated_member():
     assert chosen.isolated
 
 
-def test_all_ten_members_load_a_versioned_identity():
-    """The ten-member roster is merged, so none of them is local-only now."""
+def test_all_members_load_a_versioned_identity():
+    """The full roster is merged, so none of them is local-only now."""
     members = roster()
-    assert len(members) == 10
+    assert len(members) == 11
     assert {m.name for m in members} == {
         "atlas",
         "curie",
@@ -70,6 +70,7 @@ def test_all_ten_members_load_a_versioned_identity():
         "noether",
         "maya",
         "nico",
+        "quill",
     }
     for member in members:
         assert member.identity_text, f"{member.name} has no identity text"

@@ -26,7 +26,8 @@
                 "noether",
                 "maya",
                 "nico",
-                "santiago"
+                "santiago",
+                "quill"
               ]
             },
             "minItems": 2,
@@ -64,7 +65,8 @@
                   "noether",
                   "maya",
                   "nico",
-                  "santiago"
+                  "santiago",
+                  "quill"
                 ]
               },
               {

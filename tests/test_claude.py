@@ -18,7 +18,7 @@ def test_sync_preview_and_check_do_not_write(repo):
 def test_generates_native_members_and_is_idempotent(repo):
     assert sync(repo)[0] == 0
     files = sorted((repo / ".claude/agents").glob("*.md"))
-    assert len(files) == 10
+    assert len(files) == 11
     for path in files:
         metadata, body = read_record(path)
         assert metadata["name"] == path.stem

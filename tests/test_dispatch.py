@@ -31,7 +31,7 @@ def test_dispatch_validates_once_and_factors_shared_instructions(repo):
     with patch("council.dispatch.validate", wraps=validate) as checker:
         packet = dispatch(repo, "council-bootstrap", all_agents=True)
     assert checker.call_count == 1
-    assert len(packet["assignments"]) == 10
+    assert len(packet["assignments"]) == 11
     assert packet["objective"]["constraints"] == ["No push"]
     assert "constitution/permissions.md" in packet["shared_context"]
     assert "AGENTS.md" in packet["shared_context"]
@@ -40,7 +40,7 @@ def test_dispatch_validates_once_and_factors_shared_instructions(repo):
         assert f"members/{agent}/identity.md" in assignment["member_context"]
         assert "constitution/permissions.md" not in assignment["member_context"]
     vera = next(a for a in packet["assignments"] if a["agent"] == "vera")
-    assert set(vera["after"]) == {"ada", "curie", "gauss", "noether", "maya", "iris"}
+    assert set(vera["after"]) == {"ada", "curie", "gauss", "noether", "maya", "iris", "quill"}
     assert dispatch(repo, "council-bootstrap", all_agents=True) == packet
 
 

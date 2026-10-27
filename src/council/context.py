@@ -135,6 +135,23 @@ ROLES = {
         {"comprehension", "audience", "novice", "cold-read"},
         "Attempt a fresh low-context reading and identify missing information.",
     ),
+    "quill": (
+        {
+            "manuscript",
+            "manuscripts",
+            "journal",
+            "journals",
+            "publication",
+            "publications",
+            "publish",
+            "publishable",
+            "novelty",
+            "submission",
+            "bibliography",
+            "preprint",
+        },
+        "Develop publishable contributions into evidence-traced manuscripts and journal choices.",
+    ),
 }
 
 
@@ -172,13 +189,27 @@ def route(task: str) -> list[dict[str, str]]:
         include("noether", "iris", "nico")
         if not words & {"mathematical", "algebra", "probability", "geometry"}:
             include("curie")
+    if words & (ROLES["quill"][0] | {"paper", "papers"}):
+        include("quill", "scout", "iris", "vera")
     if words & {"final", "deliverable"} and words & {"review", "check", "final"}:
         include("vera", "nico")
     if set(selected) & {"ada", "curie", "gauss", "noether"}:
         include("vera")
     if not selected or words & {"conflict", "disagreement", "integrate", "plan"}:
         include("atlas")
-    order = ("atlas", "curie", "gauss", "ada", "vera", "iris", "scout", "noether", "maya", "nico")
+    order = (
+        "atlas",
+        "quill",
+        "curie",
+        "gauss",
+        "ada",
+        "vera",
+        "iris",
+        "scout",
+        "noether",
+        "maya",
+        "nico",
+    )
     return [{"agent": agent, "reason": selected[agent]} for agent in order if agent in selected]
 
 
