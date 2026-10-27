@@ -139,20 +139,18 @@ ROLES = {
         {
             "manuscript",
             "manuscripts",
-            "journal",
-            "journals",
-            "publication",
-            "publications",
-            "publish",
             "publishable",
-            "novelty",
-            "submission",
             "bibliography",
             "preprint",
+            "softwarex",
         },
         "Develop publishable contributions into evidence-traced manuscripts and journal choices.",
     ),
 }
+
+
+#: Atlas is never selected lexically; it is added for coordination, conflict, or no match.
+ATLAS_REASON = "Coordinate scope, integration, and unresolved conflict."
 
 
 def tokens(text: str) -> set[str]:
@@ -169,7 +167,7 @@ def route(task: str) -> list[dict[str, str]]:
 
     def include(*agents: str) -> None:
         for agent in agents:
-            selected.setdefault(agent, ROLES[agent][1])
+            selected.setdefault(agent, ROLES[agent][1] if agent in ROLES else ATLAS_REASON)
 
     if words & ROLES["noether"][0]:
         include("noether", "gauss", "vera")
@@ -189,7 +187,12 @@ def route(task: str) -> list[dict[str, str]]:
         include("noether", "iris", "nico")
         if not words & {"mathematical", "algebra", "probability", "geometry"}:
             include("curie")
-    if words & (ROLES["quill"][0] | {"paper", "papers"}):
+    # Ambiguous words ("paper", "journal", "publish", "submission") signal publication
+    # development only together: "read the paper" or "publish the package" stay out.
+    scholarly = {"paper", "papers", "article", "articles", "manuscript", "manuscripts"}
+    publishing = {"journal", "journals", "publish", "publication", "submission", "submit"}
+    publishing |= {"novelty", "draft", "reviewers", "preprint"}
+    if "quill" in selected or (words & scholarly and words & publishing):
         include("quill", "scout", "iris", "vera")
     if words & {"final", "deliverable"} and words & {"review", "check", "final"}:
         include("vera", "nico")

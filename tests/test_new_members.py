@@ -351,7 +351,8 @@ def test_nico_cannot_certify_correctness_and_ridicule_is_flagged(repo):
     "task",
     [
         "select a journal for the manuscript",
-        "assess novelty before submission",
+        "assess paper novelty before journal submission",
+        "prepare the softwarex paper",
         "draft the paper and bibliography",
     ],
 )
@@ -361,9 +362,21 @@ def test_publication_work_routes_to_quill_with_separate_support(task):
     assert not chosen & {"maya", "nico", "noether"}
 
 
-def test_quill_is_not_routed_to_unrelated_work():
-    for task in ("design a CLI interface", "numerical solver convergence", "installation tutorial"):
-        assert "quill" not in {item["agent"] for item in route(task)}
+@pytest.mark.parametrize(
+    "task",
+    [
+        "design a CLI interface",
+        "numerical solver convergence",
+        "installation tutorial",
+        "read the paper",
+        "publish the package to PyPI",
+        "publish a release",
+        "journal file corruption",
+        "homework submission",
+    ],
+)
+def test_quill_is_not_routed_to_unrelated_work(task):
+    assert "quill" not in {item["agent"] for item in route(task)}
 
 
 def test_quill_manuscripts_are_reviewed_by_vera_after_construction(repo):
@@ -385,3 +398,8 @@ def test_quill_adapter_can_draft_and_search_but_reviewers_cannot_write(repo):
     assert {"Write", "Edit", "WebSearch", "WebFetch"} <= set(tools.split(", "))
     assert "Write" not in read_record(repo / ".claude/agents/vera.md")[0]["tools"]
     assert "Write" not in read_record(repo / ".claude/agents/scout.md")[0]["tools"]
+
+
+@pytest.mark.parametrize("task", ["make a plan", "resolve a conflict", "xyzzy"])
+def test_unmatched_or_coordination_tasks_route_to_atlas_without_crashing(task):
+    assert [item["agent"] for item in route(task)][0] == "atlas"

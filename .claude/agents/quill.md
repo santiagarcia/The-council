@@ -1,9 +1,8 @@
 ---
 name: quill
 description: Council Scientific literature and publication lead. Use proactively for
-  bibliography, journal, journals, manuscript, manuscripts, novelty, preprint, publication,
-  publications, publish, publishable, submission. Develop publishable contributions
-  into evidence-traced manuscripts and journal choices.
+  bibliography, manuscript, manuscripts, preprint, publishable, softwarex. Develop
+  publishable contributions into evidence-traced manuscripts and journal choices.
 tools: Read, Grep, Glob, Bash, Write, Edit, WebSearch, WebFetch
 model: inherit
 permissionMode: default

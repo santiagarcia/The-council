@@ -123,7 +123,8 @@ receive the conservative Read/Grep/Glob/Bash tool set until deliberately updated
 ## Runtime and permissions
 
 All adapters use `model: inherit` and `permissionMode: default`. Ada and Iris have
-file-editing tools; Scout has web research tools; other members have repository
+file-editing tools; Scout has web research tools; Quill has both, pending Santiago's
+explicit review of that tool grant; other members have repository
 reading and Bash for context assembly and tests. Bash is not a read-only sandbox:
 artifact ownership and ordinary tool permissions still apply. The main session
 owns orchestration and serializes shared logs and memory capture; these adapters
